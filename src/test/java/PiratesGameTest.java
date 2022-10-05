@@ -81,7 +81,7 @@ class PiratesGameTest {
             "hold parrots, reroll swords, get 1 skull 1 sword  die")
     void line47() {
 
-        String[] dice = piratesGame.rollDice();
+        String[] dice = piratesGame.rollDice(); //rollDice() ALREADY EXISTED
 
         dice[0] = "Skull";
         dice[1] = "Skull";
@@ -95,7 +95,7 @@ class PiratesGameTest {
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
         dieToKeep = new String[]{"1", "2", "3", "4", "5", "6"};
-        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep); //reRollNotHeld() ALREADY EXISTED
 
         dice[0] = "Skull";
         dice[1] = "Skull";
