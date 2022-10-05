@@ -109,4 +109,52 @@ class PiratesGameTest {
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
     }
 
+    @Test
+    @DisplayName("line 48: roll 1 skull, 4 parrots, 3 swords, hold parrots, " +
+            "reroll swords, get 1 skull 2 monkeys, " +
+            "reroll 2 monkeys, get 1 skull 1 monkey and die")
+    void line48() {
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "5"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Skull";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "5", "6"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Skull";
+        dice[6] = "Skull";
+        dice[7] = "Monkey";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+    }
+
 }
