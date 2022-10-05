@@ -184,7 +184,7 @@ class PiratesGameTest {
         dice[6] = "Coin";
         dice[7] = "Coin";
 
-        Assertions.assertEquals(700, piratesGame.scoreDie(dice, card));
+        Assertions.assertEquals(500, piratesGame.scoreDie(dice, card));
 
 
         dieToKeep = new String[]{"1", "4", "5", "6", "7", "8"};
