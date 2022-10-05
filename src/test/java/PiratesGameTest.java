@@ -3,6 +3,7 @@ import org.junit.jupiter.api.*;
 class PiratesGameTest {
 
     PiratesGame piratesGame;
+    PiratesFortuneCardGenerator fortuneCard = new FortuneGenerator();
     String[] dice;
     String[] dieToKeep;
 
@@ -155,6 +156,63 @@ class PiratesGameTest {
         dice[7] = "Monkey";
 
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+    }
+
+    //-----------------------------------------------------------------------------------------------------
+    //PLAYER POINT/SCORE TESTING
+
+    @Test
+    @DisplayName("line 50: roll 1 skull, 2 parrots, 3 swords, 2 coins, " +
+            "reroll parrots get 2 coins" +
+            "reroll 3 swords, get 3 coins (SC 4000 for seq of 8 (with FC) + 8x100=800 = 4800) ")
+    void line50() {
+
+        PiratesFortuneCard card = fortuneCard.createFortuneCard(4);
+
+        String[] dice = piratesGame.rollDice();
+
+        //CARD == COIN
+        dice[0] = "Skull";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(700, piratesGame.scoreDie(dice, card));
+
+
+        dieToKeep = new String[]{"1", "4", "5", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        //CARD == COIN
+        dice[0] = "Skull";
+        dice[1] = "Coin";
+        dice[2] = "Coin";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(1100, piratesGame.scoreDie(dice, card));
+
+        dieToKeep = new String[]{"1", "2", "3", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        //CARD == COIN
+        dice[0] = "Skull";
+        dice[1] = "Coin";
+        dice[2] = "Coin";
+        dice[3] = "Coin";
+        dice[4] = "Coin";
+        dice[5] = "Coin";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(4800, piratesGame.scoreDie(dice, card));
     }
 
 }
