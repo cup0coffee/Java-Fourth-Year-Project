@@ -1,3 +1,6 @@
+import Card.FortuneGenerator;
+import Card.PiratesFortuneCard;
+import Card.PiratesFortuneCardGenerator;
 import org.junit.jupiter.api.*;
 
 class PiratesGameTest {

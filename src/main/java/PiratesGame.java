@@ -1,4 +1,6 @@
 
+import Card.PiratesFortuneCard;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
