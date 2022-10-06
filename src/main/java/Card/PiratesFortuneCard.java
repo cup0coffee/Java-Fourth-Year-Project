@@ -8,4 +8,8 @@ public abstract class PiratesFortuneCard extends Card {
     public void printCard() {
         System.out.println(name + " - " + description);
     }
+
+    public int applyCardRule(int score) {
+        return score;
+    }
 }

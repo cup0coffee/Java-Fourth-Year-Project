@@ -13,6 +13,8 @@ public class Captain extends PiratesFortuneCard {
                 "each player will lose 200 points for each skull (instead of 100 points).";
     }
 
+
+    @Override
     public int applyCardRule(int score) {
         return score * 2;
     }

@@ -1,9 +1,12 @@
 
+import Card.FortuneGenerator;
 import Card.PiratesFortuneCard;
+import Card.PiratesFortuneCardGenerator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class PiratesGame implements Serializable {
 
@@ -122,7 +125,18 @@ public class PiratesGame implements Serializable {
         }
 
         //ACCOUNT FOR COINS
-        score += (100 * coin);
+        score += (100 * coin) + (100 * diamond);
+
+        //CARD CHECK
+        score = applyFortuneCardLogic(fortuneCard, score);
+
+        return score;
+    }
+
+    public int applyFortuneCardLogic(PiratesFortuneCard fortuneCard, int score) {
+        if (fortuneCard.getName().equalsIgnoreCase("Captain")) {
+            return fortuneCard.applyCardRule(score);
+        }
 
         return score;
     }
@@ -152,8 +166,38 @@ public class PiratesGame implements Serializable {
         }
 
         return skull;
+    }
 
+    //ADDED: DECK OF FORTUNE CARDS
+    private ArrayList<PiratesFortuneCard> deck = new ArrayList<PiratesFortuneCard>();
 
+    public ArrayList<PiratesFortuneCard> createFortuneDeck() {
+
+        //CARDS
+        PiratesFortuneCardGenerator fortuneCard = new FortuneGenerator();
+
+        for (int i = 0; i < 4; i++) {
+            PiratesFortuneCard gold = fortuneCard.createFortuneCard(4);
+            deck.add(gold);
+        }
+
+        Collections.shuffle(deck);
+
+        return deck;
+
+    }
+    public PiratesFortuneCard drawFortuneCard(ArrayList<PiratesFortuneCard> deck) {
+
+        PiratesFortuneCard drawnCard = null;
+
+        if (deck.size() > 0) {
+            drawnCard = deck.get(0);
+            deck.remove(0);
+        } else if (deck.size() == 0) {
+            System.out.println("DECK IS EMPTY!");
+        }
+
+        return drawnCard;
     }
 
 }
