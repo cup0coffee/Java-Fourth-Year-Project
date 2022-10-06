@@ -285,5 +285,31 @@ class PiratesGameTest {
         Assertions.assertEquals(200, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 54: score 2 sets of 3 (monkey, swords) in RTS on first roll (SC 300)")
+    void line54() {
+
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(6); //MONKEY BUSINESS
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(300, piratesGame.scoreDie(dice, card));
+    }
+
 
 }
