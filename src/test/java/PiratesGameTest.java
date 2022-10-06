@@ -3,10 +3,14 @@ import Card.PiratesFortuneCard;
 import Card.PiratesFortuneCardGenerator;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+
 class PiratesGameTest {
 
     PiratesGame piratesGame;
     PiratesFortuneCardGenerator fortuneCard = new FortuneGenerator();
+
+    ArrayList<PiratesFortuneCard> deck;
     String[] dice;
     String[] dieToKeep;
 
@@ -14,6 +18,7 @@ class PiratesGameTest {
     void init() {
         piratesGame = new PiratesGame();
         dice = new String[8];
+        deck = piratesGame.createFortuneDeck();
     }
 
     //-----------------------------------------------------------------------------------------------------
@@ -217,5 +222,30 @@ class PiratesGameTest {
 
         Assertions.assertEquals(4800, piratesGame.scoreDie(dice, card));
     }
+
+    @Test
+    @DisplayName("line 52: score first roll with nothing but 2 diamonds and 2 coins and FC is captain (SC 800)")
+    void line52() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+
+        //HARD CODE CAPTAIN CARD WHICH IS ID 1 IN FORTUNE GENERATOR
+        card = fortuneCard.createFortuneCard(1);
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Sword";
+        dice[4] = "Diamond";
+        dice[5] = "Diamond";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(800, piratesGame.scoreDie(dice, card));
+    }
+
 
 }
