@@ -293,7 +293,7 @@ class PiratesGameTest {
 
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
-        card = fortuneCard.createFortuneCard(6); //MONKEY BUSINESS
+        card = fortuneCard.createFortuneCard(4); //GOLD
 
         String[] dice = piratesGame.rollDice();
 
