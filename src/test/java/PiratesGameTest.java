@@ -247,5 +247,41 @@ class PiratesGameTest {
         Assertions.assertEquals(800, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 53: get set of 2 monkeys on first roll, get 3rd monkey on 2nd roll (SC 200 since FC is coin)")
+    void line53() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(4); //GOLD
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        dieToKeep = new String[]{"1", "2", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Parrot";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        Assertions.assertEquals(200, piratesGame.scoreDie(dice, card));
+    }
+
 
 }
