@@ -315,6 +315,8 @@ class PiratesGameTest {
     @DisplayName("line 55: score 2 sets of 3 (monkey, parrots) in RTS using 2 rolls (SC 300)")
     void line55() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(4); //GOLD
