@@ -379,5 +379,33 @@ class PiratesGameTest {
         Assertions.assertEquals(500, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 57: score a set of 4 coins correctly (i.e., 200 + 400 points) with FC is a diamond (SC 700)")
+    void line57() {
+
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(5); //DIAMOND
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Parrot";
+        dice[5] = "Diamond";
+        dice[6] = "Diamond";
+        dice[7] = "Diamond";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(700, piratesGame.scoreDie(dice, card));
+    }
+
+
+
 
 }
