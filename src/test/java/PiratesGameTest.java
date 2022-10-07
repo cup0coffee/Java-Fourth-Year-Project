@@ -403,6 +403,30 @@ class PiratesGameTest {
         Assertions.assertEquals(700, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 58: score set of 3 swords and set of 4 parrots correctly on first roll (SC 400 because of FC)")
+    void line58() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(4); //GOLD
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Sword";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(400, piratesGame.scoreDie(dice, card));
+    }
+
 
 
 
