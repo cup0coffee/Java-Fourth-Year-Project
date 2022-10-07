@@ -395,10 +395,10 @@ class PiratesGameTest {
         dice[1] = "Skull";
         dice[2] = "Sword";
         dice[3] = "Sword";
-        dice[4] = "Parrot";
-        dice[5] = "Diamond";
-        dice[6] = "Diamond";
-        dice[7] = "Diamond";
+        dice[4] = "Gold";
+        dice[5] = "Gold";
+        dice[6] = "Gold";
+        dice[7] = "Gold";
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
