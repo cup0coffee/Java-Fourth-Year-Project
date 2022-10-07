@@ -353,5 +353,29 @@ class PiratesGameTest {
         Assertions.assertEquals(300, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 56: score a set of 3 diamonds correctly (i.e., 400 points)   (SC 500)")
+    void line56() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(4); //GOLD
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Parrot";
+        dice[5] = "Diamond";
+        dice[6] = "Diamond";
+        dice[7] = "Diamond";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(500, piratesGame.scoreDie(dice, card));
+    }
+
 
 }
