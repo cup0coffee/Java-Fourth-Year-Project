@@ -491,6 +491,8 @@ class PiratesGameTest {
     @DisplayName("line 60: same as previous row but with captain fortune card  (SC = (100 + + 300 + 200)*2 = 1200)")
     void line60() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(1); //CAPTAIN
