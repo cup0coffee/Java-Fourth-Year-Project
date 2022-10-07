@@ -407,6 +407,8 @@ class PiratesGameTest {
     @DisplayName("line 58: score set of 3 swords and set of 4 parrots correctly on first roll (SC 400 because of FC)")
     void line58() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(4); //GOLD
