@@ -633,6 +633,8 @@ class PiratesGameTest {
     @DisplayName("line 63: score set of 7 parrots on first roll (SC 2100)")
     void line63() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(4); //GOLD
