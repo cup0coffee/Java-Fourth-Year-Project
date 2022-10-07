@@ -94,6 +94,8 @@ public class PiratesGame implements Serializable {
 
         if(fortuneCard.getName().equalsIgnoreCase("Gold")) {
             coin++;
+        } else if(fortuneCard.getName().equalsIgnoreCase("Diamond")) {
+            diamond++;
         }
 
         numOfEach[0] = monkey;
