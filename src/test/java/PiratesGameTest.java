@@ -487,6 +487,62 @@ class PiratesGameTest {
         Assertions.assertEquals(800, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 60: same as previous row but with captain fortune card  (SC = (100 + + 300 + 200)*2 = 1200)")
+    void line60() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Sword";
+        dice[2] = "Sword";
+        dice[3] = "Diamond";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(600, piratesGame.scoreDie(dice, card));
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Sword";
+        dice[2] = "Sword";
+        dice[3] = "Diamond";
+        dice[4] = "Sword";
+        dice[5] = "Parrot";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(800, piratesGame.scoreDie(dice, card));
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "5", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Sword";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Coin";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(1200, piratesGame.scoreDie(dice, card));
+    }
+
 
 
 
