@@ -549,6 +549,8 @@ class PiratesGameTest {
     @DisplayName("line 61: score set of 5 swords over 3 rolls (SC 600)")
     void line61() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(4); //GOLD
