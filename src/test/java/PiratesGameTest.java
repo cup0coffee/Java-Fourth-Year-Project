@@ -433,6 +433,8 @@ class PiratesGameTest {
     @DisplayName("line 59: score set of 3 coins+ FC and set of 4 swords correctly over several rolls (SC = 200+400+200 = 800)")
     void line59() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(4); //GOLD
