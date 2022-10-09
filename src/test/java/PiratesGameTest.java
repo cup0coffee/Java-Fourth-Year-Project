@@ -951,6 +951,8 @@ class PiratesGameTest {
     @DisplayName("line 72: score a set of 4 monkeys and a set of 3 coins (including the COIN fortune card) (SC 600)")
     void line72() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(4); //GOLD
