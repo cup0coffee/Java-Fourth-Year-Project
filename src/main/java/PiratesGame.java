@@ -92,9 +92,15 @@ public class PiratesGame implements Serializable {
             }
         }
 
-        if(fortuneCard.getName().equalsIgnoreCase("Gold")) {
+        int score = 0;
+
+        if(fortuneCard.getName().equalsIgnoreCase("Gold") && coin == 8) {
+            score += 100;
+        } else if(fortuneCard.getName().equalsIgnoreCase("Gold") && coin != 8) {
             coin++;
-        } else if(fortuneCard.getName().equalsIgnoreCase("Diamond")) {
+        } else if(fortuneCard.getName().equalsIgnoreCase("Diamond") && diamond == 8) {
+            score += 100;
+        } else if(fortuneCard.getName().equalsIgnoreCase("Diamond") && diamond != 8) {
             diamond++;
         }
 
@@ -106,24 +112,34 @@ public class PiratesGame implements Serializable {
         numOfEach[5] = diamond;
 
         //CALCULATE SCORE
-        int score = 0;
         int fullChestBonus = 0;
 
         //ACCOUNT FOR IDENTICAL DIE
         for (int i = 0; i < 6; i++) {
-            if (numOfEach[i] == 3) {
+            if (numOfEach[i] == 3 && i != 3) {
                 score+=100;
-            } else if (numOfEach[i] == 4) {
+                fullChestBonus += numOfEach[i];
+            } else if (numOfEach[i] == 4 && i != 3) {
                 score+=200;
-            } else if (numOfEach[i] == 5) {
+                fullChestBonus += numOfEach[i];
+            } else if (numOfEach[i] == 5 && i != 3) {
                 score+=500;
-            } else if (numOfEach[i] == 6) {
+                fullChestBonus += numOfEach[i];
+            } else if (numOfEach[i] == 6 && i != 3) {
                 score+=1000;
-            } else if (numOfEach[i] == 7) {
+                fullChestBonus += numOfEach[i];
+            } else if (numOfEach[i] == 7 && i != 3) {
                 score+=2000;
-            } else if (numOfEach[i] == 8) {
+                fullChestBonus += numOfEach[i];
+            } else if (numOfEach[i] == 8 && i != 3) {
                 score+=4000;
+                fullChestBonus += numOfEach[i];
             }
+        }
+
+        //CHECK FOR CHEST BONUS
+        if (fullChestBonus == 8 && skull == 0) {
+            score+=500;
         }
 
         //ACCOUNT FOR COINS
