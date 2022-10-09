@@ -711,6 +711,8 @@ class PiratesGameTest {
     @DisplayName("line 66: score set of 8 swords on first roll and FC is captain (SC 4500x2 = 9000) since full chest")
     void line66() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(1); //CAPTAIN
