@@ -655,5 +655,31 @@ class PiratesGameTest {
         Assertions.assertEquals(2100, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 64: score set of 8 coins on first roll (SC 5400)  seq of 8 + 9 coins(FC is coin) +  full chest")
+    void line64() {
+
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(4); //GOLD
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Coin";
+        dice[1] = "Coin";
+        dice[2] = "Coin";
+        dice[3] = "Coin";
+        dice[4] = "Coin";
+        dice[5] = "Coin";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(5400, piratesGame.scoreDie(dice, card));
+    }
+
 
 }
