@@ -911,6 +911,8 @@ class PiratesGameTest {
     @DisplayName("line 71: score a set of 3 coins over 2 rolls  with FC is diamond (SC 500)")
     void line71() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(5); //DIAMOND
