@@ -707,5 +707,29 @@ class PiratesGameTest {
         Assertions.assertEquals(5400, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 66: score set of 8 swords on first roll and FC is captain (SC 4500x2 = 9000) since full chest")
+    void line66() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Sword";
+        dice[1] = "Sword";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(9000, piratesGame.scoreDie(dice, card));
+    }
+
 
 }
