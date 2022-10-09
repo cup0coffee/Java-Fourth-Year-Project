@@ -787,5 +787,43 @@ class PiratesGameTest {
         Assertions.assertEquals(4600, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 68: score a set of 2 diamonds over 2 rolls with FC is diamond (SC 400)")
+    void line68() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(5); //DIAMOND
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Sword";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Diamond";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        dieToKeep = new String[]{"2", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Diamond";
+        dice[4] = "Sword";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Diamond";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(400, piratesGame.scoreDie(dice, card));
+    }
+
 
 }
