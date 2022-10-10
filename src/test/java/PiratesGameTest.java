@@ -25,7 +25,7 @@ class PiratesGameTest {
     //PLAYER DEATH UPON ROLLING DICE TESTING
 
     @Test
-    @DisplayName("line 45: die with 3 skulls on first roll")
+    @DisplayName("line 45: die with 3 skulls 5 swords on first roll: player gets a score of 0")
     void line45() {
 
         //1. ROLL DICE
@@ -35,11 +35,11 @@ class PiratesGameTest {
         dice[0] = "Skull";
         dice[1] = "Skull";
         dice[2] = "Skull";
-        dice[3] = "Parrot";
-        dice[4] = "Parrot";
-        dice[5] = "Monkey";
-        dice[6] = "Parrot";
-        dice[7] = "Parrot";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
 
         //ASSERT DEAD IF 3 SKULLS
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
