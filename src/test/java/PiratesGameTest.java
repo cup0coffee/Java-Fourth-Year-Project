@@ -739,7 +739,7 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 69: score a set of 3 diamonds over 2 rolls (SC 500)")
+    @DisplayName("line 69: roll 2 (monkeys, skulls, swords), 1 diamond, 1 parrot, reroll 2 monkeys, get 2 diamonds, score 500")
     void line69() {
 
         //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
@@ -750,27 +750,27 @@ class PiratesGameTest {
 
         String[] dice = piratesGame.rollDice();
 
-        dice[0] = "Sword";
-        dice[1] = "Diamond";
+        dice[0] = "Skull";
+        dice[1] = "Skull";
         dice[2] = "Sword";
         dice[3] = "Sword";
-        dice[4] = "Sword";
+        dice[4] = "Parrot";
         dice[5] = "Monkey";
         dice[6] = "Monkey";
         dice[7] = "Diamond";
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
-        dieToKeep = new String[]{"2", "8"};
+        dieToKeep = new String[]{"1", "2", "3", "4", "5", "8"};
         dice = piratesGame.reRollNotHeld(dice, dieToKeep);
 
         dice[0] = "Skull";
-        dice[1] = "Diamond";
+        dice[1] = "Skull";
         dice[2] = "Sword";
-        dice[3] = "Diamond";
-        dice[4] = "Sword";
-        dice[5] = "Monkey";
-        dice[6] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Parrot";
+        dice[5] = "Diamond";
+        dice[6] = "Diamond";
         dice[7] = "Diamond";
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
