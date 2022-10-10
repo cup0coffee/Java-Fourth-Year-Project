@@ -953,4 +953,28 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 84: roll 3 skulls, 3 monkeys, 2 parrots => die scoring 0")
+    void line84() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(6); //MONKEY BUSINESS
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Skull";
+        dice[6] = "Skull";
+        dice[7] = "Skull";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+    }
+
 }
