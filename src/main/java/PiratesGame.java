@@ -98,6 +98,7 @@ public class PiratesGame implements Serializable {
         }
 
         int score = 0;
+        int monkeyBusiness = 0;
 
         if(fortuneCard.getName().equalsIgnoreCase("Gold") && coin == 8) {
             score += 100;
@@ -109,8 +110,20 @@ public class PiratesGame implements Serializable {
             diamond++;
         }
 
-        numOfEach[0] = monkey;
-        numOfEach[1] = parrot;
+        //ACCOUNT FOR FORTUNE CARDS
+
+        numOfEach[0] = monkey; //WON'T BE ACCOUNT FOR IN SCORE CALUCLATION IF MONKEY BUSINESS CARD
+
+        //ADJUSTMENT FOR MONKEY BUSINESS CARD
+        int startingPoint = 0;
+        if (fortuneCard.getName().equalsIgnoreCase("Monkey Business")) {
+            monkeyBusiness = parrot + monkey;
+            numOfEach[1] = monkeyBusiness;
+            startingPoint = 1;
+        } else {
+            numOfEach[1] = parrot;
+        }
+
         numOfEach[2] = sword;
         numOfEach[3] = skull;
         numOfEach[4] = coin;
@@ -120,7 +133,7 @@ public class PiratesGame implements Serializable {
         int fullChestBonus = 0;
 
         //ACCOUNT FOR IDENTICAL DIE
-        for (int i = 0; i < 6; i++) {
+        for (int i = startingPoint; i < 6; i++) {
             if (numOfEach[i] == 3 && i != 3) {
                 score+=100;
                 fullChestBonus += numOfEach[i];
