@@ -957,6 +957,8 @@ class PiratesGameTest {
     @DisplayName("line 84: roll 3 skulls, 3 monkeys, 2 parrots => die scoring 0")
     void line84() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(6); //MONKEY BUSINESS
