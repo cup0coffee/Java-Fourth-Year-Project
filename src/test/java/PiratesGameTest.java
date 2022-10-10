@@ -884,5 +884,34 @@ class PiratesGameTest {
         Assertions.assertEquals(600, piratesGame.scoreDie(dice, card));
     }
 
+    //------------------------------------------------------------------------------
+
+    //PART 2: Miscellaneous Fortune Cards and Full Chest bonus (SINGLE PLAYER SCORING)
+
+
+    //MONKEY BUSINESS
+    @Test
+    @DisplayName("line 82: roll 3 monkeys 3 parrots  1 skull 1 coin  SC = 1100  (i.e., sequence of of 6 + coin)")
+    void line82() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(6); //MONKEY BUSINESS
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Skull";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(1100, piratesGame.scoreDie(dice, card));
+    }
 
 }
