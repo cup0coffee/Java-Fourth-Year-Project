@@ -859,7 +859,7 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 72: score a set of 4 monkeys and a set of 3 coins (including the COIN fortune card) (SC 600)")
+    @DisplayName("line 72: get 4 monkeys, 2 coins and 2 skulls with FC coin. Score 600")
     void line72() {
 
         //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
