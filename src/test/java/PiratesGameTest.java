@@ -472,66 +472,10 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 60: same as previous row but with captain fortune card  (SC = (100 + + 300 + 200)*2 = 1200)")
+    @DisplayName("line 60: roll 1 skull, 2 (monkeys/parrots) 3 swords, " +
+            "reroll 2 monkeys, get 1 skull 1 sword, " +
+            "         then reroll parrots get 1 sword 1 monkey (SC 600)")
     void line60() {
-
-        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
-
-        //DRAW FORTUNE CARD
-        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
-        card = fortuneCard.createFortuneCard(1); //CAPTAIN
-
-        String[] dice = piratesGame.rollDice();
-
-        dice[0] = "Skull";
-        dice[1] = "Sword";
-        dice[2] = "Sword";
-        dice[3] = "Diamond";
-        dice[4] = "Parrot";
-        dice[5] = "Parrot";
-        dice[6] = "Coin";
-        dice[7] = "Coin";
-
-        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
-
-        Assertions.assertEquals(600, piratesGame.scoreDie(dice, card));
-
-        dieToKeep = new String[]{"1", "2", "3", "4", "7", "8"};
-        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
-
-        dice[0] = "Skull";
-        dice[1] = "Sword";
-        dice[2] = "Sword";
-        dice[3] = "Diamond";
-        dice[4] = "Sword";
-        dice[5] = "Parrot";
-        dice[6] = "Coin";
-        dice[7] = "Coin";
-
-        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
-
-        Assertions.assertEquals(800, piratesGame.scoreDie(dice, card));
-
-        dieToKeep = new String[]{"1", "2", "3", "4", "5", "7", "8"};
-        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
-
-        dice[0] = "Skull";
-        dice[1] = "Sword";
-        dice[2] = "Sword";
-        dice[3] = "Sword";
-        dice[4] = "Sword";
-        dice[5] = "Coin";
-        dice[6] = "Coin";
-        dice[7] = "Coin";
-
-        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
-
-        Assertions.assertEquals(1200, piratesGame.scoreDie(dice, card));
-    }
-
-    @Test
-    @DisplayName("line 61: score set of 5 swords over 3 rolls (SC 600)")
-    void line61() {
 
         //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
 
@@ -542,49 +486,52 @@ class PiratesGameTest {
         String[] dice = piratesGame.rollDice();
 
         dice[0] = "Skull";
-        dice[1] = "Sword";
-        dice[2] = "Sword";
-        dice[3] = "Diamond";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Parrot";
         dice[4] = "Parrot";
-        dice[5] = "Parrot";
-        dice[6] = "Coin";
-        dice[7] = "Coin";
-
-        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
-
-        Assertions.assertEquals(500, piratesGame.scoreDie(dice, card));
-
-        dieToKeep = new String[]{"1", "2", "3",};
-        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
-
-        dice[0] = "Skull";
-        dice[1] = "Sword";
-        dice[2] = "Sword";
-        dice[3] = "Sword";
-        dice[4] = "Parrot";
-        dice[5] = "Parrot";
-        dice[6] = "Coin";
-        dice[7] = "Coin";
-
-        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
-
-        Assertions.assertEquals(500, piratesGame.scoreDie(dice, card));
-
-        dieToKeep = new String[]{"1", "2", "3", "4"};
-        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
-
-        dice[0] = "Skull";
-        dice[1] = "Sword";
-        dice[2] = "Sword";
-        dice[3] = "Sword";
-        dice[4] = "Sword";
         dice[5] = "Sword";
-        dice[6] = "Parrot";
-        dice[7] = "Parrot";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        dieToKeep = new String[]{"1", "4", "5", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        dieToKeep = new String[]{"1", "2", "3", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Monkey";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
         Assertions.assertEquals(600, piratesGame.scoreDie(dice, card));
+
+    }
+
+    @Test
+    @DisplayName("line 61: score set of 5 swords over 3 rolls (SC 600)")
+    void line61() {
+
     }
 
     @Test
