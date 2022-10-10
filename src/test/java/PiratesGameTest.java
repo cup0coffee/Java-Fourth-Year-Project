@@ -316,7 +316,7 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 55: score 2 sets of 3 (monkey, parrots) in RTS using 2 rolls (SC 300)")
+    @DisplayName("line 55: roll 3 diamonds, 2 skulls, 1 monkey, 1 sword, 1 parrot, score (diamonds = 100 + 300 points)   (SC 500)")
     void line55() {
 
         //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
@@ -329,32 +329,16 @@ class PiratesGameTest {
 
         dice[0] = "Skull";
         dice[1] = "Skull";
-        dice[2] = "Parrot";
-        dice[3] = "Parrot";
-        dice[4] = "Sword";
+        dice[2] = "Diamond";
+        dice[3] = "Diamond";
+        dice[4] = "Diamond";
         dice[5] = "Monkey";
-        dice[6] = "Monkey";
-        dice[7] = "Monkey";
+        dice[6] = "Sword";
+        dice[7] = "Parrot";
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
-        Assertions.assertEquals(200, piratesGame.scoreDie(dice, card));
-
-        //REROLL
-        dice = piratesGame.rollDice();
-
-        dice[0] = "Skull";
-        dice[1] = "Skull";
-        dice[2] = "Parrot";
-        dice[3] = "Parrot";
-        dice[4] = "Parrot";
-        dice[5] = "Monkey";
-        dice[6] = "Monkey";
-        dice[7] = "Monkey";
-
-        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
-
-        Assertions.assertEquals(300, piratesGame.scoreDie(dice, card));
+        Assertions.assertEquals(500, piratesGame.scoreDie(dice, card));
     }
 
     @Test
