@@ -368,27 +368,27 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 57: score a set of 4 coins correctly (i.e., 200 + 400 points) with FC is a diamond (SC 700)")
+    @DisplayName("line 57: roll 3 swords, 4 parrots, 1 skull and score (SC 100+200+100= 400)")
     void line57() {
 
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
-        card = fortuneCard.createFortuneCard(5); //DIAMOND
+        card = fortuneCard.createFortuneCard(4); //GOLD
 
         String[] dice = piratesGame.rollDice();
 
         dice[0] = "Skull";
-        dice[1] = "Skull";
+        dice[1] = "Sword";
         dice[2] = "Sword";
         dice[3] = "Sword";
-        dice[4] = "Coin";
-        dice[5] = "Coin";
-        dice[6] = "Coin";
-        dice[7] = "Coin";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
-        Assertions.assertEquals(700, piratesGame.scoreDie(dice, card));
+        Assertions.assertEquals(400, piratesGame.scoreDie(dice, card));
     }
 
     @Test
