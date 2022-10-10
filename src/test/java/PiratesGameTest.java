@@ -228,21 +228,21 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 52: score first roll with nothing but 2 diamonds and 2 coins and FC is captain (SC 800)")
+    @DisplayName("line 52: score first roll with 2 (monkeys/parrot/diamonds/coins) and FC is captain (SC 800)")
     void line52() {
 
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
 
         //HARD CODE CAPTAIN CARD WHICH IS ID 1 IN FORTUNE GENERATOR
-        card = fortuneCard.createFortuneCard(1);
+        card = fortuneCard.createFortuneCard(1); //CAPTAIN
 
         String[] dice = piratesGame.rollDice();
 
-        dice[0] = "Skull";
-        dice[1] = "Parrot";
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
         dice[2] = "Parrot";
-        dice[3] = "Sword";
+        dice[3] = "Parrot";
         dice[4] = "Diamond";
         dice[5] = "Diamond";
         dice[6] = "Coin";
