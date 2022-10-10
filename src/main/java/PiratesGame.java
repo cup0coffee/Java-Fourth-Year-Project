@@ -112,7 +112,7 @@ public class PiratesGame implements Serializable {
 
         //ACCOUNT FOR FORTUNE CARDS
 
-        numOfEach[0] = monkey; //WON'T BE ACCOUNT FOR IN SCORE CALUCLATION IF MONKEY BUSINESS CARD
+        numOfEach[0] = monkey; //WON'T BE ACCOUNT FOR IN SCORE CALCULATION IF MONKEY BUSINESS CARD
 
         //ADJUSTMENT FOR MONKEY BUSINESS CARD
         int startingPoint = 0;
@@ -153,6 +153,14 @@ public class PiratesGame implements Serializable {
                 score+=4000;
                 fullChestBonus += numOfEach[i];
             }
+        }
+
+        if((coin == 1 || coin == 2) && (!fortuneCard.getName().equalsIgnoreCase("Gold"))) {
+            fullChestBonus += coin;
+        }
+
+        if((diamond == 1 || diamond == 2) && (!fortuneCard.getName().equalsIgnoreCase("Diamond"))) {
+            fullChestBonus += diamond;
         }
 
         //CHECK FOR CHEST BONUS
