@@ -914,4 +914,43 @@ class PiratesGameTest {
         Assertions.assertEquals(1100, piratesGame.scoreDie(dice, card));
     }
 
+    @Test
+    @DisplayName("line 83: roll 2 (monkeys/swords/parrots/coins), reroll 2 swords, get 1 monkey, 1 parrot, score 1700")
+    void line83() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(6); //MONKEY BUSINESS
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        dieToKeep = new String[]{"1", "2", "5", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(1700, piratesGame.scoreDie(dice, card));
+
+    }
+
 }
