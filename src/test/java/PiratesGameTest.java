@@ -555,7 +555,7 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 63: score set of 7 parrots on first roll (SC 2100)")
+    @DisplayName("line 63: score set of 7 parrots and 1 skull on first roll (SC 2100)")
     void line63() {
 
         //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
