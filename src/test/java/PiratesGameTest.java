@@ -529,12 +529,6 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 61: score set of 5 swords over 3 rolls (SC 600)")
-    void line61() {
-
-    }
-
-    @Test
     @DisplayName("line 62: score set of 6 monkeys on first roll (SC 1100)")
     void line62() {
 
