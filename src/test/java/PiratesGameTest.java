@@ -28,6 +28,8 @@ class PiratesGameTest {
     @DisplayName("line 45: die with 3 skulls 5 swords on first roll: player gets a score of 0")
     void line45() {
 
+        PiratesFortuneCard card = fortuneCard.createFortuneCard(4);
+
         //1. ROLL DICE
         String[] dice = piratesGame.rollDice();
 
@@ -43,6 +45,8 @@ class PiratesGameTest {
 
         //ASSERT DEAD IF 3 SKULLS
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
 
     }
 

@@ -92,6 +92,11 @@ public class PiratesGame implements Serializable {
             }
         }
 
+        //CHECK FOR DEATH
+        if (skull >= 3 && skull != 4) {
+            return 0;
+        }
+
         int score = 0;
 
         if(fortuneCard.getName().equalsIgnoreCase("Gold") && coin == 8) {
