@@ -529,7 +529,7 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 62: score set of 6 monkeys on first roll (SC 1100)")
+    @DisplayName("line 62: score set of 6 monkeys and 2 skulls on first roll (SC 1100)")
     void line62() {
 
         //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
@@ -547,7 +547,7 @@ class PiratesGameTest {
         dice[4] = "Monkey";
         dice[5] = "Monkey";
         dice[6] = "Monkey";
-        dice[7] = "Parrot";
+        dice[7] = "Skull";
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
