@@ -252,7 +252,7 @@ class PiratesGameTest {
     }
 
     @Test
-    @DisplayName("line 53: get set of 2 monkeys on first roll, get 3rd monkey on 2nd roll (SC 200 since FC is coin)")
+    @DisplayName("line 53: roll 2 (monkeys/skulls/swords/parrots), reroll parrots and get 1 sword & 1 monkey (SC 300 since FC is coin)")
     void line53() {
 
         //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
@@ -281,12 +281,12 @@ class PiratesGameTest {
         dice[1] = "Skull";
         dice[2] = "Sword";
         dice[3] = "Sword";
-        dice[4] = "Parrot";
+        dice[4] = "Sword";
         dice[5] = "Monkey";
         dice[6] = "Monkey";
         dice[7] = "Monkey";
 
-        Assertions.assertEquals(200, piratesGame.scoreDie(dice, card));
+        Assertions.assertEquals(300, piratesGame.scoreDie(dice, card));
     }
 
     @Test
