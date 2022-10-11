@@ -1,9 +1,12 @@
+import Card.PiratesFortuneCard;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -22,17 +25,60 @@ public class PiratesPlayer implements Serializable {
     PiratesPlayer[] players = new PiratesPlayer[3];
     Boolean inTestMode = false;
 
+    //ADDED: DECK OF FORTUNE CARDS
+    private ArrayList<PiratesFortuneCard> deck;
+
     //MENU FOR PLAYER ON THEIR SPECIFIC SCREEN
-    public int[] playRound(String[] dieRoll) {
+    public int[] playRound(String[] dieRoll, PiratesFortuneCard fortuneCard, int deckSize) {
 
         Scanner myObj = new Scanner(System.in);
 
+        //FROM YAHTZEE
         int count = 0; // reroll 3 times
         int stop = 0;
+        //----
 
+        int numOfRoundRolls = 0;
+        int skullCount = 0;
+        boolean hasRolledAtLeastOneSkull = true;
 
+        //PRINT FORTUNE CARD
+        piratesGame.printFortuneCard(fortuneCard, deckSize);
+
+        //ROLL INITIAL 8 DIE
+        piratesGame.printDieRoll(dieRoll);
 
         while (stop == 0) {
+
+            //CHECK FOR SKULL COUNT
+            skullCount = piratesGame.checkSkullCount(dieRoll, fortuneCard);
+
+            if (piratesGame.isPlayerDead(skullCount)) {
+                System.out.println("YOU DEAD (You rolled " + skullCount + " skulls)");
+                stop = 1;
+                continue;
+            } else if (skullCount == 0) {
+                System.out.println(" 0");
+                numOfRoundRolls++;
+            }
+
+            //PLAYER MENU - DICE ROLL
+            System.out.println(piratesGame.printCurrentScoreDice(dieRoll, fortuneCard));
+
+            //PLAYER MENU - SCORE
+            System.out.println("Current Total: " + piratesGame.printCurrentScore(dieRoll, fortuneCard));
+
+            //PLAYER MENU - # ROLLS MADE THIS ROUND BY PLAYER
+            System.out.println("# rolls made this round: " + numOfRoundRolls);
+
+            //PLAYER MENU - NUMBER OF SKULLS
+            System.out.print("Skull(s): ");
+            for (int i = 0; i < skullCount; i++) {
+                System.out.print("☠");
+            }
+
+            System.out.println();
+            System.out.println();
 
 
             //PLAYER MENU - OPTION SELECTION
@@ -49,21 +95,101 @@ public class PiratesPlayer implements Serializable {
             //OPTION 1
             if (act == 1 && count < 3) {
 
+                boolean invalidReroll = true;
+
+                String[] die = null;
+
+                while (invalidReroll) {
+
+                    System.out.println("Select the die to hold (Ones not held get rerolled): (1,2...) ");
+                    die = (myObj.next()).replaceAll("\\s", "").split(",");
+
+                    //CHECK FOR ROLLING MORE THAN 1 DIE
+                    if(die.length >= 7) {
+                        System.out.println("Invalid: You need to roll more than one die.");
+                    }
+
+                    //CHECK FOR NOT REROLLING SKULL
+                    ArrayList<Integer> rolls = new ArrayList<Integer>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7));
+                    for (String s : die) {
+                        int rem = Integer.parseInt(s) - 1;
+                        rolls.remove(rolls.indexOf(rem));
+                    }
+
+                    int skullsFound = 0;
+
+                    for (int s : rolls) {
+                        if (dieRoll[s].equalsIgnoreCase("Skull")) {
+                            System.out.println("Error: You cannot reroll a skull.");
+                            skullsFound++;
+                            break;
+                        }
+                    }
+
+                    if(skullsFound == 0) {
+                        invalidReroll = false;
+                    }
+                }
+                dieRoll = piratesGame.reRollNotHeld(dieRoll, die);
+                System.out.println("New Roll: ");
+                piratesGame.printDieRoll(dieRoll);
+                numOfRoundRolls++;
             }
 
             if (act == 2 && count < 3) {
 
             }
-
-
             if (act == 3) {
+//				set yahtzee bonus if applicable
+                setScoreSheet(13, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
 
+////				get the score for the option requested
+////				check if its been stored already before adding else ask for another number
+//                int r = 0;
+//                while (r != -1) {
+//                    System.out.println("Where do you want to score this round? (1/2/3...)");
+//                    r = myObj.nextInt();
+////					add the yahtzee bonus if the roll was yahtzee and yahtzee is full
+//                    if (piratesGame.isScoreSheetPositionEmpty(scoreSheet, r)) {
+//                        setScoreSheet(scoreRound(r, dieRoll));
+//                        r = -1;
+//                    } else {
+//                        System.out.println("The position is filled. Try another number");
+//                    }
+//                }
+                stop = 1;
             }
-            stop = 1;
         }
+
+
         return this.scoreSheet;
+
     }
 
+    public int[] scoreRound(int r, String[] dieRoll) {
+        return getScoreSheet();
+
+
+    }
+
+    public int getScore() {
+        int sc = 0;
+        if (getScoreSheet()[0] >= 0)
+            sc += scoreSheet[0];
+        return sc;
+    }
+
+    public int[] getScoreSheet() {
+        return scoreSheet;
+    }
+
+    public void setScoreSheet(int cat, int score) {
+        this.scoreSheet[cat] = score;
+    }
+
+    public void setScoreSheet(int[] ss) {
+        this.scoreSheet = ss;
+    }
 
     public PiratesPlayer getPlayer() {
         return this;
@@ -98,6 +224,26 @@ public class PiratesPlayer implements Serializable {
         }
     }
 
+    /*
+     * update turns
+     */
+    public void printPlayerScores(PiratesPlayer[] pl) {
+        // print the scoresheets
+
+        if (playerId == 1) {
+            piratesGame.printScoreSheet(pl[0]);
+            piratesGame.printScoreSheet(pl[1]);
+            piratesGame.printScoreSheet(pl[2]);
+        } else if (playerId == 2) {
+            piratesGame.printScoreSheet(pl[1]);
+            piratesGame.printScoreSheet(pl[0]);
+            piratesGame.printScoreSheet(pl[2]);
+        } else {
+            piratesGame.printScoreSheet(pl[2]);
+            piratesGame.printScoreSheet(pl[0]);
+            piratesGame.printScoreSheet(pl[1]);
+        }
+    }
 
     public void startGame() {
         // receive players once for names
@@ -108,8 +254,53 @@ public class PiratesPlayer implements Serializable {
             int round = clientConnection.receiveRoundNo();
             if (round == -1)
                 break;
+            System.out.println("\n \n \n ********Round Number " + round + "********");
+            int[][] pl = clientConnection.receiveScores();
+            for (int i = 0; i < 3; i++) {
+                players[i].setScoreSheet(pl[i]);
+            }
+            printPlayerScores(players);
+
+            PiratesFortuneCard fortuneCard = clientConnection.receiveFortuneCard();
+            int fortuneCardsRemaining = clientConnection.receiveDeckSize();
+
+            //-------------------------------
+            //CREATE DECK - old code
+            //piratesGame.createFortuneDeck();
+            //-------------------------------
+
+            //GET INITIAL DIE ROLL
+            String[] dieRoll = piratesGame.rollDice();
+
+            //SEND FORTUNE CARD AND DIE ROLL
+            clientConnection.sendScores(playRound(dieRoll, fortuneCard, fortuneCardsRemaining));
         }
 
+    }
+
+    public PiratesPlayer returnWinner() {
+        try {
+            int[][] pl = clientConnection.receiveScores();
+            for (int i = 0; i < 3; i++) {
+                players[i].setScoreSheet(pl[i]);
+            }
+            printPlayerScores(players);
+            PiratesPlayer win = (PiratesPlayer) clientConnection.dIn.readObject();
+            if (playerId == win.playerId) {
+                System.out.println("You win!");
+            } else {
+                System.out.println("The winner is " + win.name);
+            }
+
+            System.out.println("Game over!");
+            return win;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static final int piratesServerPortNum = 3010;
@@ -178,6 +369,41 @@ public class PiratesPlayer implements Serializable {
         }
 
         /*
+         * receive scoresheet
+         */
+        public void sendScores(int[] scores) {
+            try {
+                for (int i = 0; i < scores.length; i++) {
+                    dOut.writeInt(scores[i]);
+                }
+                dOut.flush();
+
+            } catch (IOException e) {
+                System.out.println("Score sheet not received");
+                e.printStackTrace();
+            }
+        }
+
+        //ADDED: RECEIVE DECK
+        public PiratesFortuneCard receiveFortuneCard() {
+
+            PiratesFortuneCard receivedFortuneCard = null;
+
+            try {
+                receivedFortuneCard = (PiratesFortuneCard) dIn.readObject();
+            } catch (IOException e) {
+                System.out.println("Card not received");
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                System.out.println("class not found");
+                e.printStackTrace();
+            }
+
+            return receivedFortuneCard;
+
+        }
+
+        /*
          * receive scores of other players
          */
         public PiratesPlayer[] receivePlayer() {
@@ -204,12 +430,44 @@ public class PiratesPlayer implements Serializable {
         /*
          * receive scores of other players
          */
+        public int[][] receiveScores() {
+            try {
+                int[][] sc = new int[3][1];
+                for (int j = 0; j < 3; j++) {
+                    for (int i = 0; i < 1; i++) {
+                        sc[j][i] = dIn.readInt();
+                    }
+                    System.out.println();
+                }
+
+                return sc;
+            } catch (Exception e) {
+                System.out.println("Score sheet not received");
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        /*
+         * receive scores of other players
+         */
         public int receiveRoundNo() {
             try {
                 return dIn.readInt();
 
             } catch (IOException e) {
                 System.out.println("Score sheet not received");
+                e.printStackTrace();
+            }
+            return 0;
+        }
+
+        public int receiveDeckSize() {
+            try {
+                return dIn.readInt();
+
+            } catch (IOException e) {
+                System.out.println("Deck size not received");
                 e.printStackTrace();
             }
             return 0;
@@ -252,6 +510,7 @@ public class PiratesPlayer implements Serializable {
         p.initializePlayers();
         p.connectToClient();
         p.startGame();
+        p.returnWinner();
         myObj.close();
     }
 }

@@ -1,3 +1,4 @@
+import Card.PiratesFortuneCard;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -5,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 
 //GAME SERVER IMPLEMENTS:
@@ -28,6 +31,7 @@ public class PiratesServer implements Serializable, Runnable {
 	PiratesPlayer[] players = new PiratesPlayer[3];
 	public boolean isAcceptingConnections;
 	private int turnsMade;
+	private int maxTurns;
 	private int currentPlayer = 0;
 	//-------------------------------------------
 
@@ -65,6 +69,7 @@ public class PiratesServer implements Serializable, Runnable {
 		//SPECIFY SOME GAME LOGIC VARIABLES
 		numPlayers = 0;
 		turnsMade = 0;
+		maxTurns = 13;
 
 
 		// initialize the players list with new players
@@ -114,7 +119,7 @@ public class PiratesServer implements Serializable, Runnable {
 
 	/*
 	 * -----------Networking stuff ----------
-	 * 
+	 *
 	 */
 
 	//STEP 2: ONCE GAME SERVER OBJECT CREATED,
@@ -183,16 +188,79 @@ public class PiratesServer implements Serializable, Runnable {
 
 	//STEP 3: STARTING THE LOGIC OF THE GAME
 	synchronized public void gameLoop() {
+		System.out.println("Inside of gameloop");
 
-		playerServer[0].sendPlayers(players);
-		playerServer[1].sendPlayers(players);
-		playerServer[2].sendPlayers(players);
+		System.out.println("Draw a random fortune card, starting with player 1!");
 
-		playerServer[0].sendTurnNo(-1);
-		playerServer[1].sendTurnNo(-1);
-		playerServer[2].sendTurnNo(-1);
+		//PUT THE DECK HERE
+		ArrayList<PiratesFortuneCard> deck = game.createFortuneDeck();
+		int fortuneCardsRemaining = deck.size();
+
+		//SENDS SCORE SHEET TO SERVER
+		try {
+
+			playerServer[0].sendPlayers(players);
+			playerServer[1].sendPlayers(players);
+			playerServer[2].sendPlayers(players);
+
+			//KEEP GOING UNTIL SPECIFIC MAX TURNS IS REACHED
+			//EACH PLAYER'S HAND IN A ROUND
+			//NO MAX TURNS, NEED TO EDIT
+			while (turnsMade < maxTurns) {
+
+				//DRAW FORTUNE CARD
+				PiratesFortuneCard drawnFortuneCard = game.drawFortuneCard(deck);
+
+				//INCREMENT TURN
+				turnsMade++;
+
+				// send the round number
+				System.out.println("*****************************************");
+				System.out.println("Round number " + turnsMade);
+				//CURRENT PLAYER RECEIVES THE FOLLOWING
+				playerServer[currentPlayer].sendTurnNo(turnsMade);
+				playerServer[currentPlayer].sendScores(players);
+				//ADDED FOR SENDING DECK AND DECK SIZE
+				playerServer[currentPlayer].sendFortuneCard(drawnFortuneCard);
+				playerServer[currentPlayer].sendDeckSize(deck.size());
+
+				//-------------------------
+				players[currentPlayer].setScoreSheet(playerServer[currentPlayer].receiveScores());
+				System.out.println("Player " + currentPlayer + " completed turn and their score is " + players[currentPlayer].getScore());
+
+				currentPlayer++;
+				if (currentPlayer == 3) currentPlayer = 0;
+
+			}
+
+			playerServer[0].sendTurnNo(-1);
+			playerServer[1].sendTurnNo(-1);
+			playerServer[2].sendTurnNo(-1);
+
+			// send final score sheet after bonus added
+			playerServer[0].sendScores(players);
+			playerServer[1].sendScores(players);
+			playerServer[2].sendScores(players);
 
 
+			PiratesPlayer p = game.getWinner(players);
+			System.out.println("The winner is " + p.name);
+			for (int i = 0; i < playerServer.length; i++) {
+				playerServer[i].dOut.writeObject(p);
+				playerServer[i].dOut.flush();
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+
+	}
+
+	public void setMaxTurns(int maxTurns) {
+		this.maxTurns = maxTurns;
 	}
 
 	public void setTurnsMade(int turnsMade) {
@@ -256,6 +324,27 @@ public class PiratesServer implements Serializable, Runnable {
 
 		}
 
+		//SEND THE REMAINING DECK TO OTHER PLAYERS
+		public void sendFortuneCard(PiratesFortuneCard drawnFortuneCard) {
+			try {
+				dOut.writeObject(drawnFortuneCard);
+
+			} catch (IOException ex) {
+				System.out.println("Card not sent!");
+				ex.printStackTrace();
+			}
+		}
+
+		public void sendDeckSize(int r) {
+			try {
+				dOut.writeInt(r);
+				dOut.flush();
+			} catch (Exception e) {
+				System.out.println("Deck size not received");
+				e.printStackTrace();
+			}
+		}
+
 		/*
 		 * receive scores of other players
 		 */
@@ -265,6 +354,40 @@ public class PiratesServer implements Serializable, Runnable {
 				dOut.flush();
 			} catch (Exception e) {
 				System.out.println("Score sheet not received");
+				e.printStackTrace();
+			}
+		}
+
+		/*
+		 * receive scores of other players
+		 */
+		public int[] receiveScores() {
+			try {
+				int[] sc = new int[1];
+				for (int i = 0; i < 1; i++) {
+					sc[i] = dIn.readInt();
+				}
+				return sc;
+			} catch (Exception e) {
+				System.out.println("Score sheet not received");
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		/*
+		 * send scores of other players
+		 */
+		public void sendScores(PiratesPlayer[] pl) {
+			try {
+				for (int i = 0; i < pl.length; i++) {
+					for (int j = 0; j < pl[i].getScoreSheet().length; j++) {
+						dOut.writeInt(pl[i].getScoreSheet()[j]);
+					}
+				}
+				dOut.flush();
+			} catch (Exception e) {
+				System.out.println("Score sheet not sent");
 				e.printStackTrace();
 			}
 		}
