@@ -1002,6 +1002,7 @@ class PiratesGameTest {
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
+        Assertions.assertEquals(1000, piratesGame.scoreDie(dice, card));
     }
 
     @Test
