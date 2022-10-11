@@ -951,6 +951,57 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 78: roll 3 skulls, 3 parrots, 2 swords, " +
+            "reroll skull, get parrot, " +
+            "reroll 2 swords, get parrots, score (SC 1000)")
+    void line78() {
+
+        boolean sorceressAvailable = true;
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(2); //SORCERESS
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Skull";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        dieToKeep = new String[]{"1", "2", "4", "5", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);;
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Parrot";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        dieToKeep = new String[]{"1", "2", "3", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+    }
+
 
     //------------------------------------------------------------------------------
 
