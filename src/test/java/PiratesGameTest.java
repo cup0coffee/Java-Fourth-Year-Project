@@ -896,7 +896,7 @@ class PiratesGameTest {
             "reroll skull, get monkey (SC 500)")
     void line77() {
 
-        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+        boolean sorceressAvailable = true;
 
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
@@ -918,6 +918,7 @@ class PiratesGameTest {
         dieToKeep = new String[]{"1", "2", "3", "4", "5"};
         dice = piratesGame.reRollNotHeld(dice, dieToKeep);
 
+
         dice[0] = "Diamond";
         dice[1] = "Diamond";
         dice[2] = "Monkey";
@@ -929,8 +930,11 @@ class PiratesGameTest {
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
-        dieToKeep = new String[]{"1", "2", "3", "4", "5", "7", "8"};
-        dice = piratesGame.isCardSorceress(piratesGame.reRollNotHeld(dice, dieToKeep));
+        if (sorceressAvailable) {
+            dieToKeep = new String[]{"1", "2", "3", "4", "5", "7", "8"};
+            dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+            sorceressAvailable = false;
+        }
 
         dice[0] = "Diamond";
         dice[1] = "Diamond";
