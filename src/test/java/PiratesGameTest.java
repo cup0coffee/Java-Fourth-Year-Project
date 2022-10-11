@@ -889,6 +889,68 @@ class PiratesGameTest {
     //PART 2: Miscellaneous Fortune Cards and Full Chest bonus (SINGLE PLAYER SCORING)
 
 
+    //SORCERESS
+    @Test
+    @DisplayName("line 77: roll 2 diamonds, 1 (sword/monkey/coin), 3 parrots, " +
+            "reroll 3 parrots, get 1 skull, 2 monkeys, " +
+            "reroll skull, get monkey (SC 500)")
+    void line77() {
+
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(2); //SORCERESS
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Diamond";
+        dice[1] = "Diamond";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Coin";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "5"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Diamond";
+        dice[1] = "Diamond";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Coin";
+        dice[5] = "Skull";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "5", "7", "8"};
+        dice = piratesGame.isCardSorceress(piratesGame.reRollNotHeld(dice, dieToKeep));
+
+        dice[0] = "Diamond";
+        dice[1] = "Diamond";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Coin";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(500, piratesGame.scoreDie(dice, card));
+
+    }
+
+
+    //------------------------------------------------------------------------------
+
+
     //MONKEY BUSINESS
     @Test
     @DisplayName("line 82: roll 3 monkeys 3 parrots  1 skull 1 coin  SC = 1100  (i.e., sequence of of 6 + coin)")
@@ -977,6 +1039,7 @@ class PiratesGameTest {
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
         Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+
     }
 
 }
