@@ -957,6 +957,8 @@ class PiratesGameTest {
             "reroll 2 swords, get parrots, score (SC 1000)")
     void line78() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         boolean sorceressAvailable = true;
 
         //DRAW FORTUNE CARD
