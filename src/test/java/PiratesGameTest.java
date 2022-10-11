@@ -1004,6 +1004,60 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 79: roll 1 skull, 4 parrots, 3 monkeys, " +
+            "reroll 3 monkeys, get 1 skull, 2 parrots, " +
+            "reroll skull, get parrot, score (SC 2000)")
+    void line79() {
+
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
+        boolean sorceressAvailable = true;
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(2); //SORCERESS
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Monkey";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        dieToKeep = new String[]{"1", "5", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);;
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        dieToKeep = new String[]{"1", "3", "4", "5", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(2000, piratesGame.scoreDie(dice, card));
+    }
+
 
     //------------------------------------------------------------------------------
 
