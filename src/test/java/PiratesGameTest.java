@@ -1010,7 +1010,7 @@ class PiratesGameTest {
             "reroll skull, get parrot, score (SC 2000)")
     void line79() {
 
-        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+        //REASON: ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
 
         boolean sorceressAvailable = true;
 
