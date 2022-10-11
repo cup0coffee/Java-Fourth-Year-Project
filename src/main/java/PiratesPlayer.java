@@ -141,7 +141,7 @@ public class PiratesPlayer implements Serializable {
             }
             if (act == 3) {
 //				set yahtzee bonus if applicable
-                setScoreSheet(13, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
+                setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
 
 ////				get the score for the option requested
 ////				check if its been stored already before adding else ask for another number
