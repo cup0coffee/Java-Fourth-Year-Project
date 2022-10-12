@@ -196,6 +196,17 @@ public class PiratesServer implements Serializable, Runnable {
 		ArrayList<PiratesFortuneCard> deck = game.createFortuneDeck();
 		int fortuneCardsRemaining = deck.size();
 
+		PiratesFortuneCard drawnFortuneCard = null;
+		List<PiratesFortuneCard> deckCopy = new ArrayList<>();
+		ArrayList<PiratesFortuneCard> reuseDeck = new ArrayList<>();
+
+		//COPY OF DECK
+		for(int i =0; i < deck.size(); i++) {
+			deckCopy.add(deck.get(i));
+		}
+
+		boolean initialDeck = true;
+
 		//SENDS SCORE SHEET TO SERVER
 		try {
 
@@ -206,10 +217,31 @@ public class PiratesServer implements Serializable, Runnable {
 			//KEEP GOING UNTIL SPECIFIC MAX TURNS IS REACHED
 			//EACH PLAYER'S HAND IN A ROUND
 			//NO MAX TURNS, NEED TO EDIT
-			while (turnsMade < maxTurns) {
+			//while (turnsMade < maxTurns) {
+			while(players[currentPlayer].getScore() < 6000) {
 
 				//DRAW FORTUNE CARD
-				PiratesFortuneCard drawnFortuneCard = game.drawFortuneCard(deck);
+				//ACCOUNT FOR REUSING SAME DECK
+				if(fortuneCardsRemaining == 1 && initialDeck) {
+					drawnFortuneCard = game.drawFortuneCard(deck);
+					for(int i = 0; i < deckCopy.size(); i++) {
+						reuseDeck.add(deckCopy.get(i));
+					}
+					initialDeck = false;
+					fortuneCardsRemaining = reuseDeck.size();
+				} else if (fortuneCardsRemaining > 1 && initialDeck) {
+					drawnFortuneCard = game.drawFortuneCard(deck);
+					fortuneCardsRemaining = deck.size();
+				} else if (fortuneCardsRemaining > 1 && initialDeck == false) {
+					drawnFortuneCard = game.drawFortuneCard(reuseDeck);
+					fortuneCardsRemaining = reuseDeck.size();
+				} else if (fortuneCardsRemaining == 1 && initialDeck == false){
+					drawnFortuneCard = game.drawFortuneCard(reuseDeck);
+					for(int i = 0; i < deckCopy.size(); i++) {
+						reuseDeck.add(deckCopy.get(i));
+					}
+					fortuneCardsRemaining = reuseDeck.size();
+				}
 
 				//INCREMENT TURN
 				turnsMade++;
@@ -222,7 +254,7 @@ public class PiratesServer implements Serializable, Runnable {
 				playerServer[currentPlayer].sendScores(players);
 				//ADDED FOR SENDING DECK AND DECK SIZE
 				playerServer[currentPlayer].sendFortuneCard(drawnFortuneCard);
-				playerServer[currentPlayer].sendDeckSize(deck.size());
+				playerServer[currentPlayer].sendDeckSize(fortuneCardsRemaining);
 
 				//-------------------------
 				players[currentPlayer].setScoreSheet(playerServer[currentPlayer].receiveScores());

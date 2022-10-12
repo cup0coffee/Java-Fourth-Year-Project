@@ -34,7 +34,7 @@ public class PiratesPlayer implements Serializable {
         Scanner myObj = new Scanner(System.in);
 
         //FROM YAHTZEE
-        int count = 0; // reroll 3 times
+        int count = 0;
         int stop = 0;
         //----
 
@@ -58,7 +58,6 @@ public class PiratesPlayer implements Serializable {
                 stop = 1;
                 continue;
             } else if (skullCount == 0) {
-                System.out.println(" 0");
                 numOfRoundRolls++;
             }
 
@@ -73,8 +72,12 @@ public class PiratesPlayer implements Serializable {
 
             //PLAYER MENU - NUMBER OF SKULLS
             System.out.print("Skull(s): ");
-            for (int i = 0; i < skullCount; i++) {
-                System.out.print("☠");
+            if(skullCount > 0) {
+                for (int i = 0; i < skullCount; i++) {
+                    System.out.print("☠");
+                }
+            } else {
+                System.out.print("0");
             }
 
             System.out.println();
@@ -140,23 +143,9 @@ public class PiratesPlayer implements Serializable {
 
             }
             if (act == 3) {
-//				set yahtzee bonus if applicable
                 setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
+                System.out.println("You just earned " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points! :)");
 
-////				get the score for the option requested
-////				check if its been stored already before adding else ask for another number
-//                int r = 0;
-//                while (r != -1) {
-//                    System.out.println("Where do you want to score this round? (1/2/3...)");
-//                    r = myObj.nextInt();
-////					add the yahtzee bonus if the roll was yahtzee and yahtzee is full
-//                    if (piratesGame.isScoreSheetPositionEmpty(scoreSheet, r)) {
-//                        setScoreSheet(scoreRound(r, dieRoll));
-//                        r = -1;
-//                    } else {
-//                        System.out.println("The position is filled. Try another number");
-//                    }
-//                }
                 stop = 1;
             }
         }
@@ -184,7 +173,10 @@ public class PiratesPlayer implements Serializable {
     }
 
     public void setScoreSheet(int cat, int score) {
-        this.scoreSheet[cat] = score;
+        //ADDED +
+        int newScore = this.getScore() + score;
+        this.scoreSheet[cat] = newScore;
+        //this.scoreSheet[cat] = score;
     }
 
     public void setScoreSheet(int[] ss) {
