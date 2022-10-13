@@ -1184,6 +1184,31 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 98: 3 monkeys, 3 swords, 2 coins FC: captain   => SC (100+100+200+500)*2 =  1800")
+    void line98() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        Assertions.assertEquals(1800, piratesGame.scoreDie(dice, card));
+
+    }
+
 
     //--------------------------------------------------------------
 
