@@ -1154,4 +1154,33 @@ class PiratesGameTest {
 
     }
 
+    //SKULL FORTUNE CARDS
+    @Test
+    @DisplayName("line 106: roll one skull and 7 swords with FC with two skulls => die")
+    void line106() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(8); //DOUBLE SKULL
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Sword";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+
+    }
+
+
+    //ISLAND OF SKULLS
+
 }
