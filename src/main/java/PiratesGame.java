@@ -64,6 +64,13 @@ public class PiratesGame implements Serializable {
     }
 
     public int scoreDie(int[] scoreSheet, String[] dieRoll, PiratesFortuneCard fortuneCard) {
+
+        int numSkulls = checkSkullCount(dieRoll, fortuneCard);
+
+        if (numSkulls == 3 || numSkulls > 4) {
+            return 0;
+        }
+
         int monkey = 0;
         int parrot = 0;
         int sword = 0;
@@ -177,6 +184,12 @@ public class PiratesGame implements Serializable {
     }
 
     public int scoreDie(String[] dieRoll, PiratesFortuneCard fortuneCard) {
+
+        int numSkulls = checkSkullCount(dieRoll, fortuneCard);
+
+        if (numSkulls == 3 || numSkulls > 4) {
+            return 0;
+        }
 
         int monkey = 0;
         int parrot = 0;
