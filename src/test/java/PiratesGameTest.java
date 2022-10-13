@@ -1188,6 +1188,8 @@ class PiratesGameTest {
     @DisplayName("line 98: 3 monkeys, 3 swords, 2 coins FC: captain   => SC (100+100+200+500)*2 =  1800")
     void line98() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(1); //CAPTAIN
