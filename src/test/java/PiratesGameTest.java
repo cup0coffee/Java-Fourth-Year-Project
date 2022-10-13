@@ -1205,6 +1205,56 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 108: roll 2 skulls  3(parrots/monkeys) with FC with two skulls: " +
+            "reroll 3 parrots get 2 skulls, 1 sword" +
+            "  reroll sword and 3 monkeys, get 3 skulls and 1 sword, stop " +
+            "=> -900 for other players (no negative score) & you score 0")
+    void line108() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(8); //DOUBLE SKULL
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        dieToKeep = new String[]{"1", "2", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Skull";
+        dice[3] = "Skull";
+        dice[4] = "Sword";
+        dice[5] = "Skull";
+        dice[6] = "Skull";
+        dice[7] = "Skull";
+
+        dieToKeep = new String[]{"1", "2", "3", "4"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Skull";
+        dice[3] = "Skull";
+        dice[4] = "Sword";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+
+    }
+
 
     //ISLAND OF SKULLS
 
