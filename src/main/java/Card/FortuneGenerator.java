@@ -20,6 +20,9 @@ public class FortuneGenerator extends PiratesFortuneCardGenerator {
         } else if (fortuneCardID == 6) {
             return new MonkeyBusiness();
 
+        } else if (fortuneCardID == 7) {
+            return new SkullSingle();
+
         } else if (fortuneCardID == 8) {
             return new SkullDouble();
 
