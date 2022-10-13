@@ -1154,6 +1154,37 @@ class PiratesGameTest {
 
     }
 
+    //--------------------------------------------------------------------
+
+    //FULL CHEST
+    @Test
+    @DisplayName("line 97: 3 monkeys, 3 swords, 1 diamond, 1 parrot FC: coin   => SC 400  (ie no bonus)")
+    void line97() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(4); //GOLD
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Diamond";
+        dice[7] = "Parrot";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        Assertions.assertEquals(400, piratesGame.scoreDie(dice, card));
+
+    }
+
+
+    //--------------------------------------------------------------
+
     //SKULL FORTUNE CARDS
     @Test
     @DisplayName("line 106: roll one skull and 7 swords with FC with two skulls => die")
