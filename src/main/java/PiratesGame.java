@@ -46,6 +46,33 @@ public class PiratesGame implements Serializable {
         return dieRoll;
     }
 
+    public int scoreTreasureChest(String[] dieRoll, String[] held, PiratesFortuneCard card) {
+
+        ArrayList<Integer> rolls = new ArrayList<Integer>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7));
+
+        //HELD - 5,6,7,8
+        for (String s : held) {
+            int rem = Integer.parseInt(s) - 1;
+            rolls.remove(rolls.indexOf(rem));
+        }
+
+        //ASSIGN SKULLS TO OTHER DICE THAT WEREN'T IN TREASURE CHEST
+        //THIS IS SO NOT POINTS WILL BE COLLECTED FOR ANYTHING BESDIES WHAT WAS IN TREASURE CHEST
+        for (int s : rolls) {
+            dieRoll = assignSkull(dieRoll, (s));
+        }
+
+
+        return scoreDie(dieRoll, card);
+    }
+
+    public String[] assignSkull(String[] dieRoll, int i) {
+
+        dieRoll[i] = "Skull";
+
+        return dieRoll;
+    }
+
     public String[] rerollDice(String[] dieRoll, int i) {
 
         String[] dieChoices = new String[6];
@@ -187,7 +214,7 @@ public class PiratesGame implements Serializable {
 
         int numSkulls = checkSkullCount(dieRoll, fortuneCard);
 
-        if (numSkulls == 3 || numSkulls > 4) {
+        if ((numSkulls == 3 || numSkulls > 4) && !fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
             return 0;
         }
 
@@ -216,11 +243,6 @@ public class PiratesGame implements Serializable {
             } else if (dieRoll[i].equalsIgnoreCase("Diamond")) {
                 diamond++;
             }
-        }
-
-        //CHECK FOR DEATH
-        if (skull >= 3 && skull != 4) {
-            return 0;
         }
 
         int score = 0;
@@ -317,7 +339,7 @@ public class PiratesGame implements Serializable {
 
         boolean isDead = false;
 
-        if (skullCount >= 3 && skullCount != 4) {
+        if (skullCount >= 3) {
             isDead = true;
         }
 
@@ -360,7 +382,6 @@ public class PiratesGame implements Serializable {
         }
 
         return skull;
-
 
     }
 
