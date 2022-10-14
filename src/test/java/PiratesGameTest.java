@@ -1261,7 +1261,7 @@ class PiratesGameTest {
         dice[6] = "Coin";
         dice[7] = "Coin";
 
-        Assertions.assertEquals(600, piratesGame.scoreDie(dice, card));
+        Assertions.assertEquals(600, piratesGame.scoreTreasureChest(dice, treasureToKeep, card));
 
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
