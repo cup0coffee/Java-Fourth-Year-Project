@@ -1213,6 +1213,60 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 92: roll 2 skulls, 3 parrots, 3 coins   put 3 coins in chest" +
+            "    then rerolls 3 parrots and get 2 diamonds 1 coin    put coin in chest (now 4)" +
+            "   then reroll 2 diamonds and get 1 skull 1 coin     score for chest only = 400 + 200 = 600 AND report death")
+    void line92() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(0); //TREASURE CHEST
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Coin";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        //COIN IN CHEST
+        treasureToKeep = new String[]{"6", "7", "8"};
+        dieToKeep = new String[]{"1", "2", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Diamond";
+        dice[3] = "Diamond";
+        dice[4] = "Coin";
+        dice[5] = "Coin";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        treasureToKeep = new String[]{"5", "6", "7", "8"};
+        dieToKeep = new String[]{"1", "2", "5", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Skull";
+        dice[3] = "Coin";
+        dice[4] = "Coin";
+        dice[5] = "Coin";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(600, piratesGame.scoreDie(dice, card));
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+    }
+
     //--------------------------------------------------------------------
 
     //FULL CHEST
