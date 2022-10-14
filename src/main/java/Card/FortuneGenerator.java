@@ -5,7 +5,10 @@ import Fortunes.*;
 public class FortuneGenerator extends PiratesFortuneCardGenerator {
 
     PiratesFortuneCard createCard(int fortuneCardID) {
-        if (fortuneCardID == 1) {
+        if (fortuneCardID == 0) {
+            return new TreasureChest();
+
+        } else if (fortuneCardID == 1) {
             return new Captain();
 
         } else if (fortuneCardID == 2) {
