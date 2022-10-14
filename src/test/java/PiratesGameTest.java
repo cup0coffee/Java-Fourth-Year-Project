@@ -14,6 +14,8 @@ class PiratesGameTest {
     String[] dice;
     String[] dieToKeep;
 
+    String[] treasureToKeep;
+
     @BeforeEach
     void init() {
         piratesGame = new PiratesGame();
@@ -1151,6 +1153,63 @@ class PiratesGameTest {
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
 
         Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+
+    }
+
+    //--------------------------------------------------------------------
+
+    //TREASURE CHEST
+
+    @Test
+    @DisplayName("line 87: roll 3 parrots, 2 swords, 2 diamonds, 1 coin     put 2 diamonds and 1 coin in chest" +
+            "  then reroll 2 swords and get 2 parrots put 5 parrots in chest and take out 2 diamonds & coin" +
+            "  then reroll the 3 dice and get 1 skull, 1 coin and a parrot" +
+            "   score 6 parrots + 1 coin for 1100 points")
+    void line87() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(0); //TREASURE CHEST
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Parrot";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Diamond";
+        dice[6] = "Diamond";
+        dice[7] = "Coin";
+
+        //PLACE DIAMOND AND COIN IN CHEST
+        treasureToKeep = new String[]{"6", "7", "8"};
+        dieToKeep = new String[]{"1", "2", "3", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Parrot";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Diamond";
+        dice[6] = "Diamond";
+        dice[7] = "Coin";
+
+        treasureToKeep = new String[]{"1", "2", "3", "4", "5"};
+        dieToKeep = new String[]{"1", "2", "3", "4", "5"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Parrot";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Parrot";
+        dice[4] = "Parrot";
+        dice[5] = "Skull";
+        dice[6] = "Coin";
+        dice[7] = "Parrot";
+
+        Assertions.assertEquals(1100, piratesGame.scoreDie(dice, card));
 
     }
 
