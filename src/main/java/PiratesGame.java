@@ -393,22 +393,28 @@ public class PiratesGame implements Serializable {
         //CARDS
         PiratesFortuneCardGenerator fortuneCard = new FortuneGenerator();
 
+        //TEST
+
+
         for (int i = 0; i < 4; i++) {
 
-            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
-            deck.add(captain);
+            PiratesFortuneCard treasure = fortuneCard.createFortuneCard(0);
+            deck.add(treasure);
 
-            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
-            deck.add(sorceress);
-
-            PiratesFortuneCard gold = fortuneCard.createFortuneCard(4);
-            deck.add(gold);
-
-            PiratesFortuneCard diamond = fortuneCard.createFortuneCard(5);
-            deck.add(diamond);
-
-            PiratesFortuneCard monkey = fortuneCard.createFortuneCard(6);
-            deck.add(monkey);
+//            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
+//            deck.add(captain);
+//
+//            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
+//            deck.add(sorceress);
+//
+//            PiratesFortuneCard gold = fortuneCard.createFortuneCard(4);
+//            deck.add(gold);
+//
+//            PiratesFortuneCard diamond = fortuneCard.createFortuneCard(5);
+//            deck.add(diamond);
+//
+//            PiratesFortuneCard monkey = fortuneCard.createFortuneCard(6);
+//            deck.add(monkey);
         }
 
         Collections.shuffle(deck);
@@ -571,4 +577,12 @@ public class PiratesGame implements Serializable {
 
     }
 
+    public void printTreasureChest(String[] dieRoll, String[] held, PiratesFortuneCard card) {
+
+        for (String s : held) {
+            System.out.println("+ " + dieRoll[Integer.parseInt(s)-1] + " treasure item(s).");
+        }
+
+        System.out.println("|---------------------------------------------------------------------------------------------------------------------------------------|");
+    }
 }

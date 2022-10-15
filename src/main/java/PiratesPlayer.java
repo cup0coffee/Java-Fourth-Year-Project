@@ -41,6 +41,7 @@ public class PiratesPlayer implements Serializable {
         int numOfRoundRolls = 0;
         int skullCount = 0;
         boolean hasRolledAtLeastOneSkull = true;
+        String[] treasureToKeep = new String[0];
 
         //PRINT FORTUNE CARD
         piratesGame.printFortuneCard(fortuneCard, deckSize);
@@ -61,7 +62,7 @@ public class PiratesPlayer implements Serializable {
                 numOfRoundRolls++;
             }
 
-            //PLAYER MENU - DICE ROLL
+            //PLAYER MENU - DICE ROLL SCORE
             System.out.println(piratesGame.printCurrentScoreDice(dieRoll, fortuneCard));
 
             //PLAYER MENU - SCORE
@@ -91,6 +92,11 @@ public class PiratesPlayer implements Serializable {
                 System.out.println("(2) Roll all again");
             }
             System.out.println("(3) Score this round");
+
+            //FOR TREASURE CHEST
+            if(fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
+                System.out.println("(4) Select dice to place in treasure chest");
+            }
 
             int act = myObj.nextInt();
 
@@ -148,6 +154,39 @@ public class PiratesPlayer implements Serializable {
 
                 stop = 1;
             }
+
+            //OPTION 4: TREASURE CHEST
+            if(act == 4) {
+                boolean invalidReroll = true;
+
+                while (invalidReroll) {
+
+                    System.out.println("Select the die to hold in treasure chest (Ones not held get rerolled): (1,2...) ");
+                    treasureToKeep = (myObj.next()).replaceAll("\\s", "").split(",");
+
+                    //CHECK FOR ROLLING MORE THAN 1 DIE
+                    if(treasureToKeep.length <= 0 && treasureToKeep.length > 8) {
+                        System.out.println("Invalid: You need to store between 1 & 8 dice in treasure chest!");
+                        continue;
+                    }
+
+                    //DO SKULL CHECK FOR TREASURE CHEST LATER ON
+
+                    if((treasureToKeep.length > 0 && treasureToKeep.length <= 8)) {
+                        invalidReroll = false;
+                    }
+                }
+
+                //TREASURE CHEST IS STORED
+                piratesGame.printTreasureChest(dieRoll, treasureToKeep, fortuneCard);
+                System.out.println("Treasure chest stored. Please choose how to proceed.");
+                System.out.println();
+                piratesGame.printDieRoll(dieRoll);
+                System.out.println();
+
+            }
+
+
         }
 
 
