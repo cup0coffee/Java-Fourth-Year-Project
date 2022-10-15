@@ -56,6 +56,13 @@ public class PiratesPlayer implements Serializable {
 
             if (piratesGame.isPlayerDead(skullCount)) {
                 System.out.println("YOU DEAD (You rolled " + skullCount + " skulls)");
+
+                //SCORE WHAT'S IN TREASURE CHEST
+                if(fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
+                    setScoreSheet(0, piratesGame.scoreDieUponDeathWithTreasure(scoreSheet, dieRoll, treasureToKeep, fortuneCard));
+                    System.out.println("You just earned " + piratesGame.scoreDieUponDeathWithTreasure(scoreSheet, dieRoll, treasureToKeep, fortuneCard) + " points from your treasure! :)");
+                    piratesGame.printTreasureChest(dieRoll, treasureToKeep, fortuneCard);
+                }
                 stop = 1;
                 continue;
             } else if (skullCount == 0) {
