@@ -1485,4 +1485,72 @@ class PiratesGameTest {
 
     //ISLAND OF SKULLS
 
+
+    //-----------------------------------------------------------------
+
+
+    //SEA BATTLES
+
+    @Test
+    @DisplayName("line 114: FC 2 swords, roll 4 monkeys, 3 skulls & 1 sword and die   => die and lose 300 points")
+    void line114() {
+
+        int zeroScoreTestValue = 0;
+
+        int midgameScoreTestValue = 2000;
+
+        int[] scoreSheet = new int[1];
+
+        PiratesPlayer player = new PiratesPlayer("test");
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(3); //FC 2 SWORDS
+
+        //ZERO VALUE TEST
+        //TO MAKE SURE IF PLAYER HAS 0 SCORE, THEY DON'T GET A NEGATIVE SCORE
+        player.setScoreSheet(0, zeroScoreTestValue );
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Monkey";
+        dice[4] = "Skull";
+        dice[5] = "Skull";
+        dice[6] = "Skull";
+        dice[7] = "Sword";
+
+        //currentScore = piratesGame.scoreDie(scoreSheet, dice, Card);
+
+        //PLAYER IS DEAD WITH 0 POINTS
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+        Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+
+        //------------------------------
+
+        //TESTING WHEN PLAYER HAS SCORE GREATER THAN 0
+        //MAKING SURE DEDUCTION IS CORRECT, IN THIS CASE 300
+        player.setScoreSheet(0, midgameScoreTestValue);
+
+        dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Monkey";
+        dice[4] = "Skull";
+        dice[5] = "Skull";
+        dice[6] = "Skull";
+        dice[7] = "Sword";
+
+        //PLAYER IS DEAD WITH 0 POINTS
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+        Assertions.assertEquals(700, piratesGame.scoreDie(dice, card));
+
+    }
+
+
+
 }
