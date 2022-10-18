@@ -218,6 +218,14 @@ public class PiratesGame implements Serializable {
 
         int numSkulls = checkSkullCount(dieRoll, fortuneCard);
 
+        int numSwords = checkSwordCount(dieRoll);
+
+        //CHECK FOR SEA BATTLE
+        //FAILED 2 SWORDS BY DEATH
+        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") && numSwords < 2 && numSkulls >= 3) {
+            return fortuneCard.applyCardRule(scoreSheet[0]);
+        }
+
         if (numSkulls == 3 || numSkulls > 4) {
             return 0;
         }
@@ -337,6 +345,14 @@ public class PiratesGame implements Serializable {
     public int scoreDie(String[] dieRoll, PiratesFortuneCard fortuneCard) {
 
         int numSkulls = checkSkullCount(dieRoll, fortuneCard);
+
+        int numSwords = checkSwordCount(dieRoll);
+
+        //CHECK FOR SEA BATTLE
+        //FAILED 2 SWORDS BY DEATH
+        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") && (numSwords < 2) && (numSkulls >= 3)) {
+            return -300;
+        }
 
         if ((numSkulls == 3 || numSkulls > 4) && !fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
             return 0;
@@ -470,6 +486,7 @@ public class PiratesGame implements Serializable {
         return isDead;
     }
 
+
     public int checkSkullCount(String[] dieRoll) {
 
         int skull = 0;
@@ -509,6 +526,20 @@ public class PiratesGame implements Serializable {
 
     }
 
+    public int checkSwordCount(String[] dieRoll) {
+
+        int sword = 0;
+        int numOfDie = dieRoll.length;
+
+        for(int i =0; i < numOfDie; i++) {
+            if (dieRoll[i].equalsIgnoreCase("Sword")) {
+                sword++;
+            }
+        }
+
+        return sword;
+    }
+
     //ADDED: DECK OF FORTUNE CARDS
     private ArrayList<PiratesFortuneCard> deck = new ArrayList<PiratesFortuneCard>();
 
@@ -525,20 +556,20 @@ public class PiratesGame implements Serializable {
             PiratesFortuneCard treasure = fortuneCard.createFortuneCard(0);
             deck.add(treasure);
 
-//            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
-//            deck.add(captain);
-//
-//            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
-//            deck.add(sorceress);
-//
-//            PiratesFortuneCard gold = fortuneCard.createFortuneCard(4);
-//            deck.add(gold);
-//
-//            PiratesFortuneCard diamond = fortuneCard.createFortuneCard(5);
-//            deck.add(diamond);
-//
-//            PiratesFortuneCard monkey = fortuneCard.createFortuneCard(6);
-//            deck.add(monkey);
+            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
+            deck.add(captain);
+
+            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
+            deck.add(sorceress);
+
+            PiratesFortuneCard gold = fortuneCard.createFortuneCard(4);
+            deck.add(gold);
+
+            PiratesFortuneCard diamond = fortuneCard.createFortuneCard(5);
+            deck.add(diamond);
+
+            PiratesFortuneCard monkey = fortuneCard.createFortuneCard(6);
+            deck.add(monkey);
         }
 
         Collections.shuffle(deck);

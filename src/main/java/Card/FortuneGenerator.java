@@ -14,6 +14,9 @@ public class FortuneGenerator extends PiratesFortuneCardGenerator {
         } else if (fortuneCardID == 2) {
             return new Sorceress();
 
+        } else if (fortuneCardID == 3) {
+            return new SeaBattleTwoSword();
+
         } else if (fortuneCardID == 4) {
             return new Gold();
 

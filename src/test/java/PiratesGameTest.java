@@ -1496,9 +1496,10 @@ class PiratesGameTest {
     void line114() {
 
         int zeroScoreTestValue = 0;
+        int midgameScoreTestValue = 1000;
 
-        int midgameScoreTestValue = 2000;
-
+        int currentDiceScore = 0;
+        int deduction = 0;
         int[] scoreSheet = new int[1];
 
         PiratesPlayer player = new PiratesPlayer("test");
@@ -1509,7 +1510,7 @@ class PiratesGameTest {
 
         //ZERO VALUE TEST
         //TO MAKE SURE IF PLAYER HAS 0 SCORE, THEY DON'T GET A NEGATIVE SCORE
-        player.setScoreSheet(0, zeroScoreTestValue );
+        player.setScoreSheet(0, zeroScoreTestValue);
 
         String[] dice = piratesGame.rollDice();
 
@@ -1519,6 +1520,7 @@ class PiratesGameTest {
         dice[3] = "Monkey";
         dice[4] = "Skull";
         dice[5] = "Skull";
+        dice[5] = "Skull";
         dice[6] = "Skull";
         dice[7] = "Sword";
 
@@ -1526,7 +1528,16 @@ class PiratesGameTest {
 
         //PLAYER IS DEAD WITH 0 POINTS
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
-        Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+
+        if((player.getScore()+currentDiceScore) <= 0) {
+            player.setScoreSheet(0,0);
+        } else {
+            player.setScoreSheet(0, player.getScore()+currentDiceScore);
+        }
+
+        Assertions.assertEquals(0, player.getScore());
 
         //------------------------------
 
@@ -1547,7 +1558,14 @@ class PiratesGameTest {
 
         //PLAYER IS DEAD WITH 0 POINTS
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
-        Assertions.assertEquals(700, piratesGame.scoreDie(dice, card));
+
+        deduction = piratesGame.scoreDie(dice, card);
+
+        midgameScoreTestValue+=deduction;
+
+        player.setScoreSheet(0, deduction);
+
+        Assertions.assertEquals(700, player.getScore());
 
     }
 
