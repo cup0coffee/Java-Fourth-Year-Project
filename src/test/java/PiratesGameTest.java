@@ -1677,6 +1677,90 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 116: FC 4 swords, die on first roll with 2 monkeys, 3 (skulls/swords)  => die and lose 1000 points")
+    void line116() {
+
+        int zeroScoreTestValue = 0;
+        int midgameScoreTestValue = 1000;
+
+        int currentDiceScore = 0;
+        int deduction = 0;
+        int[] scoreSheet = new int[1];
+
+        PiratesPlayer player = new PiratesPlayer("test");
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(10); //FC 4 SWORDS
+
+        //ZERO VALUE TEST
+        //TO MAKE SURE IF PLAYER HAS 0 SCORE, THEY DON'T GET A NEGATIVE SCORE
+        player.setScoreSheet(0, zeroScoreTestValue);
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Skull";
+        dice[3] = "Skull";
+        dice[4] = "Skull";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        //currentScore = piratesGame.scoreDie(scoreSheet, dice, Card);
+
+        //PLAYER IS DEAD WITH 0 POINTS
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+
+        //MAKE SURE DEDUCTION IS 500
+        Assertions.assertEquals(-1000, currentDiceScore);
+
+        if((player.getScore()+currentDiceScore) <= 0) {
+            player.setScoreSheet(0,0);
+        } else {
+            player.setScoreSheet(0, player.getScore()+currentDiceScore);
+        }
+
+        Assertions.assertEquals(0, player.getScore());
+
+        //------------------------------
+
+        //TESTING WHEN PLAYER HAS SCORE GREATER THAN 0
+        //MAKING SURE DEDUCTION IS CORRECT, IN THIS CASE 300
+        player.setScoreSheet(0, midgameScoreTestValue);
+
+        dice = piratesGame.rollDice();
+
+        dice[0] = "Sword";
+        dice[1] = "Sword";
+        dice[2] = "Skull";
+        dice[3] = "Skull";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        //PLAYER IS DEAD WITH 0 POINTS
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        deduction = piratesGame.scoreDie(dice, card);
+
+        midgameScoreTestValue+=deduction;
+
+        player.setScoreSheet(0, deduction);
+
+        //MAKE SURE DEDUCTION IS 500
+        Assertions.assertEquals(-1000, deduction);
+
+        //MAKE SURE PROPER SCORE DEDUCTED FROM PLAYER SCORE
+        Assertions.assertEquals(0, player.getScore());
+
+    }
+
 
 
 }
