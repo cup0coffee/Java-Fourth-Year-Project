@@ -1735,14 +1735,14 @@ class PiratesGameTest {
 
         dice = piratesGame.rollDice();
 
-        dice[0] = "Sword";
-        dice[1] = "Sword";
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
         dice[2] = "Skull";
         dice[3] = "Skull";
-        dice[4] = "Parrot";
-        dice[5] = "Parrot";
-        dice[6] = "Parrot";
-        dice[7] = "Parrot";
+        dice[4] = "Skull";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
 
         //PLAYER IS DEAD WITH 0 POINTS
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
