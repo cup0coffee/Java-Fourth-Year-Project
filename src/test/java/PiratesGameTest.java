@@ -1601,12 +1601,27 @@ class PiratesGameTest {
         dice[6] = "Parrot";
         dice[7] = "Parrot";
 
+        dieToKeep = new String[]{"1", "2", "3", "4"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Sword";
+        dice[1] = "Sword";
+        dice[2] = "Skull";
+        dice[3] = "Skull";
+        dice[4] = "Skull";
+        dice[5] = "Skull";
+        dice[6] = "Skull";
+        dice[7] = "Skull";
+
         //currentScore = piratesGame.scoreDie(scoreSheet, dice, Card);
 
         //PLAYER IS DEAD WITH 0 POINTS
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
 
         currentDiceScore = piratesGame.scoreDie(dice, card);
+
+        //MAKE SURE DEDUCTION IS 500
+        Assertions.assertEquals(-500, currentDiceScore);
 
         if((player.getScore()+currentDiceScore) <= 0) {
             player.setScoreSheet(0,0);
@@ -1633,6 +1648,18 @@ class PiratesGameTest {
         dice[6] = "Parrot";
         dice[7] = "Parrot";
 
+        dieToKeep = new String[]{"1", "2", "3", "4"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Sword";
+        dice[1] = "Sword";
+        dice[2] = "Skull";
+        dice[3] = "Skull";
+        dice[4] = "Skull";
+        dice[5] = "Skull";
+        dice[6] = "Skull";
+        dice[7] = "Skull";
+
         //PLAYER IS DEAD WITH 0 POINTS
         Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
 
@@ -1642,6 +1669,10 @@ class PiratesGameTest {
 
         player.setScoreSheet(0, deduction);
 
+        //MAKE SURE DEDUCTION IS 500
+        Assertions.assertEquals(-500, deduction);
+
+        //MAKE SURE PROPER SCORE DEDUCTED FROM PLAYER SCORE
         Assertions.assertEquals(500, player.getScore());
 
     }
