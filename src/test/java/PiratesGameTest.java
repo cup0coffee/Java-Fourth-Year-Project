@@ -1792,11 +1792,11 @@ class PiratesGameTest {
         dice[6] = "Parrot";
         dice[7] = "Parrot";
 
-        //currentScore = piratesGame.scoreDie(scoreSheet, dice, Card);
-
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
         currentDiceScore = piratesGame.scoreDie(dice, card);
-        Assertions.assertEquals(5000, currentDiceScore);
+
+        Assertions.assertEquals(500, currentDiceScore);
 
         if((player.getScore()+currentDiceScore) <= 0) {
             player.setScoreSheet(0,0);
@@ -1815,14 +1815,15 @@ class PiratesGameTest {
 
         dice[0] = "Monkey";
         dice[1] = "Monkey";
-        dice[2] = "Skull";
-        dice[3] = "Skull";
-        dice[4] = "Skull";
-        dice[5] = "Sword";
-        dice[6] = "Sword";
-        dice[7] = "Sword";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Coin";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
 
-        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
         currentDiceScore = piratesGame.scoreDie(dice, card);
 
         midgameScoreTestValue+=currentDiceScore;

@@ -348,10 +348,16 @@ public class PiratesGame implements Serializable {
 
         int numSwords = checkSwordCount(dieRoll);
 
+        int score = 0;
+
         //CHECK FOR SEA BATTLE
         //FAILED 2 SWORDS BY DEATH
-        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") && (numSwords < 2) && (numSkulls >= 3)) {
-            return -300;
+        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)")) {
+            if ((numSwords < 2) && (numSkulls >= 3)) {
+                return -300;
+            } else if ((numSwords == 2) && (numSkulls < 3)) {
+                score += 300;
+            }
         }
 
         if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)") && (numSwords < 3) && (numSkulls >= 3)) {
@@ -393,7 +399,6 @@ public class PiratesGame implements Serializable {
             }
         }
 
-        int score = 0;
         int monkeyBusiness = 0;
 
         if(fortuneCard.getName().equalsIgnoreCase("Gold") && coin == 8) {
