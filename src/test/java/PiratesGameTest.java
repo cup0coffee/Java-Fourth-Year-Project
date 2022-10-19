@@ -1937,6 +1937,80 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 120: FC 3 swords, roll 3 monkeys 4 swords 1 skull SC = 100 + 200 + 500 = 800")
+    void line120() {
+
+        int zeroScoreTestValue = 0;
+        int midgameScoreTestValue = 1000;
+
+        int currentDiceScore = 0;
+        int[] scoreSheet = new int[1];
+
+        PiratesPlayer player = new PiratesPlayer("test");
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(3); //FC 2 SWORDS
+
+        //ZERO VALUE TEST
+        //TO MAKE SURE IF PLAYER HAS 0 SCORE, THEY DON'T GET A NEGATIVE SCORE
+        player.setScoreSheet(0, zeroScoreTestValue);
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Skull";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+
+        Assertions.assertEquals(800, currentDiceScore);
+
+        if((player.getScore()+currentDiceScore) <= 0) {
+            player.setScoreSheet(0,0);
+        } else {
+            player.setScoreSheet(0, player.getScore()+currentDiceScore);
+        }
+
+        Assertions.assertEquals(800, player.getScore());
+
+        //------------------------------
+
+        //TESTING WHEN PLAYER HAS SCORE GREATER THAN 0
+        player.setScoreSheet(0, midgameScoreTestValue);
+
+        dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Coin";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+
+        midgameScoreTestValue+=currentDiceScore;
+
+        player.setScoreSheet(0, currentDiceScore);
+
+        Assertions.assertEquals(800, currentDiceScore);
+
+        Assertions.assertEquals(midgameScoreTestValue+800, player.getScore());
+
+    }
 
 
 }
