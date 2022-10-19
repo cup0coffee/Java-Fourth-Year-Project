@@ -1840,6 +1840,8 @@ class PiratesGameTest {
     @DisplayName("line 118: FC 2 swords, roll 4 monkeys 1 sword, 1 skull & 2 parrots then reroll 2 parrots and get 1 sword and 1 skull   SC = 200 +  300 = 500")
     void line118() {
 
+        //ALL THE FUNCTIONS IN THIS TEST ALREADY EXISTED FROM PREVIOUS CODE COMMITS
+
         int zeroScoreTestValue = 0;
         int midgameScoreTestValue = 1000;
 
