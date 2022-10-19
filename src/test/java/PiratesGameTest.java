@@ -1951,7 +1951,7 @@ class PiratesGameTest {
 
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
-        card = fortuneCard.createFortuneCard(3); //FC 2 SWORDS
+        card = fortuneCard.createFortuneCard(9); //FC 3 SWORDS
 
         //ZERO VALUE TEST
         //TO MAKE SURE IF PLAYER HAS 0 SCORE, THEY DON'T GET A NEGATIVE SCORE
@@ -1994,9 +1994,9 @@ class PiratesGameTest {
         dice[2] = "Monkey";
         dice[3] = "Sword";
         dice[4] = "Sword";
-        dice[5] = "Coin";
-        dice[6] = "Parrot";
-        dice[7] = "Parrot";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Skull";
 
         Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
 

@@ -360,8 +360,12 @@ public class PiratesGame implements Serializable {
             }
         }
 
-        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)") && (numSwords < 3) && (numSkulls >= 3)) {
-            return -500;
+        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)")) {
+            if ((numSwords < 3) && (numSkulls >= 3)) {
+                return -500;
+            } else if ((numSwords >= 3) && (numSkulls < 3)) {
+                score+=500;
+            }
         }
 
         if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)") && (numSwords < 4) && (numSkulls >= 3)) {
