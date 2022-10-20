@@ -2082,5 +2082,50 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 123: FC 4 swords, roll 3 monkeys 4 swords 1 skull  SC = 100 +200 + 1000 = 1300")
+    void line123() {
+
+        int zeroScoreTestValue = 0;
+
+        int currentDiceScore = 0;
+        int[] scoreSheet = new int[1];
+
+        PiratesPlayer player = new PiratesPlayer("test");
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(10); //FC 4 SWORDS
+
+        //ZERO VALUE TEST
+        //TO MAKE SURE IF PLAYER HAS 0 SCORE, THEY DON'T GET A NEGATIVE SCORE
+        player.setScoreSheet(0, zeroScoreTestValue);
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Skull";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+
+        Assertions.assertEquals(1300, currentDiceScore);
+
+        if((player.getScore()+currentDiceScore) <= 0) {
+            player.setScoreSheet(0,0);
+        } else {
+            player.setScoreSheet(0, player.getScore()+currentDiceScore);
+        }
+
+        Assertions.assertEquals(1300, player.getScore());
+    }
+
 
 }
