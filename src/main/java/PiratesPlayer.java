@@ -222,6 +222,7 @@ public class PiratesPlayer implements Serializable {
         //ADDED +
         int newScore = this.getScore() + score;
         this.scoreSheet[cat] = newScore;
+        System.out.println("new score: " + newScore);
         //this.scoreSheet[cat] = score;
     }
 

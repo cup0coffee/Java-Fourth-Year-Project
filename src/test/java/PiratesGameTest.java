@@ -1981,35 +1981,6 @@ class PiratesGameTest {
         }
 
         Assertions.assertEquals(800, player.getScore());
-
-        //------------------------------
-
-        //TESTING WHEN PLAYER HAS SCORE GREATER THAN 0
-        player.setScoreSheet(0, midgameScoreTestValue);
-
-        dice = piratesGame.rollDice();
-
-        dice[0] = "Monkey";
-        dice[1] = "Monkey";
-        dice[2] = "Monkey";
-        dice[3] = "Sword";
-        dice[4] = "Sword";
-        dice[5] = "Sword";
-        dice[6] = "Sword";
-        dice[7] = "Skull";
-
-        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
-
-        currentDiceScore = piratesGame.scoreDie(dice, card);
-
-        midgameScoreTestValue+=currentDiceScore;
-
-        player.setScoreSheet(0, currentDiceScore);
-
-        Assertions.assertEquals(800, currentDiceScore);
-
-        Assertions.assertEquals(midgameScoreTestValue+800, player.getScore());
-
     }
 
     @Test
