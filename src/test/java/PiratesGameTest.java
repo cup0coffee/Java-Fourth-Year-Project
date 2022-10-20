@@ -2127,5 +2127,74 @@ class PiratesGameTest {
         Assertions.assertEquals(1300, player.getScore());
     }
 
+    @Test
+    @DisplayName("line 124: FC 4 swords, roll 3 monkeys, 1 sword, 1 skull, 1 diamond, 2 parrots then reroll 2 parrots and get 2 swords thus you have 3 monkeys, 3 swords, 1 diamond, 1 skull then reroll 3 monkeys and get  1 sword and 2 parrots  SC = 200 + 100 + 1000 = 1300")
+    void line124() {
+
+        int zeroScoreTestValue = 0;
+
+        int currentDiceScore = 0;
+        int[] scoreSheet = new int[1];
+
+        PiratesPlayer player = new PiratesPlayer("test");
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(10); //FC 4 SWORDS
+
+        //ZERO VALUE TEST
+        //TO MAKE SURE IF PLAYER HAS 0 SCORE, THEY DON'T GET A NEGATIVE SCORE
+        player.setScoreSheet(0, zeroScoreTestValue);
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Skull";
+        dice[5] = "Diamond";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "5", "6"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Sword";
+        dice[4] = "Skull";
+        dice[5] = "Diamond";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        dieToKeep = new String[]{"4", "5", "6", "7", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Sword";
+        dice[1] = "Parrot";
+        dice[2] = "Parrot";
+        dice[3] = "Sword";
+        dice[4] = "Skull";
+        dice[5] = "Diamond";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+
+        Assertions.assertEquals(1300, currentDiceScore);
+
+        if((player.getScore()+currentDiceScore) <= 0) {
+            player.setScoreSheet(0,0);
+        } else {
+            player.setScoreSheet(0, player.getScore()+currentDiceScore);
+        }
+
+        Assertions.assertEquals(1300, player.getScore());
+    }
+
 
 }
