@@ -2131,6 +2131,8 @@ class PiratesGameTest {
     @DisplayName("line 124: FC 4 swords, roll 3 monkeys, 1 sword, 1 skull, 1 diamond, 2 parrots then reroll 2 parrots and get 2 swords thus you have 3 monkeys, 3 swords, 1 diamond, 1 skull then reroll 3 monkeys and get  1 sword and 2 parrots  SC = 200 + 100 + 1000 = 1300")
     void line124() {
 
+        //EVERY FUNCTION HERE ALREADY EXISTED :)
+
         int zeroScoreTestValue = 0;
 
         int currentDiceScore = 0;
