@@ -224,7 +224,7 @@ public class PiratesGame implements Serializable {
 
         //CHECK FOR SEA BATTLE
         if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)")) {
-            if ((numSkulls >= 3)) {
+            if (numSwords < 2 || (numSkulls >= 3)) {
                 return -300;
             } else if ((numSwords >= 2) && (numSkulls < 3)) {
                 score += 300;
@@ -232,7 +232,7 @@ public class PiratesGame implements Serializable {
         }
 
         if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)")) {
-            if ((numSkulls >= 3)) {
+            if (numSwords < 3 || (numSkulls >= 3)) {
                 return -500;
             } else if ((numSwords >= 3) && (numSkulls < 3)) {
                 score+=500;
@@ -240,7 +240,7 @@ public class PiratesGame implements Serializable {
         }
 
         if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
-            if ((numSkulls >= 3)) {
+            if (numSwords < 4 || (numSkulls >= 3)) {
                 return -1000;
             } else if ((numSwords >= 4) && (numSkulls < 3)) {
                 score += 1000;
@@ -366,17 +366,16 @@ public class PiratesGame implements Serializable {
         int score = 0;
 
         //CHECK FOR SEA BATTLE
-        //FAILED 2 SWORDS BY DEATH
         if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)")) {
-            if ((numSwords < 2) && (numSkulls >= 3)) {
+            if (numSwords < 2 || (numSkulls >= 3)) {
                 return -300;
-            } else if ((numSwords == 2) && (numSkulls < 3)) {
+            } else if ((numSwords >= 2) && (numSkulls < 3)) {
                 score += 300;
             }
         }
 
         if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)")) {
-            if ((numSkulls >= 3)) {
+            if (numSwords < 3 || (numSkulls >= 3)) {
                 return -500;
             } else if ((numSwords >= 3) && (numSkulls < 3)) {
                 score+=500;
@@ -384,7 +383,7 @@ public class PiratesGame implements Serializable {
         }
 
         if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
-            if ((numSwords < 4) && (numSkulls >= 3)) {
+            if (numSwords < 4 || (numSkulls >= 3)) {
                 return -1000;
             } else if ((numSwords >= 4) && (numSkulls < 3)) {
                 score += 1000;

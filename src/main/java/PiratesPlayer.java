@@ -41,6 +41,7 @@ public class PiratesPlayer implements Serializable {
         int numOfRoundRolls = 0;
         int skullCount = 0;
         int swordCount = 0;
+        int currentDiceScore = 0;
         boolean hasRolledAtLeastOneSkull = true;
         String[] treasureToKeep = new String[0];
 
@@ -58,6 +59,7 @@ public class PiratesPlayer implements Serializable {
             //CHECK FOR SWORD COUNT
             swordCount = piratesGame.checkSwordCount(dieRoll);
 
+            //CHECK FOR DEATH
             if (piratesGame.isPlayerDead(skullCount)) {
                 System.out.println("YOU DEAD (You rolled " + skullCount + " skulls)");
 
@@ -73,11 +75,17 @@ public class PiratesPlayer implements Serializable {
                         fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)") ||
                         fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
 
+                    currentDiceScore = piratesGame.scoreDie(dieRoll, fortuneCard);
+
                     //CHECK TO MAKE SURE PLAYER'S SCORE WON'T BECOME NEGATIVE FROM LOSING POINTS
-                    if((getScore()+(piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard))) <= 0) {
-                        setScoreSheet(0,0);
-                    } else {
-                        setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
+                    setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
+
+
+                    //CHECK IF THEY LOST POINTS OR GAINED
+                    if(currentDiceScore >= 0) {
+                        System.out.println("You just earned " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points!");
+                    } else if(currentDiceScore < 0) {
+                        System.out.println("You just lost " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points...");
                     }
                 }
 
@@ -91,7 +99,7 @@ public class PiratesPlayer implements Serializable {
             System.out.println(piratesGame.printCurrentScoreDice(dieRoll, fortuneCard));
 
             //PLAYER MENU - SCORE
-            System.out.println("Current Total: " + piratesGame.printCurrentScore(dieRoll, fortuneCard));
+            System.out.println("If you score this round, you will earn: " + piratesGame.printCurrentScore(dieRoll, fortuneCard));
 
             //PLAYER MENU - # ROLLS MADE THIS ROUND BY PLAYER
             System.out.println("# rolls made this round: " + numOfRoundRolls);
@@ -194,18 +202,9 @@ public class PiratesPlayer implements Serializable {
 
             if (act == 3) {
 
-                int currentDiceScore = 0;
-
                 currentDiceScore = piratesGame.scoreDie(dieRoll, fortuneCard);
 
-                //HAVE T
-
-                //CHECK TO MAKE SURE PLAYER'S SCORE WON'T BECOME NEGATIVE FROM LOSING POINTS
-                if((getScore()+currentDiceScore) <= 0) {
-                    setScoreSheet(0,0);
-                } else {
-                    setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
-                }
+                setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
 
                 //CHECK IF THEY LOST POINTS OR GAINED
                 if(currentDiceScore >= 0) {
@@ -213,8 +212,6 @@ public class PiratesPlayer implements Serializable {
                 } else if(currentDiceScore < 0) {
                     System.out.println("You just lost " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points...");
                 }
-
-                //setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
 
                 stop = 1;
             }
@@ -276,8 +273,13 @@ public class PiratesPlayer implements Serializable {
     }
 
     public void setScoreSheet(int cat, int score) {
-        //ADDED +
         int newScore = this.getScore() + score;
+
+        //CHECK THAT SCORE DOES NOT BECOME NEGATIVE
+        if (newScore < 0) {
+            newScore = 0;
+        }
+
         this.scoreSheet[cat] = newScore;
         System.out.println("new score: " + newScore);
         //this.scoreSheet[cat] = score;
