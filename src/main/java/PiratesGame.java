@@ -220,13 +220,34 @@ public class PiratesGame implements Serializable {
 
         int numSwords = checkSwordCount(dieRoll);
 
+        int score = 0;
+
         //CHECK FOR SEA BATTLE
-        //FAILED 2 SWORDS BY DEATH
-        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") && numSwords < 2 && numSkulls >= 3) {
-            return fortuneCard.applyCardRule(scoreSheet[0]);
+        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)")) {
+            if ((numSkulls >= 3)) {
+                return -300;
+            } else if ((numSwords >= 2) && (numSkulls < 3)) {
+                score += 300;
+            }
         }
 
-        if (numSkulls == 3 || numSkulls > 4) {
+        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)")) {
+            if ((numSkulls >= 3)) {
+                return -500;
+            } else if ((numSwords >= 3) && (numSkulls < 3)) {
+                score+=500;
+            }
+        }
+
+        if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
+            if ((numSkulls >= 3)) {
+                return -1000;
+            } else if ((numSwords >= 4) && (numSkulls < 3)) {
+                score += 1000;
+            }
+        }
+
+        if ((numSkulls == 3 || numSkulls > 4) && !fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
             return 0;
         }
 
@@ -257,12 +278,6 @@ public class PiratesGame implements Serializable {
             }
         }
 
-        //CHECK FOR DEATH
-        if (skull >= 3 && skull != 4) {
-            return 0;
-        }
-
-        int score = 0;
         int monkeyBusiness = 0;
 
         if(fortuneCard.getName().equalsIgnoreCase("Gold") && coin == 8) {
@@ -569,29 +584,45 @@ public class PiratesGame implements Serializable {
         //CARDS
         PiratesFortuneCardGenerator fortuneCard = new FortuneGenerator();
 
-        //TEST
+//        for (int i = 0; i < 4; i++) {
+//            PiratesFortuneCard treasure = fortuneCard.createFortuneCard(0);
+//            deck.add(treasure);
+//
+//            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
+//            deck.add(captain);
+//
+//            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
+//            deck.add(sorceress);
+//
+//            PiratesFortuneCard gold = fortuneCard.createFortuneCard(4);
+//            deck.add(gold);
+//
+//            PiratesFortuneCard diamond = fortuneCard.createFortuneCard(5);
+//            deck.add(diamond);
+//
+//            PiratesFortuneCard monkey = fortuneCard.createFortuneCard(6);
+//            deck.add(monkey);
+//        }
 
+        //ADD SKULLS AND SWORDS CARDS
+        for (int i = 0; i < 2; i++) {
+//            PiratesFortuneCard skulls = fortuneCard.createFortuneCard(8);
+//            deck.add(skulls);
 
-        for (int i = 0; i < 4; i++) {
+            PiratesFortuneCard twoswords = fortuneCard.createFortuneCard(3);
+            deck.add(twoswords);
 
-            PiratesFortuneCard treasure = fortuneCard.createFortuneCard(0);
-            deck.add(treasure);
+            PiratesFortuneCard threeswords = fortuneCard.createFortuneCard(9);
+            deck.add(threeswords);
 
-            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
-            deck.add(captain);
-
-            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
-            deck.add(sorceress);
-
-            PiratesFortuneCard gold = fortuneCard.createFortuneCard(4);
-            deck.add(gold);
-
-            PiratesFortuneCard diamond = fortuneCard.createFortuneCard(5);
-            deck.add(diamond);
-
-            PiratesFortuneCard monkey = fortuneCard.createFortuneCard(6);
-            deck.add(monkey);
+            PiratesFortuneCard fourswords = fortuneCard.createFortuneCard(10);
+            deck.add(fourswords);
         }
+
+//        for (int i = 0; i < 3; i++) {
+//            PiratesFortuneCard skull = fortuneCard.createFortuneCard(7);
+//            deck.add(skull);
+//        }
 
         Collections.shuffle(deck);
 

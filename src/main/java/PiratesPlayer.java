@@ -40,6 +40,7 @@ public class PiratesPlayer implements Serializable {
 
         int numOfRoundRolls = 0;
         int skullCount = 0;
+        int swordCount = 0;
         boolean hasRolledAtLeastOneSkull = true;
         String[] treasureToKeep = new String[0];
 
@@ -54,6 +55,9 @@ public class PiratesPlayer implements Serializable {
             //CHECK FOR SKULL COUNT
             skullCount = piratesGame.checkSkullCount(dieRoll, fortuneCard);
 
+            //CHECK FOR SWORD COUNT
+            swordCount = piratesGame.checkSwordCount(dieRoll);
+
             if (piratesGame.isPlayerDead(skullCount)) {
                 System.out.println("YOU DEAD (You rolled " + skullCount + " skulls)");
 
@@ -63,6 +67,20 @@ public class PiratesPlayer implements Serializable {
                     System.out.println("You just earned " + piratesGame.scoreDieUponDeathWithTreasure(scoreSheet, dieRoll, treasureToKeep, fortuneCard) + " points from your treasure! :)");
                     piratesGame.printTreasureChest(dieRoll, treasureToKeep, fortuneCard);
                 }
+
+                //DECREMENT SEA BATTLE BONUS
+                if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") ||
+                        fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)") ||
+                        fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
+
+                    //CHECK TO MAKE SURE PLAYER'S SCORE WON'T BECOME NEGATIVE FROM LOSING POINTS
+                    if((getScore()+(piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard))) <= 0) {
+                        setScoreSheet(0,0);
+                    } else {
+                        setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
+                    }
+                }
+
                 stop = 1;
                 continue;
             } else if (skullCount == 0) {
@@ -86,6 +104,25 @@ public class PiratesPlayer implements Serializable {
                 }
             } else {
                 System.out.print("0");
+                System.out.println();
+            }
+
+            System.out.println();
+
+            //IF SWORD CARD
+            if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") ||
+                    fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)") ||
+                    fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
+                System.out.print("Sword(s): ");
+                if(swordCount > 0) {
+                    for (int i = 0; i < swordCount; i++) {
+                        System.out.print("⚔");
+                    }
+                } else {
+                    System.out.print("0");
+                }
+
+
             }
 
             System.out.println();
@@ -153,11 +190,31 @@ public class PiratesPlayer implements Serializable {
             }
 
             if (act == 2 && count < 3) {
-
             }
+
             if (act == 3) {
-                setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
-                System.out.println("You just earned " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points! :)");
+
+                int currentDiceScore = 0;
+
+                currentDiceScore = piratesGame.scoreDie(dieRoll, fortuneCard);
+
+                //HAVE T
+
+                //CHECK TO MAKE SURE PLAYER'S SCORE WON'T BECOME NEGATIVE FROM LOSING POINTS
+                if((getScore()+currentDiceScore) <= 0) {
+                    setScoreSheet(0,0);
+                } else {
+                    setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
+                }
+
+                //CHECK IF THEY LOST POINTS OR GAINED
+                if(currentDiceScore >= 0) {
+                    System.out.println("You just earned " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points!");
+                } else if(currentDiceScore < 0) {
+                    System.out.println("You just lost " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points...");
+                }
+
+                //setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
 
                 stop = 1;
             }
