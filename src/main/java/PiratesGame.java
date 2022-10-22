@@ -583,15 +583,16 @@ public class PiratesGame implements Serializable {
         //CARDS
         PiratesFortuneCardGenerator fortuneCard = new FortuneGenerator();
 
-//        for (int i = 0; i < 4; i++) {
+        //CHANGE THIS BACK TO I < 4!!!!!
+        for (int i = 0; i < 1; i++) {
 //            PiratesFortuneCard treasure = fortuneCard.createFortuneCard(0);
 //            deck.add(treasure);
 //
-//            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
-//            deck.add(captain);
-//
-//            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
-//            deck.add(sorceress);
+            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
+            deck.add(captain);
+
+            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
+            deck.add(sorceress);
 //
 //            PiratesFortuneCard gold = fortuneCard.createFortuneCard(4);
 //            deck.add(gold);
@@ -601,21 +602,21 @@ public class PiratesGame implements Serializable {
 //
 //            PiratesFortuneCard monkey = fortuneCard.createFortuneCard(6);
 //            deck.add(monkey);
-//        }
+        }
 
         //ADD SKULLS AND SWORDS CARDS
         for (int i = 0; i < 2; i++) {
 //            PiratesFortuneCard skulls = fortuneCard.createFortuneCard(8);
 //            deck.add(skulls);
 
-            PiratesFortuneCard twoswords = fortuneCard.createFortuneCard(3);
-            deck.add(twoswords);
-
-            PiratesFortuneCard threeswords = fortuneCard.createFortuneCard(9);
-            deck.add(threeswords);
-
-            PiratesFortuneCard fourswords = fortuneCard.createFortuneCard(10);
-            deck.add(fourswords);
+//            PiratesFortuneCard twoswords = fortuneCard.createFortuneCard(3);
+//            deck.add(twoswords);
+//
+//            PiratesFortuneCard threeswords = fortuneCard.createFortuneCard(9);
+//            deck.add(threeswords);
+//
+//            PiratesFortuneCard fourswords = fortuneCard.createFortuneCard(10);
+//            deck.add(fourswords);
         }
 
 //        for (int i = 0; i < 3; i++) {

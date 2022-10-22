@@ -43,6 +43,7 @@ public class PiratesPlayer implements Serializable {
         int swordCount = 0;
         int currentDiceScore = 0;
         boolean hasRolledAtLeastOneSkull = true;
+        boolean hasSorceressRerollAvailable = true;
         String[] treasureToKeep = new String[0];
 
         //PRINT FORTUNE CARD
@@ -165,9 +166,20 @@ public class PiratesPlayer implements Serializable {
                     System.out.println("Select the die to hold (Ones not held get rerolled): (1,2...) ");
                     die = (myObj.next()).replaceAll("\\s", "").split(",");
 
-                    //CHECK FOR ROLLING MORE THAN 1 DIE
-                    if(die.length >= 7) {
-                        System.out.println("Invalid: You need to roll more than one die.");
+                    //CHECK FOR ROLLING 1 DIE
+                    if(die.length == 7) {
+                        //CHECK FOR SORCERESS CARD TO ENABLE 1 ROLL DIE
+                        if(fortuneCard.getName().equalsIgnoreCase("Sorceress") && hasSorceressRerollAvailable) {
+                            //INDICATE SORCERESS CARD HAS BEEN USED, CAN NO LONGER BE USED FOR OTHER TURNS
+                            System.out.println("Sorceress card used!");
+                            hasSorceressRerollAvailable = false;
+                            break;
+                        } else if (fortuneCard.getName().equalsIgnoreCase("Sorceress") && hasSorceressRerollAvailable==false) {
+                            System.out.println("You used your sorceress card already...nice try :p");
+                            System.out.println("Invalid: You need to roll more than one die.");
+                            System.out.println();
+                            continue;
+                        }
                     }
 
                     //CHECK FOR NOT REROLLING SKULL
@@ -191,6 +203,7 @@ public class PiratesPlayer implements Serializable {
                         invalidReroll = false;
                     }
                 }
+                System.out.println();
                 dieRoll = piratesGame.reRollNotHeld(dieRoll, die);
                 System.out.println("New Roll: ");
                 piratesGame.printDieRoll(dieRoll);
