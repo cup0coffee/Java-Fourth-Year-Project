@@ -57,207 +57,318 @@ public class PiratesPlayer implements Serializable {
             //CHECK FOR SKULL COUNT
             skullCount = piratesGame.checkSkullCount(dieRoll, fortuneCard);
 
-            //CHECK FOR SWORD COUNT
-            swordCount = piratesGame.checkSwordCount(dieRoll);
+            //CHECK FOR SKULL ISLAND
+            if(skullCount == 4 && numOfRoundRolls == 0) {
 
-            //CHECK FOR DEATH
-            if (piratesGame.isPlayerDead(skullCount)) {
-                System.out.println("YOU DEAD (You rolled " + skullCount + " skulls)");
-
-                //SCORE WHAT'S IN TREASURE CHEST
-                if(fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
-                    setScoreSheet(0, piratesGame.scoreDieUponDeathWithTreasure(scoreSheet, dieRoll, treasureToKeep, fortuneCard));
-                    System.out.println("You just earned " + piratesGame.scoreDieUponDeathWithTreasure(scoreSheet, dieRoll, treasureToKeep, fortuneCard) + " points from your treasure! :)");
-                    piratesGame.printTreasureChest(dieRoll, treasureToKeep, fortuneCard);
-                }
-
-                //DECREMENT SEA BATTLE BONUS
-                if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") ||
-                        fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)") ||
-                        fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
-
-                    currentDiceScore = piratesGame.scoreDie(dieRoll, fortuneCard);
-
-                    //CHECK TO MAKE SURE PLAYER'S SCORE WON'T BECOME NEGATIVE FROM LOSING POINTS
-                    setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
-
-
-                    //CHECK IF THEY LOST POINTS OR GAINED
-                    if(currentDiceScore >= 0) {
-                        System.out.println("You just earned " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points!");
-                    } else if(currentDiceScore < 0) {
-                        System.out.println("You just lost " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points...");
-                    }
-                }
-
-                stop = 1;
-                continue;
-            } else if (skullCount == 0) {
-                numOfRoundRolls++;
-            }
-
-            //PLAYER MENU - DICE ROLL SCORE
-            System.out.println(piratesGame.printCurrentScoreDice(dieRoll, fortuneCard));
-
-            //PLAYER MENU - SCORE
-            System.out.println("If you score this round, you will earn: " + piratesGame.printCurrentScore(dieRoll, fortuneCard));
-
-            //PLAYER MENU - # ROLLS MADE THIS ROUND BY PLAYER
-            System.out.println("# rolls made this round: " + numOfRoundRolls);
-
-            //PLAYER MENU - NUMBER OF SKULLS
-            System.out.print("Skull(s): ");
-            if(skullCount > 0) {
-                for (int i = 0; i < skullCount; i++) {
-                    System.out.print("☠");
-                }
-            } else {
-                System.out.print("0");
-                System.out.println();
-            }
-
-            System.out.println();
-
-            //IF SWORD CARD
-            if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") ||
-                    fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)") ||
-                    fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
-                System.out.print("Sword(s): ");
-                if(swordCount > 0) {
-                    for (int i = 0; i < swordCount; i++) {
-                        System.out.print("⚔");
-                    }
-                } else {
-                    System.out.print("0");
-                }
-
-
-            }
-
-            System.out.println();
-            System.out.println();
-
-
-            //PLAYER MENU - OPTION SELECTION
-            System.out.println("Select an action: ");
-            if (count < 3) {
-                System.out.println("(1) Choose dice number to roll again");
-                System.out.println("(2) Roll all again");
-            }
-            System.out.println("(3) Score this round");
-
-            //FOR TREASURE CHEST
-            if(fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
-                System.out.println("(4) Select dice to place in treasure chest");
-            }
-
-            int act = myObj.nextInt();
-
-
-            //OPTION 1
-            if (act == 1 && count < 3) {
-
+                //HANDLE ISLAND OF SKULLS
                 boolean invalidReroll = true;
 
                 String[] die = null;
 
-                while (invalidReroll) {
+                int startingSkullCount = skullCount;
 
-                    System.out.println("Select the die to hold (Ones not held get rerolled): (1,2...) ");
-                    die = (myObj.next()).replaceAll("\\s", "").split(",");
+                //KEEP GOING UNTIL NO NEW SKULLS ARE ROLLED
+                while(hasRolledAtLeastOneSkull) {
 
-                    //CHECK FOR ROLLING 1 DIE
-                    if(die.length == 7) {
-                        //CHECK FOR SORCERESS CARD TO ENABLE 1 ROLL DIE
-                        if(fortuneCard.getName().equalsIgnoreCase("Sorceress") && hasSorceressRerollAvailable) {
-                            //INDICATE SORCERESS CARD HAS BEEN USED, CAN NO LONGER BE USED FOR OTHER TURNS
-                            System.out.println("Sorceress card used!");
-                            hasSorceressRerollAvailable = false;
-                            break;
-                        } else if (fortuneCard.getName().equalsIgnoreCase("Sorceress") && hasSorceressRerollAvailable==false) {
-                            System.out.println("You used your sorceress card already...nice try :p");
-                            System.out.println("Invalid: You need to roll more than one die.");
+                    //START WITH REROLL PROMPT
+                    //WHILE LOOP TO MAKE SURE REROLL IS VALID
+                    while (invalidReroll) {
+
+                        //PLAYER MENU - NUMBER OF SKULLS
+                        System.out.print("Skull(s): ");
+                        if (skullCount > 0) {
+                            for (int i = 0; i < skullCount; i++) {
+                                System.out.print("☠");
+                            }
+                        } else {
+                            System.out.print("0");
                             System.out.println();
-                            continue;
+                        }
+
+                        System.out.println();
+
+                        System.out.println("YOUR'E IN SKULL ISLAND!");
+                        System.out.println("Select the die to hold (Ones not held get rerolled): (1,2...) ");
+                        die = (myObj.next()).replaceAll("\\s", "").split(",");
+
+                        //CHECK FOR ROLLING 1 DIE
+                        if (die.length == 7) {
+                            //CHECK FOR SORCERESS CARD TO ENABLE 1 ROLL DIE
+                            if (fortuneCard.getName().equalsIgnoreCase("Sorceress") && hasSorceressRerollAvailable) {
+                                //INDICATE SORCERESS CARD HAS BEEN USED, CAN NO LONGER BE USED FOR OTHER TURNS
+                                System.out.println("Sorceress card used!");
+                                hasSorceressRerollAvailable = false;
+                                break;
+                            } else if (fortuneCard.getName().equalsIgnoreCase("Sorceress") && hasSorceressRerollAvailable == false) {
+                                System.out.println("You used your sorceress card already...nice try :p");
+                                System.out.println("Invalid: You need to roll more than one die.");
+                                System.out.println();
+                                continue;
+                            }
+                        }
+
+                        //CHECK FOR NOT REROLLING SKULL
+                        ArrayList<Integer> rolls = new ArrayList<Integer>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7));
+                        for (String s : die) {
+                            int rem = Integer.parseInt(s) - 1;
+                            rolls.remove(rolls.indexOf(rem));
+                        }
+
+                        int skullsFound = 0;
+
+                        for (int s : rolls) {
+                            if (dieRoll[s].equalsIgnoreCase("Skull")) {
+                                System.out.println("Error: You cannot reroll a skull.");
+                                skullsFound++;
+                                break;
+                            }
+                        }
+
+                        if (skullsFound == 0) {
+                            invalidReroll = false;
                         }
                     }
+                    System.out.println();
+                    dieRoll = piratesGame.reRollNotHeld(dieRoll, die);
+                    System.out.println("New Roll: ");
+                    piratesGame.printDieRoll(dieRoll);
 
-                    //CHECK FOR NOT REROLLING SKULL
-                    ArrayList<Integer> rolls = new ArrayList<Integer>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7));
-                    for (String s : die) {
-                        int rem = Integer.parseInt(s) - 1;
-                        rolls.remove(rolls.indexOf(rem));
-                    }
+                    //DETERMINE IF SKULL WAS ROLLED TO CONTINUE OR NOT
+                    skullCount = piratesGame.checkSkullCount(dieRoll, fortuneCard);
 
-                    int skullsFound = 0;
-
-                    for (int s : rolls) {
-                        if (dieRoll[s].equalsIgnoreCase("Skull")) {
-                            System.out.println("Error: You cannot reroll a skull.");
-                            skullsFound++;
-                            break;
-                        }
-                    }
-
-                    if(skullsFound == 0) {
-                        invalidReroll = false;
+                    if(skullCount > startingSkullCount) {
+                        startingSkullCount++;
+                    } else if (skullCount == startingSkullCount) {
+                        break;
                     }
                 }
+
+                //PLAYER MENU - NUMBER OF SKULLS
+                System.out.print("Skull(s): ");
+                if (skullCount > 0) {
+                    for (int i = 0; i < skullCount; i++) {
+                        System.out.print("☠");
+                    }
+                } else {
+                    System.out.print("0");
+                    System.out.println();
+                }
+
                 System.out.println();
-                dieRoll = piratesGame.reRollNotHeld(dieRoll, die);
-                System.out.println("New Roll: ");
-                piratesGame.printDieRoll(dieRoll);
-                numOfRoundRolls++;
-            }
 
-            if (act == 2 && count < 3) {
-            }
-
-            if (act == 3) {
-
-                currentDiceScore = piratesGame.scoreDie(dieRoll, fortuneCard);
-
-                setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
-
-                //CHECK IF THEY LOST POINTS OR GAINED
-                if(currentDiceScore >= 0) {
-                    System.out.println("You just earned " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points!");
-                } else if(currentDiceScore < 0) {
-                    System.out.println("You just lost " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points...");
-                }
+                //DEDUCT POINTS FROM OTHER PLAYERS
+                System.out.println("Total skulls rolled in skull island: " + skullCount);
+                System.out.println(skullCount*100 + " points deducted from other players!");
 
                 stop = 1;
-            }
 
-            //OPTION 4: TREASURE CHEST
-            if(act == 4) {
-                boolean invalidReroll = true;
+            } else {
 
-                while (invalidReroll) {
+                numOfRoundRolls++;
 
-                    System.out.println("Select the die to hold in treasure chest (Ones not held get rerolled): (1,2...) ");
-                    treasureToKeep = (myObj.next()).replaceAll("\\s", "").split(",");
+                //CHECK FOR SWORD COUNT
+                swordCount = piratesGame.checkSwordCount(dieRoll);
 
-                    //CHECK FOR ROLLING MORE THAN 1 DIE
-                    if(treasureToKeep.length <= 0 && treasureToKeep.length > 8) {
-                        System.out.println("Invalid: You need to store between 1 & 8 dice in treasure chest!");
-                        continue;
+                //CHECK FOR DEATH
+                if (piratesGame.isPlayerDead(skullCount)) {
+                    System.out.println("YOU DEAD (You rolled " + skullCount + " skulls)");
+
+                    //SCORE WHAT'S IN TREASURE CHEST
+                    if (fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
+                        setScoreSheet(0, piratesGame.scoreDieUponDeathWithTreasure(scoreSheet, dieRoll, treasureToKeep, fortuneCard));
+                        System.out.println("You just earned " + piratesGame.scoreDieUponDeathWithTreasure(scoreSheet, dieRoll, treasureToKeep, fortuneCard) + " points from your treasure! :)");
+                        piratesGame.printTreasureChest(dieRoll, treasureToKeep, fortuneCard);
                     }
 
-                    //DO SKULL CHECK FOR TREASURE CHEST LATER ON
+                    //DECREMENT SEA BATTLE BONUS
+                    if (fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") ||
+                            fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)") ||
+                            fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
 
-                    if((treasureToKeep.length > 0 && treasureToKeep.length <= 8)) {
-                        invalidReroll = false;
+                        currentDiceScore = piratesGame.scoreDie(dieRoll, fortuneCard);
+
+                        //CHECK TO MAKE SURE PLAYER'S SCORE WON'T BECOME NEGATIVE FROM LOSING POINTS
+                        setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
+
+
+                        //CHECK IF THEY LOST POINTS OR GAINED
+                        if (currentDiceScore >= 0) {
+                            System.out.println("You just earned " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points!");
+                        } else if (currentDiceScore < 0) {
+                            System.out.println("You just lost " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points...");
+                        }
                     }
+
+                    stop = 1;
+                    continue;
                 }
 
-                //TREASURE CHEST IS STORED
-                piratesGame.printTreasureChest(dieRoll, treasureToKeep, fortuneCard);
-                System.out.println("Treasure chest stored. Please choose how to proceed.");
-                System.out.println();
-                piratesGame.printDieRoll(dieRoll);
+                //INCREMENT TURN
+                numOfRoundRolls++;
+
+                //PLAYER MENU - DICE ROLL SCORE
+                System.out.println(piratesGame.printCurrentScoreDice(dieRoll, fortuneCard));
+
+                //PLAYER MENU - SCORE
+                System.out.println("If you score this round, you will earn: " + piratesGame.printCurrentScore(dieRoll, fortuneCard));
+
+                //PLAYER MENU - # ROLLS MADE THIS ROUND BY PLAYER
+                System.out.println("# rolls made this round: " + numOfRoundRolls);
+
+                //PLAYER MENU - NUMBER OF SKULLS
+                System.out.print("Skull(s): ");
+                if (skullCount > 0) {
+                    for (int i = 0; i < skullCount; i++) {
+                        System.out.print("☠");
+                    }
+                } else {
+                    System.out.print("0");
+                    System.out.println();
+                }
+
                 System.out.println();
 
+                //IF SWORD CARD
+                if (fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)") ||
+                        fortuneCard.getName().equalsIgnoreCase("Sea Battle (3 Swords)") ||
+                        fortuneCard.getName().equalsIgnoreCase("Sea Battle (4 Swords)")) {
+                    System.out.print("Sword(s): ");
+                    if (swordCount > 0) {
+                        for (int i = 0; i < swordCount; i++) {
+                            System.out.print("⚔");
+                        }
+                    } else {
+                        System.out.print("0");
+                    }
+
+
+                }
+
+                System.out.println();
+                System.out.println();
+
+
+                //PLAYER MENU - OPTION SELECTION
+                System.out.println("Select an action: ");
+                if (count < 3) {
+                    System.out.println("(1) Choose dice number to roll again");
+                    System.out.println("(2) Roll all again");
+                }
+                System.out.println("(3) Score this round");
+
+                //FOR TREASURE CHEST
+                if (fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
+                    System.out.println("(4) Select dice to place in treasure chest");
+                }
+
+                int act = myObj.nextInt();
+
+
+                //OPTION 1
+                if (act == 1 && count < 3) {
+
+                    boolean invalidReroll = true;
+
+                    String[] die = null;
+
+                    while (invalidReroll) {
+
+                        System.out.println("Select the die to hold (Ones not held get rerolled): (1,2...) ");
+                        die = (myObj.next()).replaceAll("\\s", "").split(",");
+
+                        //CHECK FOR ROLLING 1 DIE
+                        if (die.length == 7) {
+                            //CHECK FOR SORCERESS CARD TO ENABLE 1 ROLL DIE
+                            if (fortuneCard.getName().equalsIgnoreCase("Sorceress") && hasSorceressRerollAvailable) {
+                                //INDICATE SORCERESS CARD HAS BEEN USED, CAN NO LONGER BE USED FOR OTHER TURNS
+                                System.out.println("Sorceress card used!");
+                                hasSorceressRerollAvailable = false;
+                                break;
+                            } else if (fortuneCard.getName().equalsIgnoreCase("Sorceress") && hasSorceressRerollAvailable == false) {
+                                System.out.println("You used your sorceress card already...nice try :p");
+                                System.out.println("Invalid: You need to roll more than one die.");
+                                System.out.println();
+                                continue;
+                            }
+                        }
+
+                        //CHECK FOR NOT REROLLING SKULL
+                        ArrayList<Integer> rolls = new ArrayList<Integer>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7));
+                        for (String s : die) {
+                            int rem = Integer.parseInt(s) - 1;
+                            rolls.remove(rolls.indexOf(rem));
+                        }
+
+                        int skullsFound = 0;
+
+                        for (int s : rolls) {
+                            if (dieRoll[s].equalsIgnoreCase("Skull")) {
+                                System.out.println("Error: You cannot reroll a skull.");
+                                skullsFound++;
+                                break;
+                            }
+                        }
+
+                        if (skullsFound == 0) {
+                            invalidReroll = false;
+                        }
+                    }
+                    System.out.println();
+                    dieRoll = piratesGame.reRollNotHeld(dieRoll, die);
+                    System.out.println("New Roll: ");
+                    piratesGame.printDieRoll(dieRoll);
+                    numOfRoundRolls++;
+                }
+
+                if (act == 2 && count < 3) {
+                }
+
+                if (act == 3) {
+
+                    currentDiceScore = piratesGame.scoreDie(dieRoll, fortuneCard);
+
+                    setScoreSheet(0, piratesGame.scoreDie(scoreSheet, dieRoll, fortuneCard));
+
+                    //CHECK IF THEY LOST POINTS OR GAINED
+                    if (currentDiceScore >= 0) {
+                        System.out.println("You just earned " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points!");
+                    } else if (currentDiceScore < 0) {
+                        System.out.println("You just lost " + piratesGame.printCurrentScore(dieRoll, fortuneCard) + " points...");
+                    }
+
+                    stop = 1;
+                }
+
+                //OPTION 4: TREASURE CHEST
+                if (act == 4) {
+                    boolean invalidReroll = true;
+
+                    while (invalidReroll) {
+
+                        System.out.println("Select the die to hold in treasure chest (Ones not held get rerolled): (1,2...) ");
+                        treasureToKeep = (myObj.next()).replaceAll("\\s", "").split(",");
+
+                        //CHECK FOR ROLLING MORE THAN 1 DIE
+                        if (treasureToKeep.length <= 0 && treasureToKeep.length > 8) {
+                            System.out.println("Invalid: You need to store between 1 & 8 dice in treasure chest!");
+                            continue;
+                        }
+
+                        //DO SKULL CHECK FOR TREASURE CHEST LATER ON
+
+                        if ((treasureToKeep.length > 0 && treasureToKeep.length <= 8)) {
+                            invalidReroll = false;
+                        }
+                    }
+
+                    //TREASURE CHEST IS STORED
+                    piratesGame.printTreasureChest(dieRoll, treasureToKeep, fortuneCard);
+                    System.out.println("Treasure chest stored. Please choose how to proceed.");
+                    System.out.println();
+                    piratesGame.printDieRoll(dieRoll);
+                    System.out.println();
+
+                }
             }
 
 

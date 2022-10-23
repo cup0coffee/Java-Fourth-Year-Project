@@ -588,11 +588,11 @@ public class PiratesGame implements Serializable {
 //            PiratesFortuneCard treasure = fortuneCard.createFortuneCard(0);
 //            deck.add(treasure);
 //
-            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
-            deck.add(captain);
-
-            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
-            deck.add(sorceress);
+//            PiratesFortuneCard captain = fortuneCard.createFortuneCard(1);
+//            deck.add(captain);
+//
+//            PiratesFortuneCard sorceress = fortuneCard.createFortuneCard(2);
+//            deck.add(sorceress);
 //
 //            PiratesFortuneCard gold = fortuneCard.createFortuneCard(4);
 //            deck.add(gold);
@@ -606,8 +606,8 @@ public class PiratesGame implements Serializable {
 
         //ADD SKULLS AND SWORDS CARDS
         for (int i = 0; i < 2; i++) {
-//            PiratesFortuneCard skulls = fortuneCard.createFortuneCard(8);
-//            deck.add(skulls);
+            PiratesFortuneCard skulls = fortuneCard.createFortuneCard(8);
+            deck.add(skulls);
 
 //            PiratesFortuneCard twoswords = fortuneCard.createFortuneCard(3);
 //            deck.add(twoswords);
@@ -619,10 +619,10 @@ public class PiratesGame implements Serializable {
 //            deck.add(fourswords);
         }
 
-//        for (int i = 0; i < 3; i++) {
-//            PiratesFortuneCard skull = fortuneCard.createFortuneCard(7);
-//            deck.add(skull);
-//        }
+        for (int i = 0; i < 3; i++) {
+            PiratesFortuneCard skull = fortuneCard.createFortuneCard(7);
+            deck.add(skull);
+        }
 
         Collections.shuffle(deck);
 
