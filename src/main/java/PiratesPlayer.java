@@ -20,6 +20,8 @@ public class PiratesPlayer implements Serializable {
     PiratesGame piratesGame = new PiratesGame();
     private int[] scoreSheet = new int[1];
 
+    public int skullIslandDeduction = 0;
+
     Client clientConnection;
 
     PiratesPlayer[] players = new PiratesPlayer[3];
@@ -159,6 +161,11 @@ public class PiratesPlayer implements Serializable {
                 //DEDUCT POINTS FROM OTHER PLAYERS
                 System.out.println("Total skulls rolled in skull island: " + skullCount);
                 System.out.println(skullCount*100 + " points deducted from other players!");
+                if(fortuneCard.getName().equalsIgnoreCase("Captain")) {
+                    setSkullIslandDeduction((skullCount * 100) * 2);
+                } else {
+                    setSkullIslandDeduction(skullCount * 100);
+                }
 
                 stop = 1;
 
@@ -392,6 +399,10 @@ public class PiratesPlayer implements Serializable {
         return sc;
     }
 
+    public int getSkullIslandDeduction() {
+        return skullIslandDeduction;
+    }
+
     public int[] getScoreSheet() {
         return scoreSheet;
     }
@@ -411,6 +422,10 @@ public class PiratesPlayer implements Serializable {
 
     public void setScoreSheet(int[] ss) {
         this.scoreSheet = ss;
+    }
+
+    public void setSkullIslandDeduction(int ss) {
+        this.skullIslandDeduction = ss;
     }
 
     public PiratesPlayer getPlayer() {
@@ -473,9 +488,14 @@ public class PiratesPlayer implements Serializable {
 
 
         while (true) {
+
+            //EACH PLAYER'S MENU
             int round = clientConnection.receiveRoundNo();
             if (round == -1)
                 break;
+            //----------------
+            //int skullIslandDeduction = clientConnection.receiveSkullIslandDeduction();
+            //---------------
             System.out.println("\n \n \n ********Round Number " + round + "********");
             int[][] pl = clientConnection.receiveScores();
             for (int i = 0; i < 3; i++) {
@@ -704,6 +724,16 @@ public class PiratesPlayer implements Serializable {
             }
         }
 
+        public int receiveSkullIslandDeduction() {
+            try {
+                return dIn.readInt();
+
+            } catch (IOException e) {
+                System.out.println("Score sheet not received");
+                e.printStackTrace();
+            }
+            return 0;
+        }
     }
 
     /*

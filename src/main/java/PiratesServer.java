@@ -249,9 +249,15 @@ public class PiratesServer implements Serializable, Runnable {
 				// send the round number
 				System.out.println("*****************************************");
 				System.out.println("Round number " + turnsMade);
+
+				//---------
+				//playerServer[currentPlayer].sendSkullIslandDeduction(turnsMade);
+				//---------
+
 				//CURRENT PLAYER RECEIVES THE FOLLOWING
 				playerServer[currentPlayer].sendTurnNo(turnsMade);
 				playerServer[currentPlayer].sendScores(players);
+
 				//ADDED FOR SENDING DECK AND DECK SIZE
 				playerServer[currentPlayer].sendFortuneCard(drawnFortuneCard);
 				playerServer[currentPlayer].sendDeckSize(fortuneCardsRemaining);
@@ -259,6 +265,13 @@ public class PiratesServer implements Serializable, Runnable {
 				//-------------------------
 				players[currentPlayer].setScoreSheet(playerServer[currentPlayer].receiveScores());
 				System.out.println("Player " + currentPlayer + " completed turn and their score is " + players[currentPlayer].getScore());
+
+				//ISLAND OF SKULLS DISPLAY
+				//GET DEDUCTION SCORE
+				System.out.println("Score deducted from other players: " + players[currentPlayer].getSkullIslandDeduction());
+
+				//DEDUCT FROM OTHER PLAYERS
+				//-------------------------------------
 
 				currentPlayer++;
 				if (currentPlayer == 3) currentPlayer = 0;
@@ -381,6 +394,16 @@ public class PiratesServer implements Serializable, Runnable {
 		 * receive scores of other players
 		 */
 		public void sendTurnNo(int r) {
+			try {
+				dOut.writeInt(r);
+				dOut.flush();
+			} catch (Exception e) {
+				System.out.println("Score sheet not received");
+				e.printStackTrace();
+			}
+		}
+
+		public void sendSkullIslandDeduction(int r) {
 			try {
 				dOut.writeInt(r);
 				dOut.flush();
