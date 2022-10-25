@@ -1528,7 +1528,50 @@ class PiratesGameTest {
     }
 
 
-    //ISLAND OF SKULLS
+    @Test
+    @DisplayName("line 110: roll 5 skulls, 3 monkeys with FC Captain, reroll 3 monkeys, get 2 skulls, 1 coin, stop => -1400 for other players")
+    void line110() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Skull";
+        dice[3] = "Skull";
+        dice[4] = "Skull";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "5"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Skull";
+        dice[3] = "Skull";
+        dice[4] = "Skull";
+        dice[5] = "Skull";
+        dice[6] = "Skull";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+
+        int numSkulls = piratesGame.checkSkullCount(dice, card);
+
+        int deduction = numSkulls * 100;
+        deduction*=-1;
+
+        if(card.getName().equalsIgnoreCase("Captain")) {
+            deduction*=2;
+        }
+
+        Assertions.assertEquals(-1400, deduction);
+    }
 
 
     //-----------------------------------------------------------------
