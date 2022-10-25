@@ -1580,6 +1580,8 @@ class PiratesGameTest {
     @DisplayName("line 111: roll 3 skulls and 5 swords with FC with two skulls: reroll 5 swords, get 5 coins, must stop  => -500 for other players")
     void line111() {
 
+        //ALL FUNCTIONS EXIST
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(8); //DOUBLE SKULL
