@@ -250,10 +250,6 @@ public class PiratesServer implements Serializable, Runnable {
 				System.out.println("*****************************************");
 				System.out.println("Round number " + turnsMade);
 
-				//---------
-				//playerServer[currentPlayer].sendSkullIslandDeduction(turnsMade);
-				//---------
-
 				//CURRENT PLAYER RECEIVES THE FOLLOWING
 				playerServer[currentPlayer].sendTurnNo(turnsMade);
 				playerServer[currentPlayer].sendScores(players);
@@ -268,9 +264,35 @@ public class PiratesServer implements Serializable, Runnable {
 
 				//ISLAND OF SKULLS DISPLAY
 				//GET DEDUCTION SCORE
-				System.out.println("Score deducted from other players: " + players[currentPlayer].getSkullIslandDeduction());
+				int deductedScore = 0;
+
+				players[currentPlayer].setSkullIslandDeduction(playerServer[currentPlayer].receiveSkullIslandDeduction());
+				deductedScore = players[currentPlayer].getSkullIslandDeduction();
+				//MAKE DEDUCTED SCORE NEGATIVE
+				deductedScore*=-1;
+				System.out.println("Score deducted from other players: " + deductedScore);
 
 				//DEDUCT FROM OTHER PLAYERS
+				if(currentPlayer == 0) {
+					System.out.println("Player 1 just lost: " + deductedScore);
+					System.out.println("Player 2 just lost: " + deductedScore);
+
+					players[1].setScoreSheet(0, deductedScore);
+					players[2].setScoreSheet(0, deductedScore);
+
+				} else if (currentPlayer == 1) {
+					System.out.println("Player 0 just lost: " + deductedScore);
+					System.out.println("Player 2 just lost: " + deductedScore);
+
+					players[0].setScoreSheet(0, deductedScore);
+					players[2].setScoreSheet(0, deductedScore);
+				} else if (currentPlayer == 2) {
+					System.out.println("Player 0 just lost: " + deductedScore);
+					System.out.println("Player 1 just lost: " + deductedScore);
+
+					players[0].setScoreSheet(0, deductedScore);
+					players[1].setScoreSheet(0, deductedScore);
+				}
 				//-------------------------------------
 
 				currentPlayer++;
@@ -411,6 +433,18 @@ public class PiratesServer implements Serializable, Runnable {
 				System.out.println("Score sheet not received");
 				e.printStackTrace();
 			}
+		}
+
+		public int receiveSkullIslandDeduction() {
+			try {
+				int d = 0;
+				d = dIn.readInt();
+				return d;
+			} catch (Exception e) {
+				System.out.println("Score sheet not received");
+				e.printStackTrace();
+			}
+			return 0;
 		}
 
 		/*

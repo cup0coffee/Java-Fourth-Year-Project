@@ -160,12 +160,16 @@ public class PiratesPlayer implements Serializable {
 
                 //DEDUCT POINTS FROM OTHER PLAYERS
                 System.out.println("Total skulls rolled in skull island: " + skullCount);
-                System.out.println(skullCount*100 + " points deducted from other players!");
+
                 if(fortuneCard.getName().equalsIgnoreCase("Captain")) {
                     setSkullIslandDeduction((skullCount * 100) * 2);
                 } else {
                     setSkullIslandDeduction(skullCount * 100);
                 }
+
+                System.out.println(getSkullIslandDeduction() + " points deducted from other players!");
+
+
 
                 stop = 1;
 
@@ -400,7 +404,7 @@ public class PiratesPlayer implements Serializable {
     }
 
     public int getSkullIslandDeduction() {
-        return skullIslandDeduction;
+        return this.skullIslandDeduction;
     }
 
     public int[] getScoreSheet() {
@@ -416,7 +420,6 @@ public class PiratesPlayer implements Serializable {
         }
 
         this.scoreSheet[cat] = newScore;
-        System.out.println("new score: " + newScore);
         //this.scoreSheet[cat] = score;
     }
 
@@ -516,6 +519,7 @@ public class PiratesPlayer implements Serializable {
 
             //SEND FORTUNE CARD AND DIE ROLL
             clientConnection.sendScores(playRound(dieRoll, fortuneCard, fortuneCardsRemaining));
+            clientConnection.sendSkullIslandDeduction(getSkullIslandDeduction());
         }
 
     }
@@ -607,6 +611,17 @@ public class PiratesPlayer implements Serializable {
             } catch (IOException ex) {
                 System.out.println("String not sent");
                 ex.printStackTrace();
+            }
+        }
+
+        public void sendSkullIslandDeduction(int deduction) {
+            try {
+                dOut.writeInt(deduction);
+                dOut.flush();
+
+            } catch (IOException e) {
+                System.out.println("Score sheet not received");
+                e.printStackTrace();
             }
         }
 
