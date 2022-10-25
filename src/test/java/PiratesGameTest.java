@@ -1532,6 +1532,9 @@ class PiratesGameTest {
     @DisplayName("line 110: roll 5 skulls, 3 monkeys with FC Captain, reroll 3 monkeys, get 2 skulls, 1 coin, stop => -1400 for other players")
     void line110() {
 
+        //ALL FUNCTIONS ALREADY EXIST]
+        //CHARLES SAID JUST CHECKING DEDUCTION WAS FINE
+
         //DRAW FORTUNE CARD
         PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
         card = fortuneCard.createFortuneCard(1); //CAPTAIN
