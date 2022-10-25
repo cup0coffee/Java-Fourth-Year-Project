@@ -1576,6 +1576,47 @@ class PiratesGameTest {
         Assertions.assertEquals(-1400, deduction);
     }
 
+    @Test
+    @DisplayName("line 111: roll 3 skulls and 5 swords with FC with two skulls: reroll 5 swords, get 5 coins, must stop  => -500 for other players")
+    void line111() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(8); //DOUBLE SKULL
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Skull";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        dieToKeep = new String[]{"1", "2", "3"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Skull";
+        dice[3] = "Coin";
+        dice[4] = "Coin";
+        dice[5] = "Coin";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+
+        int numSkulls = piratesGame.checkSkullCount(dice, card);
+
+        int deduction = numSkulls * 100;
+        deduction*=-1;
+
+        Assertions.assertEquals(-500, deduction);
+    }
+
 
     //-----------------------------------------------------------------
 
