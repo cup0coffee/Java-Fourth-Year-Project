@@ -1501,9 +1501,9 @@ class PiratesGameTest {
         dice[2] = "Skull";
         dice[3] = "Skull";
         dice[4] = "Sword";
-        dice[5] = "Skull";
-        dice[6] = "Skull";
-        dice[7] = "Skull";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
 
         dieToKeep = new String[]{"1", "2", "3", "4"};
         dice = piratesGame.reRollNotHeld(dice, dieToKeep);
@@ -1513,12 +1513,18 @@ class PiratesGameTest {
         dice[2] = "Skull";
         dice[3] = "Skull";
         dice[4] = "Sword";
-        dice[5] = "Monkey";
-        dice[6] = "Monkey";
-        dice[7] = "Monkey";
+        dice[5] = "Skull";
+        dice[6] = "Skull";
+        dice[7] = "Skull";
 
         Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
 
+        int numSkulls = piratesGame.checkSkullCount(dice, card);
+
+        int deduction = numSkulls * 100;
+        deduction*=-1;
+
+        Assertions.assertEquals(-900, deduction);
     }
 
 
