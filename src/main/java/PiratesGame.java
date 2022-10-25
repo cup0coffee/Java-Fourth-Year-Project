@@ -365,12 +365,17 @@ public class PiratesGame implements Serializable {
 
         int score = 0;
 
+        //CALCULATE SCORE
+        int fullChestBonus = 0;
+
         //CHECK FOR SEA BATTLE
+        //ACCOUNT FOR SWORDS BEING USED in FULL CHEST BONUS TOO
         if(fortuneCard.getName().equalsIgnoreCase("Sea Battle (2 Swords)")) {
             if (numSwords < 2 || (numSkulls >= 3)) {
                 return -300;
             } else if ((numSwords >= 2) && (numSkulls < 3)) {
                 score += 300;
+                fullChestBonus+=numSwords;
             }
         }
 
@@ -379,6 +384,7 @@ public class PiratesGame implements Serializable {
                 return -500;
             } else if ((numSwords >= 3) && (numSkulls < 3)) {
                 score+=500;
+                fullChestBonus+=numSwords;
             }
         }
 
@@ -387,6 +393,7 @@ public class PiratesGame implements Serializable {
                 return -1000;
             } else if ((numSwords >= 4) && (numSkulls < 3)) {
                 score += 1000;
+                fullChestBonus+=numSwords;
             }
         }
 
@@ -452,9 +459,6 @@ public class PiratesGame implements Serializable {
         numOfEach[4] = coin;
         numOfEach[5] = diamond;
 
-        //CALCULATE SCORE
-        int fullChestBonus = 0;
-
         //ACCOUNT FOR IDENTICAL DIE
         for (int i = startingPoint; i < 6; i++) {
             if (numOfEach[i] == 3 && i != 3) {
@@ -485,6 +489,8 @@ public class PiratesGame implements Serializable {
         if((diamond == 1 || diamond == 2) && (!fortuneCard.getName().equalsIgnoreCase("Diamond"))) {
             fullChestBonus += diamond;
         }
+
+        System.out.println("full chest bonus: " + fullChestBonus);
 
         //CHECK FOR CHEST BONUS
         if (fullChestBonus == 8 && skull == 0) {
