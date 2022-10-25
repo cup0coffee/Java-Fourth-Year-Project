@@ -1352,6 +1352,45 @@ class PiratesGameTest {
     }
 
     @Test
+    @DisplayName("line 100: FC: 2 sword sea battle, first  roll:  4 monkeys, 1 sword, 2 parrots and a coin then reroll 2 parrots and get 2nd coin and 2nd sword score is: 200 (coins) + 200 (monkeys) + 300 (swords of battle) + 500 (full chest) = 1200")
+    void line100() {
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(3); //FC 2 SWORDS
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Monkey";
+        dice[4] = "Sword";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "5", "8"};
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Monkey";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Coin";
+        dice[7] = "Coin";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+
+        Assertions.assertEquals(1200, piratesGame.scoreDie(dice, card));
+
+    }
+
+    @Test
     @DisplayName("line 103: FC: monkey business and roll 2 monkeys, 1 parrot, 2 coins, 3 diamonds   SC 1200")
     void line103() {
 
