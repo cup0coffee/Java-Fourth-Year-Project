@@ -218,7 +218,7 @@ public class PiratesServer implements Serializable, Runnable {
 			//EACH PLAYER'S HAND IN A ROUND
 			//NO MAX TURNS, NEED TO EDIT
 			//while (turnsMade < maxTurns) {
-			while(players[currentPlayer].getScore() < 6000) {
+			while(players[currentPlayer].getScore() < 3000) {
 
 				//DRAW FORTUNE CARD
 				//ACCOUNT FOR REUSING SAME DECK
