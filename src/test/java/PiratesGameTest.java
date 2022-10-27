@@ -2432,4 +2432,195 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 134: player1 rolls 7 swords + 1 skull with FC captain (gets 4000 points - could win)\n" +
+            "then player2 scores 0 (3 skulls, 5 monkeys, FC coin)\n" +
+            "then player3 rolls 6 skulls & 2 parrots with FC  Captain, then stops => deduction of (600x2)= 1200 points\n" +
+            "      => score of player1 goes to 2800, scoreof player 2 stays at 0\n" +
+            "then player 1 rolls 4 monkeys, 4 parrots with FC coin, scores 500 points to get him to 3300 (again can win)\n" +
+            "then player2 scores 0 (3 skulls, 5 monkeys, FC Captain) and player3 scores 0 (2 skulls, 6 monkeys, FC 1 skull)\n" +
+            "player 1 wins")
+    void line134() {
+
+        int currentDiceScore = 0;
+        PiratesServer server = new PiratesServer();
+        PiratesPlayer[] players = new PiratesPlayer[3];
+        PiratesPlayer p1 = new PiratesPlayer("p1");
+        PiratesPlayer p2 = new PiratesPlayer("p2");
+        PiratesPlayer p3 = new PiratesPlayer("p3");
+
+        players[0] = p1;
+        players[1] = p2;
+        players[2] = p3;
+        //-----------------
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Sword";
+        dice[1] = "Sword";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Skull";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+        Assertions.assertEquals(4000, currentDiceScore);
+        p1.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(4000, p1.getScore());
+
+        //-------------------------
+
+        //PLAYER 2
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card2 = piratesGame.drawFortuneCard(deck);
+        card2 = fortuneCard.createFortuneCard(4); //GOLD
+
+        String[] dice2 = piratesGame.rollDice();
+
+        dice2[0] = "Skull";
+        dice2[1] = "Skull";
+        dice2[2] = "Skull";
+        dice2[3] = "Monkey";
+        dice2[4] = "Monkey";
+        dice2[5] = "Monkey";
+        dice2[6] = "Monkey";
+        dice2[7] = "Monkey";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice2, card2)));
+        currentDiceScore = piratesGame.scoreDie(dice2, card2);
+        Assertions.assertEquals(0, currentDiceScore);
+        p2.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(0, p2.getScore());
+
+        //-------------------------
+
+        //PLAYER 3
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card3 = piratesGame.drawFortuneCard(deck);
+        card3 = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        String[] dice3 = piratesGame.rollDice();
+
+        dice3[0] = "Skull";
+        dice3[1] = "Skull";
+        dice3[2] = "Skull";
+        dice3[3] = "Skull";
+        dice3[4] = "Skull";
+        dice3[5] = "Skull";
+        dice3[6] = "Parrot";
+        dice3[7] = "Parrot";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice3, card3)));
+        currentDiceScore = piratesGame.scoreDie(dice3, card3);
+        Assertions.assertEquals(1200, currentDiceScore);
+
+        //UPDATE SCORE CAUSE OF ISLAND OF SKULLS DEDUCTION
+        p1.setScoreSheet(0, -1*currentDiceScore);
+        Assertions.assertEquals(2800, p1.getScore());
+
+        p2.setScoreSheet(0, -1*currentDiceScore);
+        Assertions.assertEquals(0, p2.getScore());
+
+        //-----------------------------
+
+        //NEXT ROUND
+
+        //DRAW FORTUNE CARD
+        card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(4); //GOLD
+
+        dice = piratesGame.rollDice();
+
+        dice[0] = "Monkey";
+        dice[1] = "Monkey";
+        dice[2] = "Monkey";
+        dice[3] = "Monkey";
+        dice[4] = "Parrot";
+        dice[5] = "Parrot";
+        dice[6] = "Parrot";
+        dice[7] = "Parrot";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+        //THE EXCEL SHEET IS WRONG
+        //IF THE PLAYER SCORES 4 PARROTS, 4 MONKEYS, AND A COIN
+        //THIS  IS FOUR OF A KIND IS 200, MULTIPLIED BY 2 CAUSE THERE ARE 4 PARROTS AND 4 MONKEYS
+        //+100 FOR THE GOLD COIN
+        //+500 FOR FULL CHEST USING ALL 8 DIE
+        //THEREFORE, 1000
+        Assertions.assertEquals(1000, currentDiceScore);
+        p1.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(3800, p1.getScore());
+
+        //-------------------------
+
+        //PLAYER 2
+
+        //DRAW FORTUNE CARD
+        card2 = piratesGame.drawFortuneCard(deck);
+        card2 = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        dice2 = piratesGame.rollDice();
+
+        dice2[0] = "Skull";
+        dice2[1] = "Skull";
+        dice2[2] = "Skull";
+        dice2[3] = "Monkey";
+        dice2[4] = "Monkey";
+        dice2[5] = "Monkey";
+        dice2[6] = "Monkey";
+        dice2[7] = "Monkey";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice2, card2)));
+        currentDiceScore = piratesGame.scoreDie(dice2, card2);
+        Assertions.assertEquals(0, currentDiceScore);
+        p2.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(0, p2.getScore());
+
+        //-------------------------
+
+        //PLAYER 3
+
+        //DRAW FORTUNE CARD
+        card3 = piratesGame.drawFortuneCard(deck);
+        card3 = fortuneCard.createFortuneCard(7); //FC 1 SKULL
+
+        dice3 = piratesGame.rollDice();
+
+        dice3[0] = "Skull";
+        dice3[1] = "Skull";
+        dice3[2] = "Monkey";
+        dice3[3] = "Monkey";
+        dice3[4] = "Monkey";
+        dice3[5] = "Monkey";
+        dice3[6] = "Monkey";
+        dice3[7] = "Monkey";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice3, card3)));
+        currentDiceScore = piratesGame.scoreDie(dice3, card3);
+        Assertions.assertEquals(0, currentDiceScore);
+
+        PiratesPlayer winner = piratesGame.getWinner(players);
+        System.out.println("winner: " + winner.name);
+
+        Assertions.assertEquals(p1, winner);
+
+    }
+
+
+    //-------------------------------------------------
+
+
+
+
+
 }
