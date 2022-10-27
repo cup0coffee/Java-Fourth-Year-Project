@@ -2616,6 +2616,123 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 142: player 1 scores 0 with (3 skulls, 5 monkeys, FC Captain) player2 rolls 7 swords + 1 skull with FC captain (gets 4000 points - could win) then player3 scores 0 with FC 2 skulls and a roll of 1 skull & 7 swords then player 1 has FC Captain rolls 8 swords and thus gets 9000 points => player 1 WINS")
+    void line142() {
+
+        int currentDiceScore = 0;
+        PiratesServer server = new PiratesServer();
+        PiratesPlayer[] players = new PiratesPlayer[3];
+        PiratesPlayer p1 = new PiratesPlayer("p1");
+        PiratesPlayer p2 = new PiratesPlayer("p2");
+        PiratesPlayer p3 = new PiratesPlayer("p3");
+
+        players[0] = p1;
+        players[1] = p2;
+        players[2] = p3;
+        //-----------------
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Skull";
+        dice[3] = "Monkey";
+        dice[4] = "Monkey";
+        dice[5] = "Monkey";
+        dice[6] = "Monkey";
+        dice[7] = "Monkey";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+        Assertions.assertEquals(0, currentDiceScore);
+        p1.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(0, p1.getScore());
+
+        //-------------------------
+
+        //PLAYER 2
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card2 = piratesGame.drawFortuneCard(deck);
+        card2 = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        String[] dice2 = piratesGame.rollDice();
+
+        dice2[0] = "Sword";
+        dice2[1] = "Sword";
+        dice2[2] = "Sword";
+        dice2[3] = "Sword";
+        dice2[4] = "Skull";
+        dice2[5] = "Sword";
+        dice2[6] = "Sword";
+        dice2[7] = "Sword";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice2, card2)));
+        currentDiceScore = piratesGame.scoreDie(dice2, card2);
+        Assertions.assertEquals(4000, currentDiceScore);
+        p2.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(4000, p2.getScore());
+
+        //-------------------------
+
+        //PLAYER 3
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card3 = piratesGame.drawFortuneCard(deck);
+        card3 = fortuneCard.createFortuneCard(8); //FC 2 SKULLS
+
+        String[] dice3 = piratesGame.rollDice();
+
+        dice3[0] = "Sword";
+        dice3[1] = "Sword";
+        dice3[2] = "Sword";
+        dice3[3] = "Sword";
+        dice3[4] = "Skull";
+        dice3[5] = "Sword";
+        dice3[6] = "Sword";
+        dice3[7] = "Sword";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice3, card3)));
+        currentDiceScore = piratesGame.scoreDie(dice3, card3);
+        Assertions.assertEquals(0, currentDiceScore);
+        p3.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(0, p3.getScore());
+
+        //---
+
+        //DRAW FORTUNE CARD
+        card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(1); //CAPTAIN
+
+        dice = piratesGame.rollDice();
+
+        dice[0] = "Sword";
+        dice[1] = "Sword";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+        Assertions.assertEquals(9000, currentDiceScore);
+        p1.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(9000, p1.getScore());
+
+        PiratesPlayer winner = piratesGame.getWinner(players);
+        System.out.println("winner: " + winner.name);
+
+        Assertions.assertEquals(p1, winner);
+
+    }
+
 
     //-------------------------------------------------
 
