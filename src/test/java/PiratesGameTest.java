@@ -2735,6 +2735,90 @@ class PiratesGameTest {
 
     }
 
+    @Test
+    @DisplayName("line 147: Player 1 rolls 6 swords, 2 skulls and FC coin, scores 1100 points Player 2 has FC Sorceress and rolls 7 skulls and a coin, uses sorceress to reroll a skull into a parrot then selects the coin and the parrot and gets 2 skulls: now has 8 skulls => -800 for player1 (now at 300) and still 0 for players 2 and 3")
+    void line147() {
+
+        int currentDiceScore = 0;
+        PiratesServer server = new PiratesServer();
+        PiratesPlayer[] players = new PiratesPlayer[3];
+        PiratesPlayer p1 = new PiratesPlayer("p1");
+        PiratesPlayer p2 = new PiratesPlayer("p2");
+        PiratesPlayer p3 = new PiratesPlayer("p3");
+
+        players[0] = p1;
+        players[1] = p2;
+        players[2] = p3;
+        //-----------------
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card = piratesGame.drawFortuneCard(deck);
+        card = fortuneCard.createFortuneCard(4); //GOLD
+
+        String[] dice = piratesGame.rollDice();
+
+        dice[0] = "Skull";
+        dice[1] = "Skull";
+        dice[2] = "Sword";
+        dice[3] = "Sword";
+        dice[4] = "Sword";
+        dice[5] = "Sword";
+        dice[6] = "Sword";
+        dice[7] = "Sword";
+
+        Assertions.assertEquals(false, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+        Assertions.assertEquals(1100, currentDiceScore);
+        p1.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(1100, p1.getScore());
+
+        //-------------------------
+
+        //PLAYER 2
+
+        //DRAW FORTUNE CARD
+        PiratesFortuneCard card2 = piratesGame.drawFortuneCard(deck);
+        card2 = fortuneCard.createFortuneCard(2); //SORCERESS
+
+        String[] dice2 = piratesGame.rollDice();
+
+        dice2[0] = "Skull";
+        dice2[1] = "Skull";
+        dice2[2] = "Skull";
+        dice2[3] = "Skull";
+        dice2[4] = "Skull";
+        dice2[5] = "Skull";
+        dice2[6] = "Skull";
+        dice2[7] = "Coin";
+
+        dieToKeep = new String[]{"1", "2", "3", "4", "5", "6", "7"};
+        dice2 = piratesGame.reRollNotHeld(dice2, dieToKeep);
+
+        dice2[0] = "Skull";
+        dice2[1] = "Skull";
+        dice2[2] = "Skull";
+        dice2[3] = "Skull";
+        dice2[4] = "Skull";
+        dice2[5] = "Skull";
+        dice2[6] = "Skull";
+        dice2[7] = "Skull";
+
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice2, card2)));
+        currentDiceScore = piratesGame.scoreDie(dice2, card2);
+        currentDiceScore = (100 * piratesGame.checkSkullCount(dice2)) * -1;
+        Assertions.assertEquals(-800, currentDiceScore);
+        //-------------------------
+
+        //DEDUCTIONS FROM ISLAND OF SKULLS
+        p1.setScoreSheet(0, currentDiceScore);
+        Assertions.assertEquals(300, p1.getScore());
+
+        Assertions.assertEquals(0, p2.getScore());
+
+        Assertions.assertEquals(0, p3.getScore());
+
+    }
+
 
     //-------------------------------------------------
 
