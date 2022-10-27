@@ -60,7 +60,7 @@ public class PiratesPlayer implements Serializable {
             skullCount = piratesGame.checkSkullCount(dieRoll, fortuneCard);
 
             //CHECK FOR SKULL ISLAND
-            if(skullCount == 4 && numOfRoundRolls == 0) {
+            if(skullCount >= 4 && numOfRoundRolls == 0) {
 
                 //HANDLE ISLAND OF SKULLS
                 boolean invalidReroll = true;
