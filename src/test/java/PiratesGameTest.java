@@ -2342,6 +2342,8 @@ class PiratesGameTest {
     @DisplayName("line 130: player1 rolls 7 swords + 1 skull with FC captain (gets 4000 points - could win) then player2 rolls 7 swords 1 skull  with FC 1 skull (2000) then player3 scores 0 (3 skulls, 5 monkeys, FC coin) => game stops and declares player 1 wins")
     void line130() {
 
+        //ALL FUNCTIONS EXIST ALREADY
+
         int currentDiceScore = 0;
         PiratesServer server = new PiratesServer();
         PiratesPlayer[] players = new PiratesPlayer[3];
