@@ -397,7 +397,11 @@ public class PiratesGame implements Serializable {
             }
         }
 
-        if ((numSkulls == 3 || numSkulls > 4) && !fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
+        if ((numSkulls >= 4) && fortuneCard.getName().equalsIgnoreCase("Captain")) {
+            return (numSkulls * 100) * 2;
+        }
+
+        if ((numSkulls >= 3) && !fortuneCard.getName().equalsIgnoreCase("Treasure Chest")) {
             return 0;
         }
 
