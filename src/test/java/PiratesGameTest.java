@@ -1562,7 +1562,7 @@ class PiratesGameTest {
         dice[6] = "Skull";
         dice[7] = "Coin";
 
-        Assertions.assertEquals(0, piratesGame.scoreDie(dice, card));
+        Assertions.assertEquals(1400, piratesGame.scoreDie(dice, card));
 
         int numSkulls = piratesGame.checkSkullCount(dice, card);
 
