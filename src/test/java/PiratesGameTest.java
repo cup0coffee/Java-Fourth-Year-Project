@@ -2739,6 +2739,8 @@ class PiratesGameTest {
     @DisplayName("line 147: Player 1 rolls 6 swords, 2 skulls and FC coin, scores 1100 points Player 2 has FC Sorceress and rolls 7 skulls and a coin, uses sorceress to reroll a skull into a parrot then selects the coin and the parrot and gets 2 skulls: now has 8 skulls => -800 for player1 (now at 300) and still 0 for players 2 and 3")
     void line147() {
 
+        //FUNCTIONS ALREADY EXISTED
+
         int currentDiceScore = 0;
         PiratesServer server = new PiratesServer();
         PiratesPlayer[] players = new PiratesPlayer[3];
