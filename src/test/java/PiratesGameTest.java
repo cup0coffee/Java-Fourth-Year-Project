@@ -2345,7 +2345,6 @@ class PiratesGameTest {
         //ALL FUNCTIONS EXIST ALREADY
 
         int currentDiceScore = 0;
-        PiratesServer server = new PiratesServer();
         PiratesPlayer[] players = new PiratesPlayer[3];
         PiratesPlayer p1 = new PiratesPlayer("p1");
         PiratesPlayer p2 = new PiratesPlayer("p2");
@@ -2432,6 +2431,7 @@ class PiratesGameTest {
 
     }
 
+
     @Test
     @DisplayName("line 134: player1 rolls 7 swords + 1 skull with FC captain (gets 4000 points - could win)\n" +
             "then player2 scores 0 (3 skulls, 5 monkeys, FC coin)\n" +
@@ -2443,7 +2443,6 @@ class PiratesGameTest {
     void line134() {
 
         int currentDiceScore = 0;
-        PiratesServer server = new PiratesServer();
         PiratesPlayer[] players = new PiratesPlayer[3];
         PiratesPlayer p1 = new PiratesPlayer("p1");
         PiratesPlayer p2 = new PiratesPlayer("p2");
@@ -2623,7 +2622,6 @@ class PiratesGameTest {
         //ALL FUNCTIONS ALREADY EXISTED
 
         int currentDiceScore = 0;
-        PiratesServer server = new PiratesServer();
         PiratesPlayer[] players = new PiratesPlayer[3];
         PiratesPlayer p1 = new PiratesPlayer("p1");
         PiratesPlayer p2 = new PiratesPlayer("p2");
@@ -2742,7 +2740,6 @@ class PiratesGameTest {
         //FUNCTIONS ALREADY EXISTED
 
         int currentDiceScore = 0;
-        PiratesServer server = new PiratesServer();
         PiratesPlayer[] players = new PiratesPlayer[3];
         PiratesPlayer p1 = new PiratesPlayer("p1");
         PiratesPlayer p2 = new PiratesPlayer("p2");
@@ -2823,6 +2820,8 @@ class PiratesGameTest {
 
 
     //-------------------------------------------------
+
+
 
 
 
