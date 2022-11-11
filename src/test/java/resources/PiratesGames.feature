@@ -20,11 +20,10 @@ Feature: Pirates Game Part 1 Testing
     Given a player object
     Given default gold card
     When roll is <roll>
-    And reroll is <reroll>
-    Then death with <roll>
-    And <score> is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    Then death with <reroll>
     Examples:
-      |roll					| reroll	| score
-      |"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Sword" "Sword" "Sword" 		|	"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Skull" "Sword" 			| 0 |
+      |roll					| held | reroll	|
+      |"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Sword" "Sword" "Sword" 		| "1,2,3,4,5"		|	"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Skull" "Sword" 			|
 
 
