@@ -19,6 +19,7 @@ public class MyStepdefs {
 
     ArrayList<PiratesFortuneCard> deck;
     String[] dice;
+    String[] dieToKeep;
 
     //GAME STEUP TO ENABLE TEST
     @Given("game setup")
@@ -64,6 +65,26 @@ public class MyStepdefs {
     }
 
     //DO SAME FOR REROLL
+    @And("player wants to hold {string} and reroll is {string} {string} {string} {string} {string} {string} {string} {string}")
+    public void player_wants_to_hold_and_reroll(String string, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
+
+        System.out.println("Rerolling the dice...");
+
+        dieToKeep = string.replaceAll("\\s", "").split(",");
+
+        dice = piratesGame.reRollNotHeld(dice, dieToKeep);
+
+        dice[0] = string1;
+        dice[1] = string2;
+        dice[2] = string3;
+        dice[3] = string4;
+        dice[4] = string5;
+        dice[5] = string6;
+        dice[6] = string7;
+        dice[7] = string8;
+
+        piratesGame.printDieRoll(dice);
+    }
 
     //CHECKING FOR DEATH
     @Then("death with {string} {string} {string} {string} {string} {string} {string} {string}")
@@ -77,7 +98,9 @@ public class MyStepdefs {
         dice[6] = string7;
         dice[7] = string8;
 
-        piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice));
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+
+        System.out.println("You're dead!");
 
     }
 
