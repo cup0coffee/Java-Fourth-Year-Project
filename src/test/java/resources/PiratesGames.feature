@@ -22,8 +22,9 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     Then death with <reroll>
+    And <score> is <reroll>
     Examples:
-      |roll					| held | reroll	|
-      |"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Sword" "Sword" "Sword" 		| "1,2,3,4,5"		|	"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Skull" "Sword" 			|
+      |roll					| held | reroll	| score |
+      |"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Sword" "Sword" "Sword" 		| "1,2,3,4,5"		|	"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Skull" "Sword" 			| 0 |
 
 
