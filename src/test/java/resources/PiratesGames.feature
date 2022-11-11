@@ -27,4 +27,17 @@ Feature: Pirates Game Part 1 Testing
       |roll					| held | reroll	| score |
       |"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Sword" "Sword" "Sword" 		| "1,2,3,4,5"		|	"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Skull" "Sword" 			| 0 |
 
+  @line47
+  Scenario Outline: line 47: roll 2 skulls, 4 parrots, 2 swords, reroll swords, get 1 skull 1 sword  die
+    Given game setup
+    Given a player object
+    Given default gold card
+    When roll is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    Then death with <reroll>
+    And <score> is <reroll>
+    Examples:
+      |roll					| held | reroll	| score |
+      |"Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,5,6"		|	"Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Sword" 			| 0 |
+
 
