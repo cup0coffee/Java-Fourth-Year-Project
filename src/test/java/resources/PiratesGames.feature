@@ -20,7 +20,7 @@ Feature: Pirates Game Part 1 Testing
     Given a player object
     Given default gold card
     When roll is <roll>
-    And roll is <reroll>
+    And reroll is <reroll>
     Then death with <roll>
     And <score> is <roll>
     Examples:
