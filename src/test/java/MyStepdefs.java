@@ -37,12 +37,20 @@ public class MyStepdefs {
     //DEFAULT CARD WHEN A CARD ISN'T SPECIFIED
     @Given("default gold card")
     public void give_gold_card() {
+        System.out.println("Dealing fortune card...");
+        card = piratesGame.drawFortuneCard(deck);
+
         card = fortuneCard.createFortuneCard(4);
+        System.out.println("Default gold card dealt!");
     }
 
     //ROLLING DICE
     @When("roll is {string} {string} {string} {string} {string} {string} {string} {string}")
     public void roll_is(String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
+
+        System.out.println("Rolling the dice...");
+        dice = piratesGame.rollDice();
+
         dice[0] = string1;
         dice[1] = string2;
         dice[2] = string3;
@@ -51,7 +59,11 @@ public class MyStepdefs {
         dice[5] = string6;
         dice[6] = string7;
         dice[7] = string8;
+
+        piratesGame.printDieRoll(dice);
     }
+
+    //DO SAME FOR REROLL
 
     //CHECKING FOR DEATH
     @Then("death with {string} {string} {string} {string} {string} {string} {string} {string}")
@@ -80,6 +92,8 @@ public class MyStepdefs {
         dice[5] = string6;
         dice[6] = string7;
         dice[7] = string8;
+
+        System.out.println("score earned: " + piratesGame.scoreDie(dice, card));
 
         Assertions.assertEquals(int1, piratesGame.scoreDie(dice, card));
 

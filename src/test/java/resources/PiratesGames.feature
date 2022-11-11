@@ -13,4 +13,3 @@ Feature: Pirates Game Part 1 Testing
     Examples:
       |roll					| score	|
       |"Skull" "Skull" "Skull" "Sword" "Sword" "Sword" "Sword" "Sword" 		|	0			|
-
