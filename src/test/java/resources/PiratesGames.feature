@@ -195,7 +195,7 @@ Feature: Pirates Game Part 1 Testing
       | 4 |"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" 		| 2100 |
 
   @line64
-  Scenario Outline: line 64: score set of 8 coins on first roll (SC 5400)  seq of 8 + 9 coins(FC is coin) +  full chest  (no extra points for 9 coins)
+  Scenario Outline: line 64: score set of 8 coins on first roll (SC 5400)  seq of 8 + 9 coins(FC is coin) +  full chest  (no extra points for 9 coins) - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
