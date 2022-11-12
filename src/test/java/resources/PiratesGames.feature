@@ -92,7 +92,7 @@ Feature: Pirates Game Part 1 Testing
 
 
   @line55
-  Scenario Outline: line 55: roll 3 diamonds, 2 skulls, 1 monkey, 1 sword, 1 parrot, score (diamonds = 100 + 300 points)   (SC 500)
+  Scenario Outline: line 55: roll 3 diamonds, 2 skulls, 1 monkey, 1 sword, 1 parrot, score (diamonds = 100 + 300 points)   (SC 500) (all code exists already for test)
     Given game setup
     Given a player object
     Given card is <card>
