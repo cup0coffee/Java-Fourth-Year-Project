@@ -262,7 +262,7 @@ Feature: Pirates Game Part 1 Testing
       | 6 |"Monkey" "Monkey" "Sword" "Sword" "Parrot" "Parrot" "Coin" "Coin" 		| "1,2,5,6,7,8"	|	"Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot" "Coin" "Coin"			| 1700 |
 
   @line84
-  Scenario Outline: line 84: roll 3 skulls, 3 monkeys, 2 parrots => die scoring 0
+  Scenario Outline: line 84: roll 3 skulls, 3 monkeys, 2 parrots => die scoring 0 - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
