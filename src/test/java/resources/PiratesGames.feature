@@ -92,7 +92,7 @@ Feature: Pirates Game Part 1 Testing
 
 
   @line56
-  Scenario Outline: line 56: roll 4 coins, 2 skulls, 2 swords and score (coins: 200 + 400 points) with FC is a diamond (SC 700)
+  Scenario Outline: line 56: roll 4 coins, 2 skulls, 2 swords and score (coins: 200 + 400 points) with FC is a diamond (SC 700) (all code exists already for test)
     Given game setup
     Given a player object
     Given card is <card>
