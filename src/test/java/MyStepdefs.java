@@ -45,6 +45,16 @@ public class MyStepdefs {
         System.out.println("Default gold card dealt!");
     }
 
+    //CARD IS SPECIFIED
+    @Given("card is {int}")
+    public void give_card(int int1) {
+        System.out.println("Dealing fortune card...");
+        card = piratesGame.drawFortuneCard(deck);
+
+        card = fortuneCard.createFortuneCard(int1);
+        System.out.println("Default gold card dealt!");
+    }
+
     //ROLLING DICE
     @When("roll is {string} {string} {string} {string} {string} {string} {string} {string}")
     public void roll_is(String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
