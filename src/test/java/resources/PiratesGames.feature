@@ -68,7 +68,7 @@ Feature: Pirates Game Part 1 Testing
       | 4 |"Skull" "Parrot" "Parrot" "Sword" "Sword" "Sword" "Coin" "Coin"  		| "1,4,5,6,7,8"		|	"Skull" "Coin" "Coin" "Sword" "Sword" "Sword" "Coin" "Coin" | "1,2,3,7,8" |	"Skull" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin"			| 4800 |
 
   @line52
-  Scenario Outline: line 52: score first roll with 2 (monkeys/parrot/diamonds/coins) and FC is captain (SC 800)
+  Scenario Outline: line 52: score first roll with 2 (monkeys/parrot/diamonds/coins) and FC is captain (SC 800) (all code exists already for test)
     Given game setup
     Given a player object
     Given card is <card>
