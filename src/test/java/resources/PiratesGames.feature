@@ -261,5 +261,17 @@ Feature: Pirates Game Part 1 Testing
       |card |roll					| held | reroll	| score |
       | 6 |"Monkey" "Monkey" "Sword" "Sword" "Parrot" "Parrot" "Coin" "Coin" 		| "1,2,5,6,7,8"	|	"Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot" "Coin" "Coin"			| 1700 |
 
+  @line84
+  Scenario Outline: line 84: roll 3 skulls, 3 monkeys, 2 parrots => die scoring 0
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    Then death with <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 6 |"Monkey" "Monkey" "Monkey" "Skull" "Parrot" "Parrot" "Skull" "Skull" 		| 0 |
+
 
 
