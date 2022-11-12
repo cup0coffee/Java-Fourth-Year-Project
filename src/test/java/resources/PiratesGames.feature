@@ -227,5 +227,16 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 1 |"Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" 		| 9000 |
 
+  @line72
+  Scenario Outline: line 72: get 4 monkeys, 2 coins and 2 skulls with FC coin. Score 600
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 4 |"Monkey" "Monkey" "Monkey" "Monkey" "Coin" "Coin" "Skull" "Skull" 		| 600 |
+
 
 
