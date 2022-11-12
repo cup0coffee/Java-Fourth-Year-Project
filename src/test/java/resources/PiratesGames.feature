@@ -93,7 +93,7 @@ Feature: Pirates Game Part 1 Testing
 
 
   @line54
-  Scenario Outline: line 54: roll 3 (monkey, swords) + 2 skulls and score   (SC 300)
+  Scenario Outline: line 54: roll 3 (monkey, swords) + 2 skulls and score   (SC 300) (all code exists already for test)
     Given game setup
     Given a player object
     Given card is <card>
