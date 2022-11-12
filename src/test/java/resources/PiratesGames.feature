@@ -159,7 +159,7 @@ Feature: Pirates Game Part 1 Testing
       | 1 |"Skull" "Coin" "Coin" "Sword" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Skull" "Coin" "Coin" "Sword" "Coin" "Sword" "Sword" "Sword"			| 1200 |
 
   @line60
-  Scenario Outline: line 60: roll 1 skull, 2 (monkeys/parrots) 3 swords, reroll 2 monkeys, get 1 skull 1 sword, then reroll parrots get 1 sword 1 monkey (SC 600)
+  Scenario Outline: line 60: roll 1 skull, 2 (monkeys/parrots) 3 swords, reroll 2 monkeys, get 1 skull 1 sword, then reroll parrots get 1 sword 1 monkey (SC 600) - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <fcard>
