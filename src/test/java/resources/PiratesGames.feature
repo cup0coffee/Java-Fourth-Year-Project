@@ -206,7 +206,7 @@ Feature: Pirates Game Part 1 Testing
       | 4 |"Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" 		| 5400 |
 
   @line65
-  Scenario Outline: line 65: score set of 8 coins on first roll and FC is diamond (SC 5400)
+  Scenario Outline: line 65: score set of 8 coins on first roll and FC is diamond (SC 5400) - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
