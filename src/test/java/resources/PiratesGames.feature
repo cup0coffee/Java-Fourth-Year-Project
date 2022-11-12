@@ -173,7 +173,7 @@ Feature: Pirates Game Part 1 Testing
 
 
   @line62
-  Scenario Outline: line 62: score set of 6 monkeys and 2 skulls on first roll (SC 1100)
+  Scenario Outline: line 62: score set of 6 monkeys and 2 skulls on first roll (SC 1100) - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
