@@ -89,3 +89,16 @@ Feature: Pirates Game Part 1 Testing
     Examples:
       |roll					| held | reroll	| score |
       |"Monkey" "Monkey" "Skull" "Skull" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Monkey" "Monkey" "Skull" "Skull" "Sword" "Monkey" "Sword" "Sword" 			| 300 |
+
+
+
+  @line54
+  Scenario Outline: line 54: roll 3 (monkey, swords) + 2 skulls and score   (SC 300)
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 4 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Skull" "Skull" 		| 300 |
