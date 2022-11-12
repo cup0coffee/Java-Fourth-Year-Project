@@ -238,5 +238,16 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 4 |"Monkey" "Monkey" "Monkey" "Monkey" "Coin" "Coin" "Skull" "Skull" 		| 600 |
 
+  @line82
+  Scenario Outline: line 82: roll 3 monkeys 3 parrots  1 skull 1 coin  SC = 1100  (i.e., sequence of of 6 + coin)
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 6 |"Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot" "Skull" "Coin" 		| 1100 |
+
 
 
