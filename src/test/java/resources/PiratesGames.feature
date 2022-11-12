@@ -124,7 +124,7 @@ Feature: Pirates Game Part 1 Testing
       | 5 |"Coin" "Coin" "Coin" "Coin" "Sword" "Sword" "Skull" "Skull" 		| 700 |
 
   @line57
-  Scenario Outline: line 57: roll 3 swords, 4 parrots, 1 skull and score (SC 100+200+100= 400)
+  Scenario Outline: line 57: roll 3 swords, 4 parrots, 1 skull and score (SC 100+200+100= 400) (all code exists already for test)
     Given game setup
     Given a player object
     Given card is <card>
