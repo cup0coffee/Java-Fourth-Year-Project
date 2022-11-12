@@ -52,7 +52,7 @@ public class MyStepdefs {
         card = piratesGame.drawFortuneCard(deck);
 
         card = fortuneCard.createFortuneCard(int1);
-        System.out.println("Default gold card dealt!");
+        System.out.println("card dealt: " + card.getName());
     }
 
     //ROLLING DICE
