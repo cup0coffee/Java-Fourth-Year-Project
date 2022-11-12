@@ -250,7 +250,7 @@ Feature: Pirates Game Part 1 Testing
       | 6 |"Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot" "Skull" "Coin" 		| 1100 |
 
   @line83
-  Scenario Outline: line 83: roll 2 (monkeys/swords/parrots/coins), reroll 2 swords, get 1 monkey, 1 parrot, score 1700
+  Scenario Outline: line 83: roll 2 (monkeys/swords/parrots/coins), reroll 2 swords, get 1 monkey, 1 parrot, score 1700 - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
