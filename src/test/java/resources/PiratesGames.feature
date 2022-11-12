@@ -145,3 +145,19 @@ Feature: Pirates Game Part 1 Testing
     Examples:
       |roll					| held | reroll	| score |
       |"Skull" "Coin" "Coin" "Sword" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Skull" "Coin" "Coin" "Sword" "Coin" "Sword" "Sword" "Sword"			| 800 |
+
+  @line59
+  Scenario Outline: line 59: same as previous row but with captain fortune card  (SC = (100 + 300 + 200)*2 = 1200)
+    Given game setup
+    Given a player object
+    Given card is <fcard>
+    When roll is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    And <score> is <reroll>
+    Examples:
+      |fcard |roll					| held | reroll	| score |
+      | 1 |"Skull" "Coin" "Coin" "Sword" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Skull" "Coin" "Coin" "Sword" "Coin" "Sword" "Sword" "Sword"			| 1200 |
+
+
+
+
