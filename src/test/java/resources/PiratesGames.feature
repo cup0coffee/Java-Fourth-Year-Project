@@ -79,7 +79,7 @@ Feature: Pirates Game Part 1 Testing
       | 1 |"Monkey" "Monkey" "Parrot" "Parrot" "Diamond" "Diamond" "Coin" "Coin" 		| 800 |
 
   @line53
-  Scenario Outline: line 53: roll 2 (monkeys/skulls/swords/parrots), reroll parrots and get 1 sword & 1 monkey (SC 300 since FC is coin)
+  Scenario Outline: line 53: roll 2 (monkeys/skulls/swords/parrots), reroll parrots and get 1 sword & 1 monkey (SC 300 since FC is coin) (all code exists already for test)
     Given game setup
     Given a player object
     Given default gold card
