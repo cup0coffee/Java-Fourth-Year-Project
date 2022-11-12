@@ -216,5 +216,16 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 5 |"Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" 		| 5400 |
 
+  @line66
+  Scenario Outline: line 66: score set of 8 swords on first roll and FC is captain (SC 4500x2 = 9000) since full chest
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 1 |"Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" 		| 9000 |
+
 
 
