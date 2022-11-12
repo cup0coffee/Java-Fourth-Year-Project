@@ -77,3 +77,15 @@ Feature: Pirates Game Part 1 Testing
     Examples:
       |card |roll			|score |
       | 1 |"Monkey" "Monkey" "Parrot" "Parrot" "Diamond" "Diamond" "Coin" "Coin" 		| 800 |
+
+  @line53
+  Scenario Outline: line 53: roll 2 (monkeys/skulls/swords/parrots), reroll parrots and get 1 sword & 1 monkey (SC 300 since FC is coin)
+    Given game setup
+    Given a player object
+    Given default gold card
+    When roll is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    And <score> is <reroll>
+    Examples:
+      |roll					| held | reroll	| score |
+      |"Monkey" "Monkey" "Skull" "Skull" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Monkey" "Monkey" "Skull" "Skull" "Sword" "Monkey" "Sword" "Sword" 			| 300 |
