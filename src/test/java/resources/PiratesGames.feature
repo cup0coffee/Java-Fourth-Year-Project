@@ -91,9 +91,8 @@ Feature: Pirates Game Part 1 Testing
       |"Monkey" "Monkey" "Skull" "Skull" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Monkey" "Monkey" "Skull" "Skull" "Sword" "Monkey" "Sword" "Sword" 			| 300 |
 
 
-
-  @line54
-  Scenario Outline: line 54: roll 3 (monkey, swords) + 2 skulls and score   (SC 300) (all code exists already for test)
+  @line55
+  Scenario Outline: line 55: roll 3 diamonds, 2 skulls, 1 monkey, 1 sword, 1 parrot, score (diamonds = 100 + 300 points)   (SC 500)
     Given game setup
     Given a player object
     Given card is <card>
@@ -101,4 +100,4 @@ Feature: Pirates Game Part 1 Testing
     And <score> is <roll>
     Examples:
       |card |roll			|score |
-      | 4 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Skull" "Skull" 		| 300 |
+      | 4 |"Diamond" "Diamond" "Diamond" "Monkey" "Sword" "Parrot" "Skull" "Skull" 		| 500 |
