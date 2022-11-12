@@ -135,7 +135,7 @@ Feature: Pirates Game Part 1 Testing
       | 4 |"Parrot" "Parrot" "Parrot" "Parrot" "Sword" "Sword" "Sword" "Skull" 		| 400 |
 
   @line58
-  Scenario Outline: line 58: roll 1 skull, 2 coins/parrots & 3 swords, reroll parrots, get 1 coin and 1 sword, score (SC = 200+400+200 = 800)
+  Scenario Outline: line 58: roll 1 skull, 2 coins/parrots & 3 swords, reroll parrots, get 1 coin and 1 sword, score (SC = 200+400+200 = 800) - ALL CODE EXISTS
     Given game setup
     Given a player object
     Given default gold card
