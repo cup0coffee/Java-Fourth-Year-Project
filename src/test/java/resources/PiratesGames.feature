@@ -183,6 +183,17 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 4 |"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Skull" "Skull" 		| 1100 |
 
+  @line63
+  Scenario Outline: line 63: score set of 7 parrots and 1 skull on first roll (SC 2100)
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 4 |"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" 		| 2100 |
+
 
 
 
