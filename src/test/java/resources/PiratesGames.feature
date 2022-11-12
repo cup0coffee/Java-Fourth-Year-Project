@@ -172,5 +172,17 @@ Feature: Pirates Game Part 1 Testing
       | 4 |"Skull" "Monkey" "Monkey" "Parrot" "Parrot" "Sword" "Sword" "Sword" 		| "1,4,5,6,7,8"	|	"Skull" "Skull" "Sword" "Parrot" "Parrot" "Sword" "Sword" "Sword"	| "1,2,3,6,7,8"	|	"Skull" "Skull" "Sword" "Sword" "Monkey" "Sword" "Sword" "Sword"		| 600 |
 
 
+  @line62
+  Scenario Outline: line 62: score set of 6 monkeys and 2 skulls on first roll (SC 1100)
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 4 |"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Skull" "Skull" 		| 1100 |
+
+
 
 
