@@ -65,4 +65,4 @@ Feature: Pirates Game Part 1 Testing
     And <score> is <reroll2>
     Examples:
       |card |roll					| held | reroll	| held2 |reroll2	|score |
-      | 4 |"Skull" "Parrot" "Parrot" "Sword" "Sword" "Sword" "Coin" "Coin"  		| "1,4,5,6,7,8"		|	"Skull" "Coin" "Coin" "Sword" "Sword" "Sword" "Coin" "Coin" | "1,2,3,7,8" |	"Skull" "Coin" "Coin" "Sword" "Sword" "Sword" "Coin" "Coin"			| 4800 |
+      | 4 |"Skull" "Parrot" "Parrot" "Sword" "Sword" "Sword" "Coin" "Coin"  		| "1,4,5,6,7,8"		|	"Skull" "Coin" "Coin" "Sword" "Sword" "Sword" "Coin" "Coin" | "1,2,3,7,8" |	"Skull" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin"			| 4800 |
