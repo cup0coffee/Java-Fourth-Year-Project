@@ -239,7 +239,7 @@ Feature: Pirates Game Part 1 Testing
       | 4 |"Monkey" "Monkey" "Monkey" "Monkey" "Coin" "Coin" "Skull" "Skull" 		| 600 |
 
   @line82
-  Scenario Outline: line 82: roll 3 monkeys 3 parrots  1 skull 1 coin  SC = 1100  (i.e., sequence of of 6 + coin)
+  Scenario Outline: line 82: roll 3 monkeys 3 parrots  1 skull 1 coin  SC = 1100  (i.e., sequence of of 6 + coin) - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
