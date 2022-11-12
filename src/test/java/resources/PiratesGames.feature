@@ -184,7 +184,7 @@ Feature: Pirates Game Part 1 Testing
       | 4 |"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Skull" "Skull" 		| 1100 |
 
   @line63
-  Scenario Outline: line 63: score set of 7 parrots and 1 skull on first roll (SC 2100)
+  Scenario Outline: line 63: score set of 7 parrots and 1 skull on first roll (SC 2100) - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
