@@ -419,5 +419,17 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 8 |"Skull" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" 		| 0 |
 
+  @line107
+  Scenario Outline: line 107: roll 2 skulls and 6 swords with FC with 1 skull  => die
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    Then death with <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 7 |"Skull" "Skull" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" 		| 0 |
+
 
 
