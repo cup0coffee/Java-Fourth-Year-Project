@@ -108,7 +108,7 @@ public class MyStepdefs {
         dice[6] = string7;
         dice[7] = string8;
 
-        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice)));
+        Assertions.assertEquals(true, piratesGame.isPlayerDead(piratesGame.checkSkullCount(dice, card)));
 
         System.out.println("You're dead!");
 
