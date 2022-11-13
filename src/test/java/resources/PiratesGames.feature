@@ -252,7 +252,7 @@ Feature: Pirates Game Part 1 Testing
       |5   | "Monkey" "Monkey" "Skull" "Skull" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Monkey" "Monkey" "Skull" "Skull" "Diamond" "Diamond" "Sword" "Sword"			| 400 |
 
   @line69
-  Scenario Outline: line 69: roll 2 (monkeys, skulls, swords), 1 diamond, 1 parrot, reroll 2 monkeys, get 2 diamonds, score 500
+  Scenario Outline: line 69: roll 2 (monkeys, skulls, swords), 1 diamond, 1 parrot, reroll 2 monkeys, get 2 diamonds, score 500 - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
