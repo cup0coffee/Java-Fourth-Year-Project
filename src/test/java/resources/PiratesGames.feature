@@ -276,7 +276,7 @@ Feature: Pirates Game Part 1 Testing
       |4   | "Skull" "Coin" "Coin" "Monkey" "Parrot" "Sword" "Sword" "Sword" 		| "1,2,3,4,5"	|	"Skull" "Coin" "Coin" "Monkey" "Parrot" "Coin" "Monkey" "Parrot"			| 600 |
 
   @line71
-  Scenario Outline: line 71: roll 1 skull, 2 coins, 1 (monkey/parrot), 3 swords, reroll swords, get 1 (coin/monkey/parrot) with FC is diamond (SC 500)
+  Scenario Outline: line 71: roll 1 skull, 2 coins, 1 (monkey/parrot), 3 swords, reroll swords, get 1 (coin/monkey/parrot) with FC is diamond (SC 500) - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
