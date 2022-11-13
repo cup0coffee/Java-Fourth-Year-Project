@@ -334,7 +334,7 @@ Feature: Pirates Game Part 1 Testing
       | 6 |"Monkey" "Monkey" "Monkey" "Skull" "Parrot" "Parrot" "Skull" "Skull" 		| 0 |
 
   @line97
-  Scenario Outline: line 97: 3 monkeys, 3 swords, 1 diamond, 1 parrot FC: coin   => SC 400  (ie no bonus)
+  Scenario Outline: line 97: 3 monkeys, 3 swords, 1 diamond, 1 parrot FC: coin   => SC 400  (ie no bonus) - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
