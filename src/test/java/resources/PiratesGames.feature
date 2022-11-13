@@ -311,6 +311,19 @@ Feature: Pirates Game Part 1 Testing
       |card |roll					| held | reroll	| held2| reroll2| score |
       | 2 |"Diamond" "Diamond" "Sword" "Monkey" "Coin" "Parrot" "Parrot" "Parrot" 		| "1,2,3,4,5"	|	"Diamond" "Diamond" "Sword" "Monkey" "Coin" "Skull" "Monkey" "Monkey"			| "1,2,3,4,5,7,8"	|	"Diamond" "Diamond" "Sword" "Monkey" "Coin" "Monkey" "Monkey" "Monkey"		| 500 |
 
+  @line78
+  Scenario Outline: line 78: roll 3 skulls, 3 parrots, 2 swords, reroll skull, get parrot, reroll 2 swords, get parrots, score (SC 1000)
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    And player wants to hold <held2> and reroll is <reroll2>
+    And <score> is <reroll2>
+    Examples:
+      |card |roll					| held | reroll	| held2| reroll2| score |
+      | 2 |"Skull" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Sword" "Sword" 		| "2,3,4,5,6,7,8"	|	"Parrot" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Sword" "Sword" 			| "1,2,3,4,5,6"	|	"Parrot" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Parrot"		| 1000 |
+
   @line82
   Scenario Outline: line 82: roll 3 monkeys 3 parrots  1 skull 1 coin  SC = 1100  (i.e., sequence of of 6 + coin) - ALL CODE EXISTED
     Given game setup
