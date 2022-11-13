@@ -228,7 +228,7 @@ Feature: Pirates Game Part 1 Testing
       | 1 |"Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" 		| 9000 |
 
   @line67
-  Scenario Outline: line 67: roll 6 monkeys and 2 swords, reroll swords, get 2 monkeys, score (SC 4600 because of FC is coin and full chest)
+  Scenario Outline: line 67: roll 6 monkeys and 2 swords, reroll swords, get 2 monkeys, score (SC 4600 because of FC is coin and full chest)  - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given default gold card
