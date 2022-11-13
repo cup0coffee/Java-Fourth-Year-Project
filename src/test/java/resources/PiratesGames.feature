@@ -239,6 +239,18 @@ Feature: Pirates Game Part 1 Testing
       |roll					| held | reroll	| score |
       |"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Sword" 		| "1,2,3,4,5,6"	|	"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey"			| 4600 |
 
+  @line68
+  Scenario Outline: line 68: roll 2 (monkeys/skulls/swords/parrots), reroll parrots, get 2 diamonds, score with FC is diamond (SC 400)
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    And <score> is <reroll>
+    Examples:
+      |card |roll					| held | reroll	| score |
+      |5   | "Monkey" "Monkey" "Skull" "Skull" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Monkey" "Monkey" "Skull" "Skull" "Diamond" "Diamond" "Sword" "Sword"			| 400 |
+
   @line72
   Scenario Outline: line 72: get 4 monkeys, 2 coins and 2 skulls with FC coin. Score 600 - ALL CODE EXISTED
     Given game setup
