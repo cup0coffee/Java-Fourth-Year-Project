@@ -333,5 +333,16 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 6 |"Monkey" "Monkey" "Monkey" "Skull" "Parrot" "Parrot" "Skull" "Skull" 		| 0 |
 
+  @line97
+  Scenario Outline: line 97: 3 monkeys, 3 swords, 1 diamond, 1 parrot FC: coin   => SC 400  (ie no bonus)
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 4 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Parrot" "Diamond" 		| 400 |
+
 
 
