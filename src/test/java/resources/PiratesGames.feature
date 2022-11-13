@@ -227,6 +227,18 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 1 |"Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" 		| 9000 |
 
+  @line67
+  Scenario Outline: line 67: roll 6 monkeys and 2 swords, reroll swords, get 2 monkeys, score (SC 4600 because of FC is coin and full chest)
+    Given game setup
+    Given a player object
+    Given default gold card
+    When roll is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    And <score> is <reroll>
+    Examples:
+      |roll					| held | reroll	| score |
+      |"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Sword" 		| "1,2,3,4,5,6"	|	"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey"			| 4600 |
+
   @line72
   Scenario Outline: line 72: get 4 monkeys, 2 coins and 2 skulls with FC coin. Score 600 - ALL CODE EXISTED
     Given game setup
