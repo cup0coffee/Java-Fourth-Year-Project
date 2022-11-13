@@ -345,7 +345,7 @@ Feature: Pirates Game Part 1 Testing
       | 4 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Parrot" "Diamond" 		| 400 |
 
   @line98
-  Scenario Outline: line 98: 3 monkeys, 3 swords, 2 coins FC: captain   => SC (100+100+200+500)*2 =  1800
+  Scenario Outline: line 98: 3 monkeys, 3 swords, 2 coins FC: captain   => SC (100+100+200+500)*2 =  1800 - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
