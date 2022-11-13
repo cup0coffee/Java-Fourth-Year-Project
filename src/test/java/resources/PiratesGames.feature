@@ -299,7 +299,7 @@ Feature: Pirates Game Part 1 Testing
       | 4 |"Monkey" "Monkey" "Monkey" "Monkey" "Coin" "Coin" "Skull" "Skull" 		| 600 |
 
   @line77
-  Scenario Outline: line 77: roll 2 diamonds, 1 (sword/monkey/coin), 3 parrots, reroll 3 parrots, get 1 skull, 2 monkeys, reroll skull, get monkey (SC 500)
+  Scenario Outline: line 77: roll 2 diamonds, 1 (sword/monkey/coin), 3 parrots, reroll 3 parrots, get 1 skull, 2 monkeys, reroll skull, get monkey (SC 500) - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
