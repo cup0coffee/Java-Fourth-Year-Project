@@ -240,7 +240,7 @@ Feature: Pirates Game Part 1 Testing
       |"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Sword" 		| "1,2,3,4,5,6"	|	"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey"			| 4600 |
 
   @line68
-  Scenario Outline: line 68: roll 2 (monkeys/skulls/swords/parrots), reroll parrots, get 2 diamonds, score with FC is diamond (SC 400)
+  Scenario Outline: line 68: roll 2 (monkeys/skulls/swords/parrots), reroll parrots, get 2 diamonds, score with FC is diamond (SC 400)  - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
