@@ -445,7 +445,7 @@ Feature: Pirates Game Part 1 Testing
       | 3 |"Skull" "Skull" "Skull" "Sword" "Monkey" "Monkey" "Monkey" "Monkey" 		| -300 |
 
   @line116
-  Scenario Outline: line 116: FC 4 swords, die on first roll with 2 monkeys, 3 (skulls/swords)  => die and lose 1000 points
+  Scenario Outline: line 116: FC 4 swords, die on first roll with 2 monkeys, 3 (skulls/swords)  => die and lose 1000 points  - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
