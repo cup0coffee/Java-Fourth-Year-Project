@@ -433,7 +433,7 @@ Feature: Pirates Game Part 1 Testing
 
 
   @line114
-  Scenario Outline: line 114: FC 2 swords, roll 4 monkeys, 3 skulls & 1 sword and die   => die and lose 300 points
+  Scenario Outline: line 114: FC 2 swords, roll 4 monkeys, 3 skulls & 1 sword and die   => die and lose 300 points  - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
