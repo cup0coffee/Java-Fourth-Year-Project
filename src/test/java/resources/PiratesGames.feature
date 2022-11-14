@@ -489,7 +489,7 @@ Feature: Pirates Game Part 1 Testing
       | 3 |"Parrot" "Parrot" "Sword" "Sword" "Monkey" "Monkey" "Monkey" "Coin" 		| 500 |
 
   @line118
-  Scenario Outline: line 118: FC 2 swords, roll 4 monkeys 1 sword, 1 skull & 2 parrots then reroll 2 parrots and get 1 sword and 1 skull   SC = 200 +  300 = 500
+  Scenario Outline: line 118: FC 2 swords, roll 4 monkeys 1 sword, 1 skull & 2 parrots then reroll 2 parrots and get 1 sword and 1 skull   SC = 200 +  300 = 500  - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
