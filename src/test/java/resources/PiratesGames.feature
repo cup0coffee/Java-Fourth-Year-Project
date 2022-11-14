@@ -452,6 +452,20 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 7 |"Skull" "Skull" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" 		| 0 |
 
+  @line108
+  Scenario Outline: line 108: roll 2 skulls  3(parrots/monkeys) with FC with two skulls: reroll 3 parrots get 2 skulls, 1 sword reroll sword and 3 monkeys, get 3 skulls and 1 sword, stop => -900 for other players (no negative score) & you score 0
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    And player wants to hold <held2> and reroll is <reroll2>
+    And <score> is <reroll2>
+    And <skullIslandScore> deduction is <reroll2>
+    Examples:
+      |card |roll					| held | reroll	| held2| reroll2| score | skullIslandScore |
+      | 8 |"Skull" "Skull" "Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot"		| "1,2,3,4,5"	|	"Skull" "Skull" "Monkey" "Monkey" "Monkey" "Skull" "Skull" "Sword" 			| "1,2,6,7"	|	"Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Sword"		| 0 | -900 |
+
 
   @line114
   Scenario Outline: line 114: FC 2 swords, roll 4 monkeys, 3 skulls & 1 sword and die   => die and lose 300 points  - ALL CODE EXISTED
