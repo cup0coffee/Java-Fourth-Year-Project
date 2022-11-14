@@ -467,6 +467,18 @@ Feature: Pirates Game Part 1 Testing
       | 8 |"Skull" "Skull" "Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot"		| "1,2,3,4,5"	|	"Skull" "Skull" "Monkey" "Monkey" "Monkey" "Skull" "Skull" "Sword" 			| "1,2,6,7"	|	"Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Sword"		| 0 | -900 |
 
 
+  @line110
+  Scenario Outline: line 110: roll 5 skulls, 3 monkeys with FC Captain, reroll 3 monkeys, get 2 skulls, 1 coin, stop => -1400 for other players
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    And <skullIslandScore> deduction is <reroll>
+    Examples:
+      |card |roll					| held | reroll	| score | skullIslandScore |
+      |1  | "Monkey" "Monkey" "Monkey" "Skull" "Skull" "Skull" "Skull" "Skull" 		| "4,5,6,7,8"	|	"Skull" "Skull" "Monkey" "Skull" "Skull" "Skull" "Skull" "Skull" 			| 0 | -1400 |
+
   @line114
   Scenario Outline: line 114: FC 2 swords, roll 4 monkeys, 3 skulls & 1 sword and die   => die and lose 300 points  - ALL CODE EXISTED
     Given game setup
