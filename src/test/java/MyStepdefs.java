@@ -149,7 +149,11 @@ public class MyStepdefs {
         int deduction = numSkulls * 100;
         deduction*=-1;
 
-        Assertions.assertEquals(-900, deduction);
+        if(card.getName().equalsIgnoreCase("Captain")) {
+            deduction*=2;
+        }
+
+        Assertions.assertEquals(int1, deduction);
 
         System.out.println("score deduction for other players: " + deduction);
 
