@@ -418,7 +418,7 @@ Feature: Pirates Game Part 1 Testing
       |3  | "Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Parrot" "Parrot" "Coin" 		| "1,2,3,4,5,8"	|	"Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Coin" "Sword" "Coin" 			| 1200 |
 
   @line103
-  Scenario Outline: line 103: FC: monkey business and roll 2 monkeys, 1 parrot, 2 coins, 3 diamonds   SC 1200
+  Scenario Outline: line 103: FC: monkey business and roll 2 monkeys, 1 parrot, 2 coins, 3 diamonds   SC 1200   - ALL CODE EXISTED
     Given game setup
     Given a player object
     Given card is <card>
