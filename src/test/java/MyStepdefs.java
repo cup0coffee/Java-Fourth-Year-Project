@@ -133,5 +133,28 @@ public class MyStepdefs {
     }
 
 
+    @And("{int} deduction is {string} {string} {string} {string} {string} {string} {string} {string}")
+    public void check_skull_island_score(int int1, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
+        dice[0] = string1;
+        dice[1] = string2;
+        dice[2] = string3;
+        dice[3] = string4;
+        dice[4] = string5;
+        dice[5] = string6;
+        dice[6] = string7;
+        dice[7] = string8;
+
+        int numSkulls = piratesGame.checkSkullCount(dice, card);
+
+        int deduction = numSkulls * 100;
+        deduction*=-1;
+
+        Assertions.assertEquals(-900, deduction);
+
+        System.out.println("score deduction for other players: " + deduction);
+
+    }
+
+
 }
 
