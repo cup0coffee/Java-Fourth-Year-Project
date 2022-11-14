@@ -417,7 +417,16 @@ Feature: Pirates Game Part 1 Testing
       |card |roll					| held | reroll	| score |
       |3  | "Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Parrot" "Parrot" "Coin" 		| "1,2,3,4,5,8"	|	"Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Coin" "Sword" "Coin" 			| 1200 |
 
-
+  @line103
+  Scenario Outline: line 103: FC: monkey business and roll 2 monkeys, 1 parrot, 2 coins, 3 diamonds   SC 1200
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 6 |"Monkey" "Monkey" "Parrot" "Coin" "Coin" "Diamond" "Diamond" "Diamond" 		| 1200 |
 
   @line106
   Scenario Outline: line 106: roll one skull and 7 swords with FC with two skulls => die
