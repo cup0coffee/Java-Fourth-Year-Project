@@ -510,3 +510,14 @@ Feature: Pirates Game Part 1 Testing
     Examples:
       |card |roll			|score |
       | 9 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Sword" "Skull" 		| 800 |
+
+  @line123
+  Scenario Outline: line 123: FC 4 swords, roll 3 monkeys 4 swords 1 skull  SC = 100 +200 + 1000 = 1300
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And <score> is <roll>
+    Examples:
+      |card |roll			|score |
+      | 10 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Sword" "Skull" 		| 1300 |
