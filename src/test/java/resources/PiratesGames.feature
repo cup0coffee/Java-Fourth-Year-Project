@@ -514,7 +514,7 @@ Feature: Pirates Game Part 1 Testing
     And player <score> is <reroll>
     Examples:
       |card |roll					| held | reroll	| score |
-      |9  | "Sword" "Sword" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" 		| "1,2,3,4"	|	"Sword" "Sword" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" 			| -500 |
+      |9  | "Sword" "Sword" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" 		| "1,2,3,4"	|	"Sword" "Sword" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" 			| 500 |
 
   @line115B
   Scenario Outline: line 115B: FC 3 swords, have 2 swords, 2 skulls and 4 parrots, reroll 4 parrots, get 4 skulls=> die and lose 500 points (THE SAME TEST AS LINE 115 BUT TESTING WITH 0 AS A STARTING POINT TO SHOW THAT THE PLAYER WON'T GET A NEGATIVE SCORE WHEN THEY LOSE POINTS WITH 0)
@@ -527,7 +527,7 @@ Feature: Pirates Game Part 1 Testing
     And player <score> is <reroll>
     Examples:
       |card |roll					| held | reroll	| score |
-      |9  | "Sword" "Sword" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" 		| "1,2,3,4"	|	"Sword" "Sword" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" 			| 0 |
+      |9  | "Sword" "Sword" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" 		| "1,2,3,4"	|	"Sword" "Sword" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" 			| -500 |
 
 
   @line116
