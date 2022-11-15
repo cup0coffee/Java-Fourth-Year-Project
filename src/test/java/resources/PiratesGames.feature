@@ -577,7 +577,7 @@ Feature: Pirates Game Part 1 Testing
       | 9 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Sword" "Skull" 		| 800 |
 
   @line121
-  Scenario Outline: line 121: FC 3 swords, roll 4 monkeys 2 swords 2 skulls then reroll 4 monkeys and get  2 skulls and 2 swords   => die and lose 500 points    - ALL CODE EXISTED
+  Scenario Outline: line 121: FC 3 swords, roll 4 monkeys 2 swords 2 skulls then reroll 4 monkeys and get  2 skulls and 2 swords   => die and lose 500 points    - ALL CODE EXISTED!!
     Given game setup
     Given player has 1000 points
     Given card is <card>
