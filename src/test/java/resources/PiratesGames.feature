@@ -576,6 +576,19 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 9 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Sword" "Skull" 		| 800 |
 
+  @line121
+  Scenario Outline: line 121: FC 3 swords, roll 4 monkeys 2 swords 2 skulls then reroll 4 monkeys and get  2 skulls and 2 swords   => die and lose 500 points    - ALL CODE EXISTED
+    Given game setup
+    Given player has 1000 points
+    Given card is <card>
+    When roll is <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    Then death with <reroll>
+    And player <score> is <reroll>
+    Examples:
+      |card |roll					| held | reroll	| score |
+      |9  | "Sword" "Sword" "Monkey" "Monkey" "Monkey" "Monkey" "Skull" "Skull" 		| "1,2,7,8"	|	"Sword" "Sword" "Sword" "Sword" "Skull" "Skull" "Skull" "Skull" 			| 500 |
+
   @line123
   Scenario Outline: line 123: FC 4 swords, roll 3 monkeys 4 swords 1 skull  SC = 100 +200 + 1000 = 1300   - ALL CODE EXISTED
     Given game setup
