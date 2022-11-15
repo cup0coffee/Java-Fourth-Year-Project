@@ -529,17 +529,18 @@ Feature: Pirates Game Part 1 Testing
       |card |roll					| held | reroll	| score |
       |9  | "Sword" "Sword" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" 		| "1,2,3,4"	|	"Sword" "Sword" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" 			| 0 |
 
+
   @line116
   Scenario Outline: line 116: FC 4 swords, die on first roll with 2 monkeys, 3 (skulls/swords)  => die and lose 1000 points  - ALL CODE EXISTED
     Given game setup
-    Given a player object
+    Given player has 1000 points
     Given card is <card>
     When roll is <roll>
     Then death with <roll>
-    And <score> is <roll>
+    And player <score> is <roll>
     Examples:
       |card |roll			|score |
-      | 10 |"Sword" "Sword" "Sword" "Skull" "Skull" "Skull" "Monkey" "Monkey" 		| -1000 |
+      | 10 |"Sword" "Sword" "Sword" "Skull" "Skull" "Skull" "Monkey" "Monkey" 		| 0 |
 
   @line117
   Scenario Outline: line 117: FC 2 swords, roll 3 monkeys 2 swords, 1 coin, 2 parrots  SC = 100 + 100 + 300 = 500  - ALL CODE EXISTED

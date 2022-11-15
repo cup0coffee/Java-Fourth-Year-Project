@@ -64,15 +64,22 @@ public class MyStepdefs {
 
         currentDiceScore = piratesGame.scoreDie(dice, card);
 
+        System.out.println("player current score: " + player.getScore());
         System.out.println("score earned: " + currentDiceScore);
 
-        if((player.getScore()+currentDiceScore) <= 0) {
+        int newScore = 0;
+
+        newScore = ((player.getScore())+(currentDiceScore));
+
+        if(newScore <= 0) {
             player.setScoreSheet(0,0);
         } else {
             player.setScoreSheet(0, currentDiceScore);
         }
 
-        System.out.println("player score is now: " + player.getScore());
+        Assertions.assertEquals(int1, newScore);
+
+        System.out.println("player score is now: " + newScore);
 
     }
 
