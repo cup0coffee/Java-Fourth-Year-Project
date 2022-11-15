@@ -71,10 +71,14 @@ public class MyStepdefs {
 
         newScore = ((player.getScore())+(currentDiceScore));
 
+        if (newScore <= 0) {
+            newScore = 0;
+        }
+
         if(newScore <= 0) {
             player.setScoreSheet(0,0);
         } else {
-            player.setScoreSheet(0, currentDiceScore);
+            player.setScoreSheet(0, newScore);
         }
 
         Assertions.assertEquals(int1, newScore);

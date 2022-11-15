@@ -527,7 +527,7 @@ Feature: Pirates Game Part 1 Testing
     And player <score> is <reroll>
     Examples:
       |card |roll					| held | reroll	| score |
-      |9  | "Sword" "Sword" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" 		| "1,2,3,4"	|	"Sword" "Sword" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" 			| -500 |
+      |9  | "Sword" "Sword" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" 		| "1,2,3,4"	|	"Sword" "Sword" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" 			| 0 |
 
 
   @line116
