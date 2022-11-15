@@ -21,18 +21,59 @@ public class MyStepdefs {
     String[] dice;
     String[] dieToKeep;
 
+    PiratesPlayer player;
+
     //GAME STEUP TO ENABLE TEST
     @Given("game setup")
     public void init() {
         piratesGame = new PiratesGame();
         dice = new String[8];
         deck = piratesGame.createFortuneDeck();
+        player = new PiratesPlayer("p2");
+
     }
 
     //SINGLE PLAYER OBJECT
     @Given("a player object")
     public void create_a_player() {
         PiratesPlayer p1 = new PiratesPlayer("p1");
+    }
+
+    //PROVIDING SCORES FOR TESTING PURPOSES
+    //SINGLE PLAYER OBJECT
+    @Given("player has {int} points")
+    public void set_player_points(int int1) {
+        player.setScoreSheet(0, int1);
+
+        System.out.println("Player 2 score is : " + player.getScore());
+
+    }
+
+    @And("player {int} is {string} {string} {string} {string} {string} {string} {string} {string}")
+    public void update_player_score(int int1, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
+        dice[0] = string1;
+        dice[1] = string2;
+        dice[2] = string3;
+        dice[3] = string4;
+        dice[4] = string5;
+        dice[5] = string6;
+        dice[6] = string7;
+        dice[7] = string8;
+
+        int currentDiceScore = 0;
+
+        currentDiceScore = piratesGame.scoreDie(dice, card);
+
+        System.out.println("score earned: " + currentDiceScore);
+
+        if((player.getScore()+currentDiceScore) <= 0) {
+            player.setScoreSheet(0,0);
+        } else {
+            player.setScoreSheet(0, currentDiceScore);
+        }
+
+        System.out.println("player score is now: " + player.getScore());
+
     }
 
     //DEFAULT CARD WHEN A CARD ISN'T SPECIFIED
