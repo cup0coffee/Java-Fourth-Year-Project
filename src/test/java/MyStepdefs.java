@@ -360,8 +360,85 @@ public class MyStepdefs {
 
         Assertions.assertEquals(winner, winningPlayer.name);
 
+    }
+
+    @And("{int} deduction is {string} {string} {string} {string} {string} {string} {string} {string} with {int}")
+    public void check_skull_island_score(int int1, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8, int cardnum) {
+        dice[0] = string1;
+        dice[1] = string2;
+        dice[2] = string3;
+        dice[3] = string4;
+        dice[4] = string5;
+        dice[5] = string6;
+        dice[6] = string7;
+        dice[7] = string8;
+
+        card = piratesGame.drawFortuneCard(deck);
+
+        card = fortuneCard.createFortuneCard(cardnum);
+
+        int numSkulls = piratesGame.checkSkullCount(dice, card);
+
+        int deduction = numSkulls * 100;
+        deduction*=-1;
+
+        if(card.getName().equalsIgnoreCase("Captain")) {
+            deduction*=2;
+        }
+
+        Assertions.assertEquals(int1, deduction);
+
+        System.out.println("score deduction for other players: " + deduction);
 
     }
+    @And("scores are {int}, {int}, and {int}")
+    public void set_scores(int p1score, int p2score, int p3score) {
+
+        //PLAYER 1 SCORESHEET
+        player.setScoreSheet(0, p1score);
+
+        //PLAYER 2 SCORESHEET
+        player2.setScoreSheet(0, p2score);
+
+        //PLAYER 3 SCORESHEET
+        player3.setScoreSheet(0, p3score);
+
+    }
+
+    @And("others lose {int}")
+    public void deduct_skull_island(int deduction) {
+
+        //PLAYER 1 SCORESHEET
+        player.setScoreSheet(0, deduction);
+
+        //PLAYER 2 SCORESHEET
+        player2.setScoreSheet(0, deduction);
+
+        System.out.println("player 1 loses " + deduction + " and now has " + player.getScore());
+        System.out.println("player 2 loses " + deduction + " and now has " + player2.getScore());
+
+    }
+
+    @Then("show scores and {string}")
+    public void show_scores(String winner) {
+
+        System.out.println("player 1 has " + player.getScore());
+        System.out.println("player 2 has " + player2.getScore());
+        System.out.println("player 3 has " + player3.getScore());
+
+        System.out.println();
+
+        PiratesPlayer winningPlayer = piratesGame.getWinner(players);
+        System.out.println("winner: " + winningPlayer.name + " with " + winningPlayer.getScore() + " points!");
+
+        Assertions.assertEquals(winner, winningPlayer.name);
+
+
+
+
+    }
+
+
 
 
 
