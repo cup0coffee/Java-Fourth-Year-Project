@@ -644,7 +644,7 @@ Feature: Pirates Game Part 1 Testing
       | 1 |"Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword"		| 4000	| "Skull" "Skull" "Skull" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" | 0 | 4 | "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Parrot" "Parrot" | -1200 | 1 | 0 | "Monkey" "Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot" "Parrot" | 4 | 1000 | "Skull" "Skull" "Skull" "Monkey" "Parrot" "Parrot" "Parrot" "Parrot" | 1 | 0 | "Skull" "Skull" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" | 7 | 0 | "p1" |
 
   @line142
-  Scenario Outline: line 142: player 1 scores 0 with (3 skulls, 5 monkeys, FC Captain) player2 rolls 7 swords + 1 skull with FC captain (gets 4000 points - could win) then player3 scores 0 with FC 2 skulls and a roll of 1 skull & 7 swords then player 1 has FC Captain rolls 8 swords and thus gets 9000 points     => player 1 WINS
+  Scenario Outline: line 142: player 1 scores 0 with (3 skulls, 5 monkeys, FC Captain) player2 rolls 7 swords + 1 skull with FC captain (gets 4000 points - could win) then player3 scores 0 with FC 2 skulls and a roll of 1 skull & 7 swords then player 1 has FC Captain rolls 8 swords and thus gets 9000 points     => player 1 WINS - ALL CODE EXISTED
     Given multiplayer game setup where player 1 starts a gets <card>
     When roll is <p1roll>
     And <p1score> is <p1roll>
