@@ -666,3 +666,21 @@ Feature: Pirates Game Part 1 Testing
     Examples:
       |card | p1roll					| p1score | p2roll | p2score | p2card | p3roll | p3score | p3card | p1roll2 | p1card2 | p1score2 | winner |
       | 1 |"Skull" "Skull" "Skull" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey"		| 0	| "Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword" | 4000 | 1 | "Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword" | 0 | 8 | "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" | 1 | 9000 | "p1" |
+
+  @line147
+  Scenario Outline: line 147: Player 1 rolls 6 swords, 2 skulls and FC coin, scores 1100 points Player 2 has FC Sorceress and rolls 7 skulls and a coin, uses sorceress to reroll a skull into a parrot then selects the coin and the parrot and gets 2 skulls: now has 8 skulls => -800 for player1 (now at 300) and still 0 for players 2 and 3
+    Given multiplayer game setup where player 1 starts a gets <card>
+    When roll is <p1roll>
+    And <p1score> is <p1roll>
+    Then turn is complete
+    When roll is <p2roll>
+    And player wants to hold <held> and reroll is <p2reroll>
+    And <skullIslandScore> deduction is <p2reroll> with <p2card>
+    Then death with <p2reroll>
+    And scores are <p1score>, <p2score>, and 0
+    And others lose <skullIslandScore>
+    Then turn is complete
+    Then show scores and <winner>
+    Examples:
+      |card | p1roll					| p1score | p2roll | p2score | p2card | held | p2reroll | skullIslandScore | winner |
+      | 4 |"Sword" "Sword" "Sword" "Skull" "Skull" "Sword" "Sword" "Sword"		| 1100	| "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Coin" | 0 | 2 | "2,3,4,5,6,7,8" | "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" | -800 | "p1" |
