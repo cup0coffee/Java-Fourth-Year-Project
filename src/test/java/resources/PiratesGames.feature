@@ -53,6 +53,7 @@ Feature: Pirates Game Part 1 Testing
     And player wants to hold <held> and reroll is <reroll>
     And player wants to hold <held2> and reroll is <reroll2>
     And <score> is <reroll2>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| held2 |reroll2	|score |
       | 4 |"Skull" "Parrot" "Parrot" "Sword" "Sword" "Sword" "Coin" "Coin"  		| "1,4,5,6,7,8"		|	"Skull" "Coin" "Coin" "Sword" "Sword" "Sword" "Coin" "Coin" | "1,2,3,7,8" |	"Skull" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin"			| 4800 |
@@ -62,6 +63,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 1 |"Monkey" "Monkey" "Parrot" "Parrot" "Diamond" "Diamond" "Coin" "Coin" 		| 800 |
@@ -72,6 +74,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |roll					| held | reroll	| score |
       |"Monkey" "Monkey" "Skull" "Skull" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Monkey" "Monkey" "Skull" "Skull" "Sword" "Monkey" "Sword" "Sword" 			| 300 |
@@ -81,6 +84,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 4 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Skull" "Skull" | 300|
@@ -90,6 +94,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 4 |"Diamond" "Diamond" "Diamond" "Monkey" "Sword" "Parrot" "Skull" "Skull" 		| 500 |
@@ -99,6 +104,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 5 |"Coin" "Coin" "Coin" "Coin" "Sword" "Sword" "Skull" "Skull" 		| 700 |
@@ -108,6 +114,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 4 |"Parrot" "Parrot" "Parrot" "Parrot" "Sword" "Sword" "Sword" "Skull" 		| 400 |
@@ -118,6 +125,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |roll					| held | reroll	| score |
       |"Skull" "Coin" "Coin" "Sword" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Skull" "Coin" "Coin" "Sword" "Coin" "Sword" "Sword" "Sword"			| 800 |
@@ -128,6 +136,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| score |
       | 1 |"Skull" "Coin" "Coin" "Sword" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Skull" "Coin" "Coin" "Sword" "Coin" "Sword" "Sword" "Sword"			| 1200 |
@@ -139,6 +148,7 @@ Feature: Pirates Game Part 1 Testing
     And player wants to hold <held> and reroll is <reroll>
     And player wants to hold <held2> and reroll is <reroll2>
     And <score> is <reroll2>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	|  held2 | reroll2	|score |
       | 4 |"Skull" "Monkey" "Monkey" "Parrot" "Parrot" "Sword" "Sword" "Sword" 		| "1,4,5,6,7,8"	|	"Skull" "Skull" "Sword" "Parrot" "Parrot" "Sword" "Sword" "Sword"	| "1,2,3,6,7,8"	|	"Skull" "Skull" "Sword" "Sword" "Monkey" "Sword" "Sword" "Sword"		| 600 |
@@ -149,6 +159,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 4 |"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Skull" "Skull" 		| 1100 |
@@ -158,6 +169,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 4 |"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" 		| 2100 |
@@ -167,6 +179,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 4 |"Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" 		| 5400 |
@@ -176,6 +189,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 5 |"Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" "Coin" 		| 5400 |
@@ -185,6 +199,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 1 |"Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" 		| 9000 |
@@ -195,6 +210,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |roll					| held | reroll	| score |
       |"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Sword" 		| "1,2,3,4,5,6"	|	"Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey"			| 4600 |
@@ -205,6 +221,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| score |
       |5   | "Monkey" "Monkey" "Skull" "Skull" "Parrot" "Parrot" "Sword" "Sword" 		| "1,2,3,4,7,8"	|	"Monkey" "Monkey" "Skull" "Skull" "Diamond" "Diamond" "Sword" "Sword"			| 400 |
@@ -215,6 +232,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| score |
       |4   | "Monkey" "Monkey" "Skull" "Skull" "Diamond" "Parrot" "Sword" "Sword" 		| "3,4,5,6,7,8"	|	"Diamond" "Diamond" "Skull" "Skull" "Diamond" "Parrot" "Sword" "Sword"			| 500 |
@@ -225,6 +243,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| score |
       |4   | "Skull" "Coin" "Coin" "Monkey" "Parrot" "Sword" "Sword" "Sword" 		| "1,2,3,4,5"	|	"Skull" "Coin" "Coin" "Monkey" "Parrot" "Coin" "Monkey" "Parrot"			| 600 |
@@ -235,6 +254,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| score |
       |5   | "Skull" "Coin" "Coin" "Monkey" "Parrot" "Sword" "Sword" "Sword" 		| "1,2,3,4,5"	|	"Skull" "Coin" "Coin" "Monkey" "Parrot" "Coin" "Monkey" "Parrot"			| 500 |
@@ -244,6 +264,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 4 |"Monkey" "Monkey" "Monkey" "Monkey" "Coin" "Coin" "Skull" "Skull" 		| 600 |
@@ -255,6 +276,7 @@ Feature: Pirates Game Part 1 Testing
     And player wants to hold <held> and reroll is <reroll>
     And player wants to hold <held2> and reroll is <reroll2>
     And <score> is <reroll2>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| held2| reroll2| score |
       | 2 |"Diamond" "Diamond" "Sword" "Monkey" "Coin" "Parrot" "Parrot" "Parrot" 		| "1,2,3,4,5"	|	"Diamond" "Diamond" "Sword" "Monkey" "Coin" "Skull" "Monkey" "Monkey"			| "1,2,3,4,5,7,8"	|	"Diamond" "Diamond" "Sword" "Monkey" "Coin" "Monkey" "Monkey" "Monkey"		| 500 |
@@ -266,6 +288,7 @@ Feature: Pirates Game Part 1 Testing
     And player wants to hold <held> and reroll is <reroll>
     And player wants to hold <held2> and reroll is <reroll2>
     And <score> is <reroll2>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| held2| reroll2| score |
       | 2 |"Skull" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Sword" "Sword" 		| "2,3,4,5,6,7,8"	|	"Parrot" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Sword" "Sword" 			| "1,2,3,4,5,6"	|	"Parrot" "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Parrot"		| 1000 |
@@ -277,6 +300,7 @@ Feature: Pirates Game Part 1 Testing
     And player wants to hold <held> and reroll is <reroll>
     And player wants to hold <held2> and reroll is <reroll2>
     And <score> is <reroll2>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| held2| reroll2| score |
       | 2 |"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Monkey" "Monkey" "Monkey" 		| "1,2,3,4,5"	|	"Skull" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Parrot" "Parrot" 			| "2,3,4,5,6,7,8"	|	"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Parrot" "Parrot"		| 2000 |
@@ -286,6 +310,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 6 |"Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot" "Skull" "Coin" 		| 1100 |
@@ -296,6 +321,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| score |
       | 6 |"Monkey" "Monkey" "Sword" "Sword" "Parrot" "Parrot" "Coin" "Coin" 		| "1,2,5,6,7,8"	|	"Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot" "Coin" "Coin"			| 1700 |
@@ -320,6 +346,7 @@ Feature: Pirates Game Part 1 Testing
     And player wants to hold <held2> and reroll is <reroll2>
     And player wants to hold <treasure2> from <reroll2>
     And <score> is <reroll2>
+    Then turn is complete
     Examples:
       |card |roll					| treasure| held | reroll	| held2| reroll2| treasure2 | score |
       | 0 |"Parrot" "Parrot" "Parrot" "Sword" "Sword" "Diamond" "Diamond" "Coin" 		| "6,7,8" |  "1,2,3,6,7,8"	|	"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Diamond" "Diamond" "Coin" 			| "1,2,3,4,5"	|	"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Coin" "Parrot" | "1,2,3,4,5"		| 1100 |
@@ -333,6 +360,7 @@ Feature: Pirates Game Part 1 Testing
     And player wants to hold <held2> and reroll is <reroll2>
     And player wants to hold <treasure2> from <reroll2>
     And <score> with treasure <treasure2> is <reroll2>
+    Then turn is complete
     Examples:
       |card | roll	 | treasure| held | reroll	| treasure2 |held2| reroll2| score |
       | 0 | "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Coin" "Coin" "Coin" 		| "6,7,8" |  "1,2,6,7,8"	|	"Skull" "Skull" "Diamond" "Diamond" "Coin" "Coin" "Coin" "Coin" 			| "5,6,7,8"	|	"1,2,5,6,7,8" | "Skull" "Skull" "Skull" "Coin" "Coin" "Coin" "Coin" "Coin"	| 600 |
@@ -342,6 +370,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 4 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Parrot" "Diamond" 		| 400 |
@@ -351,6 +380,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 1 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Coin" "Coin" 		| 1800 |
@@ -360,6 +390,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 4 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Sword" "Diamond" 		| 1000 |
@@ -370,6 +401,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| score |
       |3  | "Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Parrot" "Parrot" "Coin" 		| "1,2,3,4,5,8"	|	"Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Coin" "Sword" "Coin" 			| 1200 |
@@ -379,6 +411,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 6 |"Monkey" "Monkey" "Parrot" "Coin" "Coin" "Diamond" "Diamond" "Diamond" 		| 1200 |
@@ -411,6 +444,7 @@ Feature: Pirates Game Part 1 Testing
     And player wants to hold <held2> and reroll is <reroll2>
     And <score> is <reroll2>
     And <skullIslandScore> deduction is <reroll2>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| held2| reroll2| score | skullIslandScore |
       | 8 |"Skull" "Skull" "Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot"		| "1,2,3,4,5"	|	"Skull" "Skull" "Monkey" "Monkey" "Monkey" "Skull" "Skull" "Sword" 			| "1,2,6,7"	|	"Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Sword"		| 0 | -900 |
@@ -422,6 +456,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <skullIslandScore> deduction is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| score | skullIslandScore |
       |1  | "Monkey" "Monkey" "Monkey" "Skull" "Skull" "Skull" "Skull" "Skull" 		| "4,5,6,7,8"	|	"Skull" "Skull" "Monkey" "Skull" "Skull" "Skull" "Skull" "Skull" 			| 0 | -1400 |
@@ -432,6 +467,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <skullIslandScore> deduction is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| skullIslandScore |
       |8  | "Sword" "Sword" "Sword" "Sword" "Sword" "Skull" "Skull" "Skull" 		| "6,7,8"	|	"Coin" "Coin" "Coin" "Coin" "Coin" "Skull" "Skull" "Skull" | -500 |
@@ -497,6 +533,7 @@ Feature: Pirates Game Part 1 Testing
     When roll is <roll>
     And player wants to hold <held> and reroll is <reroll>
     And <score> is <reroll>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| score |
       |3  | "Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Skull" "Parrot" "Parrot" 		| "1,2,3,4,5,6"	|	"Monkey" "Monkey" "Monkey" "Monkey" "Sword" "Skull" "Sword" "Skull" 			| 500 |
@@ -506,6 +543,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 9 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Sword" "Skull" 		| 800 |
@@ -539,6 +577,7 @@ Feature: Pirates Game Part 1 Testing
     Given game setup with <card>
     When roll is <roll>
     And <score> is <roll>
+    Then turn is complete
     Examples:
       |card |roll			|score |
       | 10 |"Monkey" "Monkey" "Monkey" "Sword" "Sword" "Sword" "Sword" "Skull" 		| 1300 |
@@ -550,6 +589,7 @@ Feature: Pirates Game Part 1 Testing
     And player wants to hold <held> and reroll is <reroll>
     And player wants to hold <held2> and reroll is <reroll2>
     And <score> is <reroll2>
+    Then turn is complete
     Examples:
       |card |roll					| held | reroll	| held2| reroll2| score |
       | 10 |"Monkey" "Monkey" "Monkey" "Sword" "Skull" "Parrot" "Parrot" "Diamond"		| "1,2,3,4,5,8"	|	"Monkey" "Monkey" "Monkey" "Sword" "Skull" "Sword" "Sword" "Diamond" 			| "4,5,6,7,8"	|	"Sword" "Parrot" "Parrot" "Sword" "Skull" "Sword" "Sword" "Diamond"		| 1300 |

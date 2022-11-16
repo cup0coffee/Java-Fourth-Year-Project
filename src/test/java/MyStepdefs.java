@@ -188,6 +188,14 @@ public class MyStepdefs {
 
     }
 
+    @Then("turn is complete")
+    public void complete() {
+
+        System.out.println("Turn is complete!");
+        System.out.println("\n---------------------------------------------------\n\n");
+
+    }
+
     //CHECKING FOR SCORE
     @And("{int} is {string} {string} {string} {string} {string} {string} {string} {string}")
     public void check_dice_score(int int1, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
@@ -279,6 +287,8 @@ public class MyStepdefs {
         System.out.println("score deduction for other players: " + deduction);
 
     }
+
+
 
 
 }
