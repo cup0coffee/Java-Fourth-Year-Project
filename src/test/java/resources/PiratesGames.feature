@@ -593,3 +593,21 @@ Feature: Pirates Game Part 1 Testing
     Examples:
       |card |roll					| held | reroll	| held2| reroll2| score |
       | 10 |"Monkey" "Monkey" "Monkey" "Sword" "Skull" "Parrot" "Parrot" "Diamond"		| "1,2,3,4,5,8"	|	"Monkey" "Monkey" "Monkey" "Sword" "Skull" "Sword" "Sword" "Diamond" 			| "4,5,6,7,8"	|	"Sword" "Parrot" "Parrot" "Sword" "Skull" "Sword" "Sword" "Diamond"		| 1300 |
+
+  @line130
+  Scenario Outline: line 130: player1 rolls 7 swords + 1 skull with FC captain (gets 4000 points - could win)  then player2 rolls 7 swords 1 skull  with FC 1 skull (2000) then player3 scores 0 (3 skulls, 5 monkeys, FC coin) => game stops and declares player 1 wins
+    Given multiplayer game setup where player 1 starts a gets <card>
+    When roll is <p1roll>
+    And <p1score> is <p1roll>
+    Then turn is complete
+    When roll is <p2roll>
+    And <p2score> is <p2roll> with <p2card>
+    Then turn is complete
+    When roll is <p3roll>
+    And <p3score> is <p3roll> with <p3card>
+    Then death with <p3roll>
+    Then turn is complete
+    And winner based on <p1score>, <p2score>, and <p3score> is <winner>
+    Examples:
+      |card | p1roll					| p1score | p2roll | p2score | p2card | p3roll | p3score | p3card | winner |
+      | 1 |"Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword"		| 4000	| "Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword" | 2000 | 7 | "Skull" "Skull" "Skull" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" | 0 | 4 | "p1" |
