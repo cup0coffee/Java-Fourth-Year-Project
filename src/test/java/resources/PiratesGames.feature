@@ -379,10 +379,10 @@ Feature: Pirates Game Part 1 Testing
     Given a player object
     Given card is <card>
     When roll is <roll>
-    And player wants to hold <treasure>
+    And player wants to hold <treasure> from <roll>
     And player wants to hold <held> and reroll is <reroll>
     And player wants to hold <held2> and reroll is <reroll2>
-    And player wants to hold <treasure2>
+    And player wants to hold <treasure2> from <reroll2>
     And <score> is <reroll2>
     Examples:
       |card |roll					| treasure| held | reroll	| held2| reroll2| treasure2 | score |

@@ -22,6 +22,7 @@ public class MyStepdefs {
     String[] dieToKeep;
 
     PiratesPlayer player;
+    String[] treasureToKeep;
 
     //GAME STEUP TO ENABLE TEST
     @Given("game setup")
@@ -181,6 +182,27 @@ public class MyStepdefs {
         System.out.println("score earned: " + piratesGame.scoreDie(dice, card));
 
         Assertions.assertEquals(int1, piratesGame.scoreDie(dice, card));
+
+    }
+
+
+    @And("player wants to hold {string} from {string} {string} {string} {string} {string} {string} {string} {string}")
+    public void player_wants_treasure(String string, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
+
+        System.out.println("Stashing treasure...");
+
+        treasureToKeep = string.replaceAll("\\s", "").split(",");
+
+        dice[0] = string1;
+        dice[1] = string2;
+        dice[2] = string3;
+        dice[3] = string4;
+        dice[4] = string5;
+        dice[5] = string6;
+        dice[6] = string7;
+        dice[7] = string8;
+
+        piratesGame.printTreasureChest(dice, treasureToKeep, card);
 
     }
 
