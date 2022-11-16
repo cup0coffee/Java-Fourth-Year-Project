@@ -668,7 +668,7 @@ Feature: Pirates Game Part 1 Testing
       | 1 |"Skull" "Skull" "Skull" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey"		| 0	| "Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword" | 4000 | 1 | "Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword" | 0 | 8 | "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" "Sword" | 1 | 9000 | "p1" |
 
   @line147
-  Scenario Outline: line 147: Player 1 rolls 6 swords, 2 skulls and FC coin, scores 1100 points Player 2 has FC Sorceress and rolls 7 skulls and a coin, uses sorceress to reroll a skull into a parrot then selects the coin and the parrot and gets 2 skulls: now has 8 skulls => -800 for player1 (now at 300) and still 0 for players 2 and 3
+  Scenario Outline: line 147: Player 1 rolls 6 swords, 2 skulls and FC coin, scores 1100 points Player 2 has FC Sorceress and rolls 7 skulls and a coin, uses sorceress to reroll a skull into a parrot then selects the coin and the parrot and gets 2 skulls: now has 8 skulls => -800 for player1 (now at 300) and still 0 for players 2 and 3 - ALL CODE EXISTS
     Given multiplayer game setup where player 1 starts a gets <card>
     When roll is <p1roll>
     And <p1score> is <p1roll>
