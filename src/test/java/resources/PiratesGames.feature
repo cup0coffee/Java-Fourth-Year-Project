@@ -388,6 +388,21 @@ Feature: Pirates Game Part 1 Testing
       |card |roll					| treasure| held | reroll	| held2| reroll2| treasure2 | score |
       | 0 |"Parrot" "Parrot" "Parrot" "Sword" "Sword" "Diamond" "Diamond" "Coin" 		| "6,7,8" |  "1,2,3,6,7,8"	|	"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Diamond" "Diamond" "Coin" 			| "1,2,3,4,5"	|	"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Coin" "Parrot" | "1,2,3,4,5"		| 1100 |
 
+  @line92
+  Scenario Outline: line 92: roll 2 skulls, 3 parrots, 3 coins   put 3 coins in chest then rerolls 3 parrots and get 2 diamonds 1 coin    put coin in chest (now 4) then reroll 2 diamonds and get 1 skull 1 coin     score for chest only = 400 + 200 = 600 AND report death
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And player wants to hold <treasure> from <roll>
+    And player wants to hold <held> and reroll is <reroll>
+    And player wants to hold <held2> and reroll is <reroll2>
+    And player wants to hold <treasure2> from <reroll2>
+    And <score> with treasure <treasure2> is <reroll2>
+    Examples:
+      |card | roll	 | treasure| held | reroll	| treasure2 |held2| reroll2| score |
+      | 0 | "Skull" "Skull" "Parrot" "Parrot" "Parrot" "Coin" "Coin" "Coin" 		| "6,7,8" |  "1,2,6,7,8"	|	"Skull" "Skull" "Diamond" "Diamond" "Coin" "Coin" "Coin" "Coin" 			| "5,6,7,8"	|	"1,2,5,6,7,8" | "Skull" "Skull" "Skull" "Coin" "Coin" "Coin" "Coin" "Coin"	| 600 |
+
   @line97
   Scenario Outline: line 97: 3 monkeys, 3 swords, 1 diamond, 1 parrot FC: coin   => SC 400  (ie no bonus) - ALL CODE EXISTED
     Given game setup
