@@ -185,6 +185,32 @@ public class MyStepdefs {
 
     }
 
+    @And("{int} with treasure {string} is {string} {string} {string} {string} {string} {string} {string} {string}")
+    public void check_treasure_score(int int1, String string, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
+
+        System.out.println("You died! \n Scoring treasure...");
+
+        treasureToKeep = string.replaceAll("\\s", "").split(",");
+
+        dice[0] = string1;
+        dice[1] = string2;
+        dice[2] = string3;
+        dice[3] = string4;
+        dice[4] = string5;
+        dice[5] = string6;
+        dice[6] = string7;
+        dice[7] = string8;
+
+        int treasurescore = 0;
+
+        treasurescore = piratesGame.scoreTreasureChest(dice, treasureToKeep, card);
+
+        System.out.println("score earned: " + treasurescore);
+
+        Assertions.assertEquals(int1, treasurescore);
+
+    }
+
 
     @And("player wants to hold {string} from {string} {string} {string} {string} {string} {string} {string} {string}")
     public void player_wants_treasure(String string, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
