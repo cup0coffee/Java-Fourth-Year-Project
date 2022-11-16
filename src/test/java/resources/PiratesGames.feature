@@ -611,3 +611,34 @@ Feature: Pirates Game Part 1 Testing
     Examples:
       |card | p1roll					| p1score | p2roll | p2score | p2card | p3roll | p3score | p3card | winner |
       | 1 |"Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword"		| 4000	| "Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword" | 2000 | 7 | "Skull" "Skull" "Skull" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" | 0 | 4 | "p1" |
+
+
+  @line134
+  Scenario Outline: line 134: player1 rolls 7 swords + 1 skull with FC captain (gets 4000 points - could win) then player2 scores 0 (3 skulls, 5 monkeys, FC coin) then player3 rolls 6 skulls & 2 parrots with FC  Captain, then stops => deduction of (600x2)= 1200 points=> score of player1 goes to 2800, scoreof player 2 stays at 0 then player 1 rolls 4 monkeys, 4 parrots with FC coin, scores 1000 points to get him to 3800 (again can win) then player2 scores 0 (3 skulls, 5 monkeys, FC Captain) and player3 scores 0 (2 skulls, 6 monkeys, FC 1 skull) player 1 wins
+    Given multiplayer game setup where player 1 starts a gets <card>
+    When roll is <p1roll>
+    And <p1score> is <p1roll>
+    Then turn is complete
+    When roll is <p2roll>
+    And <p2score> is <p2roll> with <p2card>
+    Then turn is complete
+    When roll is <p3roll>
+    And <skullIslandScore> deduction is <p3roll> with <p3card>
+    Then death with <p3roll>
+    And scores are <p1score>, <p2score>, and <p3score>
+    And others lose <skullIslandScore>
+    Then turn is complete
+    When roll is <p1roll2>
+    And <p1score2> is <p1roll2> with <p1card2>
+    Then turn is complete
+    When roll is <p2roll2>
+    And <p2score2> is <p2roll2> with <p2card2>
+    Then turn is complete
+    When roll is <p3roll2>
+    And <p3score2> is <p3roll2> with <p3card2>
+    Then turn is complete
+    And scores are <p1score2>, <p2score2>, and <p3score2>
+    Then show scores and <winner>
+    Examples:
+      |card | p1roll					| p1score | p2roll | p2score | p2card | p3roll | skullIslandScore | p3card | p3score | p1roll2 | p1card2 | p1score2 | p2roll2 | p2card2 | p2score2 | p3roll2 | p3card2 | p3score2 | winner |
+      | 1 |"Sword" "Sword" "Sword" "Sword" "Skull" "Sword" "Sword" "Sword"		| 4000	| "Skull" "Skull" "Skull" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" | 0 | 4 | "Skull" "Skull" "Skull" "Skull" "Skull" "Skull" "Parrot" "Parrot" | -1200 | 1 | 0 | "Monkey" "Monkey" "Monkey" "Monkey" "Parrot" "Parrot" "Parrot" "Parrot" | 4 | 1000 | "Skull" "Skull" "Skull" "Monkey" "Parrot" "Parrot" "Parrot" "Parrot" | 1 | 0 | "Skull" "Skull" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" "Monkey" | 7 | 0 | "p1" |
