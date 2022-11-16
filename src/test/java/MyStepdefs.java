@@ -22,7 +22,11 @@ public class MyStepdefs {
     String[] dieToKeep;
 
     PiratesPlayer player;
+    PiratesPlayer player2;
+    PiratesPlayer player3;
+    PiratesPlayer[] players;
     String[] treasureToKeep;
+
 
     //GAME STEUP TO ENABLE TEST
     @Given("game setup with gold card")
@@ -287,6 +291,78 @@ public class MyStepdefs {
         System.out.println("score deduction for other players: " + deduction);
 
     }
+
+    //MULTIPLAYER
+    @Given("multiplayer game setup where player 1 starts a gets {int}")
+    public void init_multiplayer(int int1) {
+        piratesGame = new PiratesGame();
+        dice = new String[8];
+        deck = piratesGame.createFortuneDeck();
+
+        int currentDiceScore = 0;
+        players = new PiratesPlayer[3];
+
+        //PLAYERS
+        player = new PiratesPlayer("p1");
+        player2 = new PiratesPlayer("p2");
+        player3 = new PiratesPlayer("p3");
+
+        players[0] = player;
+        players[1] = player2;
+        players[2] = player3;
+
+
+        System.out.println("Dealing fortune card for p1...");
+        card = piratesGame.drawFortuneCard(deck);
+
+        card = fortuneCard.createFortuneCard(int1);
+        System.out.println("card dealt: " + card.getName());
+    }
+
+    @And("{int} is {string} {string} {string} {string} {string} {string} {string} {string} with {int}")
+    public void check_dice_score_with_card(int int1, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8, int cardnum) {
+        dice[0] = string1;
+        dice[1] = string2;
+        dice[2] = string3;
+        dice[3] = string4;
+        dice[4] = string5;
+        dice[5] = string6;
+        dice[6] = string7;
+        dice[7] = string8;
+
+        System.out.println("Dealing fortune card...");
+        card = piratesGame.drawFortuneCard(deck);
+
+        card = fortuneCard.createFortuneCard(cardnum);
+        System.out.println("card dealt: " + card.getName());
+
+        System.out.println("score earned: " + piratesGame.scoreDie(dice, card));
+
+        Assertions.assertEquals(int1, piratesGame.scoreDie(dice, card));
+
+    }
+
+    @And("winner based on {int}, {int}, and {int} is {string}")
+    public void check_winner(int p1score, int p2score, int p3score, String winner) {
+
+        //PLAYER 1 SCORESHEET
+        player.setScoreSheet(0, p1score);
+
+        //PLAYER 2 SCORESHEET
+        player2.setScoreSheet(0, p2score);
+
+        //PLAYER 3 SCORESHEET
+        player3.setScoreSheet(0, p3score);
+
+
+        PiratesPlayer winningPlayer = piratesGame.getWinner(players);
+        System.out.println("winner: " + winningPlayer.name + " with " + winningPlayer.getScore() + " points!");
+
+        Assertions.assertEquals(winner, winningPlayer.name);
+
+
+    }
+
 
 
 
