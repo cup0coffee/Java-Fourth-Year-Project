@@ -25,12 +25,33 @@ public class MyStepdefs {
     String[] treasureToKeep;
 
     //GAME STEUP TO ENABLE TEST
-    @Given("game setup")
+    @Given("game setup with gold card")
     public void init() {
         piratesGame = new PiratesGame();
         dice = new String[8];
         deck = piratesGame.createFortuneDeck();
         player = new PiratesPlayer("p2");
+
+        System.out.println("Dealing fortune card...");
+        card = piratesGame.drawFortuneCard(deck);
+
+        card = fortuneCard.createFortuneCard(4);
+        System.out.println("Default gold card dealt!");
+
+    }
+
+    @Given("game setup with {int}")
+    public void init_with_card(int int1) {
+        piratesGame = new PiratesGame();
+        dice = new String[8];
+        deck = piratesGame.createFortuneDeck();
+        player = new PiratesPlayer("p2");
+
+        System.out.println("Dealing fortune card...");
+        card = piratesGame.drawFortuneCard(deck);
+
+        card = fortuneCard.createFortuneCard(int1);
+        System.out.println("card dealt: " + card.getName());
 
     }
 
@@ -42,7 +63,7 @@ public class MyStepdefs {
 
     //PROVIDING SCORES FOR TESTING PURPOSES
     //SINGLE PLAYER OBJECT
-    @Given("player has {int} points")
+    @And("player has {int} points")
     public void set_player_points(int int1) {
         player.setScoreSheet(0, int1);
 
