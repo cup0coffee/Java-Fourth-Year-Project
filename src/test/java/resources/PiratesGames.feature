@@ -372,6 +372,22 @@ Feature: Pirates Game Part 1 Testing
       |card |roll			|score |
       | 6 |"Monkey" "Monkey" "Monkey" "Skull" "Parrot" "Parrot" "Skull" "Skull" 		| 0 |
 
+
+  @line87
+  Scenario Outline: line 87: roll 3 parrots, 2 swords, 2 diamonds, 1 coin     put 2 diamonds and 1 coin in chest then reroll 2 swords and get 2 parrots put 5 parrots in chest and take out 2 diamonds & coin then reroll the 3 dice and get 1 skull, 1 coin and a parrot score 6 parrots + 1 coin for 1100 points
+    Given game setup
+    Given a player object
+    Given card is <card>
+    When roll is <roll>
+    And player wants to hold <treasure>
+    And player wants to hold <held> and reroll is <reroll>
+    And player wants to hold <held2> and reroll is <reroll2>
+    And player wants to hold <treasure2>
+    And <score> is <reroll2>
+    Examples:
+      |card |roll					| treasure| held | reroll	| held2| reroll2| treasure2 | score |
+      | 0 |"Parrot" "Parrot" "Parrot" "Sword" "Sword" "Diamond" "Diamond" "Coin" 		| "6,7,8" |  "1,2,3,6,7,8"	|	"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Diamond" "Diamond" "Coin" 			| "1,2,3,4,5"	|	"Parrot" "Parrot" "Parrot" "Parrot" "Parrot" "Skull" "Coin" "Parrot" | "1,2,3,4,5"		| 1100 |
+
   @line97
   Scenario Outline: line 97: 3 monkeys, 3 swords, 1 diamond, 1 parrot FC: coin   => SC 400  (ie no bonus) - ALL CODE EXISTED
     Given game setup
